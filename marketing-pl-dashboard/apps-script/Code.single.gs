@@ -422,8 +422,9 @@ function loadHistoricalData() {
     ['2026-06-02',17098.5,211,1177,9708,2174.95,7294.85,865.23,370.77],
     ['2026-06-03',18519.97,223,1351,8525,2499.67,5983.02,1114.3,370.38],
     ['2026-06-04',13416.94,154,999,7827,1771.73,4095.15,1327.23,805.46],
-    ['2026-06-05',15059.18,182,1271,6213,2146.62,4085.07,880.73,402.15],
-    ['2026-06-06',17345.51,208,1606,5498,2642.6,4286.16,584.38,230.78]
+    ['2026-06-05',15059.18,182,1271,6213,2146.62,4086.03,880.73,402.15],
+    ['2026-06-06',25121.4,297,2321,8262,3761.06,6007.89,904.93,317.28],
+    ['2026-06-07',5328.97,66,487,2341,765.45,1657.16,218.21,'']
   ];
   var records = {};
   ROWS.forEach(function (r) {
@@ -493,13 +494,14 @@ function sendSlackSummary_() {
   var ym = Utilities.formatDate(new Date(), CONFIG.TIMEZONE, 'yyyy-MM');
   var data = feed.getDataRange().getValues();
 
+  var todayKey = Utilities.formatDate(new Date(), CONFIG.TIMEZONE, 'yyyy-MM-dd');
   var mRev = 0, mSpend = 0, last = null;
   for (var i = 1; i < data.length; i++) {
     var d = dayKey_(data[i][0]);
     var rev = num_(data[i][1]);
     var spend2 = num_(data[i][6]) + num_(data[i][7]) + num_(data[i][8]);
     if (d.slice(0, 7) === ym) { mRev += rev; mSpend += spend2; }
-    if (rev > 0 && (!last || d > last.date)) {
+    if (rev > 0 && d < todayKey && (!last || d > last.date)) {
       last = { date: d, rev: rev, orders: num_(data[i][2]), sessions: num_(data[i][4]),
                fb: num_(data[i][6]), gg: num_(data[i][7]), tt: num_(data[i][8]) };
     }

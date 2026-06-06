@@ -49,14 +49,15 @@ function sendSlackSummary_() {
   var ym = Utilities.formatDate(new Date(), CONFIG.TIMEZONE, 'yyyy-MM');
   var data = feed.getDataRange().getValues();
 
-  // month-to-date totals + the latest day that has revenue (yesterday's result)
+  // month-to-date totals + the latest COMPLETED day (before today) with revenue
+  var todayKey = Utilities.formatDate(new Date(), CONFIG.TIMEZONE, 'yyyy-MM-dd');
   var mRev = 0, mSpend = 0, last = null;
   for (var i = 1; i < data.length; i++) {
     var d = dayKey_(data[i][0]);
     var rev = num_(data[i][1]);
     var spend = num_(data[i][6]) + num_(data[i][7]) + num_(data[i][8]);
     if (d.slice(0, 7) === ym) { mRev += rev; mSpend += spend; }
-    if (rev > 0 && (!last || d > last.date)) {
+    if (rev > 0 && d < todayKey && (!last || d > last.date)) {
       last = { date: d, rev: rev, orders: num_(data[i][2]), sessions: num_(data[i][4]),
                fb: num_(data[i][6]), gg: num_(data[i][7]), tt: num_(data[i][8]) };
     }
