@@ -17,7 +17,7 @@ function buildDashProfit() {
   var rows = [['date', 'profit', 'profit_pct']];
   Object.keys(CONFIG.MONTH_TABS).forEach(function (name) {
     var m = CONFIG.MONTH_TABS[name];
-    var tab = ss.getSheetByName(name);
+    var tab = resolveSheet_(name);
     if (!tab) return;
     var values = tab.getDataRange().getValues();
     var dayCols = findDayColumns_(values, m.year, m.month);

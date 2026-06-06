@@ -230,8 +230,7 @@ function setupRepointAllMonths() {
 }
 
 function repointMonthTab(sheetName, year, month) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sh = ss.getSheetByName(sheetName);
+  var sh = resolveSheet_(sheetName);
   if (!sh) throw new Error('Tab not found: ' + sheetName);
   var values = sh.getDataRange().getValues();
   var dayCols = findDayColumns_(values, year, month);
@@ -279,7 +278,7 @@ function buildDashProfit() {
   var rows = [['date', 'profit', 'profit_pct']];
   Object.keys(CONFIG.MONTH_TABS).forEach(function (name) {
     var m = CONFIG.MONTH_TABS[name];
-    var tab = ss.getSheetByName(name);
+    var tab = resolveSheet_(name);
     if (!tab) return;
     var values = tab.getDataRange().getValues();
     var dayCols = findDayColumns_(values, m.year, m.month);
@@ -347,6 +346,17 @@ function num_(v) {
 function blankIfNull_(v) { return (v === null || v === undefined) ? '' : v; }
 function dayKey_(v) { return (v instanceof Date) ? fmtDate_(v) : String(v).slice(0, 10); }
 function fmtDate_(d) { return Utilities.formatDate(d, CONFIG.TIMEZONE, 'yyyy-MM-dd'); }
+function resolveSheet_(name) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var direct = ss.getSheetByName(name);
+  if (direct) return direct;
+  var target = String(name).toLowerCase().replace(/\s+/g, ' ').trim();
+  var all = ss.getSheets();
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].getName().toLowerCase().replace(/\s+/g, ' ').trim() === target) return all[i];
+  }
+  return null;
+}
 function datesInRange_(from, to) {
   var out = [], p = from.split('-'), q = to.split('-');
   var d = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]), 12, 0, 0);

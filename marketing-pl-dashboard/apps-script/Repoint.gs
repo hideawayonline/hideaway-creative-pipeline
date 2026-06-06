@@ -18,8 +18,7 @@ function setupRepointAllMonths() {
 
 /** Repoint a single month tab. e.g. repointMonthTab('JUN 26', 2026, 6). */
 function repointMonthTab(sheetName, year, month) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sh = ss.getSheetByName(sheetName);
+  var sh = resolveSheet_(sheetName);
   if (!sh) throw new Error('Tab not found: ' + sheetName);
 
   var values = sh.getDataRange().getValues();

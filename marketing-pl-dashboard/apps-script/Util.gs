@@ -32,6 +32,19 @@ function dayKey_(v) {
 
 function fmtDate_(d) { return Utilities.formatDate(d, CONFIG.TIMEZONE, 'yyyy-MM-dd'); }
 
+/** Find a sheet by name, ignoring case and extra spaces (e.g. 'MAY 26' == 'May 26'). */
+function resolveSheet_(name) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var direct = ss.getSheetByName(name);
+  if (direct) return direct;
+  var target = String(name).toLowerCase().replace(/\s+/g, ' ').trim();
+  var all = ss.getSheets();
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].getName().toLowerCase().replace(/\s+/g, ' ').trim() === target) return all[i];
+  }
+  return null;
+}
+
 function datesInRange_(from, to) {
   var out = [];
   var p = from.split('-'), q = to.split('-');
