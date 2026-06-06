@@ -234,9 +234,9 @@ function repointMonthTab(sheetName, year, month) {
   var sh = ss.getSheetByName(sheetName);
   if (!sh) throw new Error('Tab not found: ' + sheetName);
   var values = sh.getDataRange().getValues();
-  var dayCols = findDayColumns_(values, month);
+  var dayCols = findDayColumns_(values, year, month);
   var nCols = Object.keys(dayCols).length;
-  if (nCols === 0) throw new Error('No "<day> ' + monthAbbr_(month) + '" header columns found in ' + sheetName);
+  if (nCols === 0) throw new Error('No day columns for ' + sheetName);
 
   var feedCol = {};
   CONFIG.FEED_COLUMNS.forEach(function (f, i) { feedCol[f] = columnLetter_(i + 1); });
@@ -261,20 +261,11 @@ function repointMonthTab(sheetName, year, month) {
   return rowsTouched;
 }
 
-function findDayColumns_(values, month) {
-  var abbr = monthAbbr_(month);
-  var best = {}, bestCount = 0;
-  for (var r = 0; r < values.length; r++) {
-    var row = values[r];
-    var map = {}, c = 0;
-    for (var col = 1; col < row.length; col++) {
-      var cell = String(row[col] == null ? '' : row[col]).toLowerCase().trim();
-      var m = cell.match(/^(\d{1,2})\s*([a-z]{3})/);
-      if (m && m[2] === abbr) { map[col] = Number(m[1]); c++; }
-    }
-    if (c > bestCount) { bestCount = c; best = map; }
-  }
-  return best;
+function findDayColumns_(values, year, month) {
+  var days = new Date(year, month, 0).getDate(); // 30, 31, ...
+  var map = {};
+  for (var d = 1; d <= days; d++) map[d] = d; // 0-indexed col d == day d (col A is 0)
+  return map;
 }
 
 /* ============================ DASH_PROFIT ============================== */
@@ -291,7 +282,7 @@ function buildDashProfit() {
     var tab = ss.getSheetByName(name);
     if (!tab) return;
     var values = tab.getDataRange().getValues();
-    var dayCols = findDayColumns_(values, m.month);
+    var dayCols = findDayColumns_(values, m.year, m.month);
     var profitRow = findRowByLabel_(values, function (l) { return l === 'profit'; });
     var pctRow = findRowByLabel_(values, function (l) { return l === 'profit %'; });
     if (profitRow < 0 || pctRow < 0) return;

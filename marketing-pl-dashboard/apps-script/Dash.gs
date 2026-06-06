@@ -20,7 +20,7 @@ function buildDashProfit() {
     var tab = ss.getSheetByName(name);
     if (!tab) return;
     var values = tab.getDataRange().getValues();
-    var dayCols = findDayColumns_(values, m.month);
+    var dayCols = findDayColumns_(values, m.year, m.month);
     var profitRow = findRowByLabel_(values, function (l) { return l === 'profit'; });
     var pctRow = findRowByLabel_(values, function (l) { return l === 'profit %'; });
     if (profitRow < 0 || pctRow < 0) return;

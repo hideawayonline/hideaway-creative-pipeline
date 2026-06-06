@@ -25,9 +25,9 @@ function repointMonthTab(sheetName, year, month) {
   var values = sh.getDataRange().getValues();
 
   // {0-indexed column -> day number} for this month's day columns.
-  var dayCols = findDayColumns_(values, month);
+  var dayCols = findDayColumns_(values, year, month);
   var nCols = Object.keys(dayCols).length;
-  if (nCols === 0) throw new Error('No "<day> ' + monthAbbr_(month) + '" header columns found in ' + sheetName);
+  if (nCols === 0) throw new Error('No day columns for ' + sheetName);
 
   // DATA_FEED field -> column letter
   var feedCol = {};
@@ -54,22 +54,15 @@ function repointMonthTab(sheetName, year, month) {
 }
 
 /**
- * Find the date-header row and its day columns. Scans every row, looking for
- * cells like "1 Jun" / "15 jun" that match the target month, and returns the
- * row with the most matches as {0-indexed col -> day number}.
+ * Day columns for a month tab, mapped by POSITION. The tabs aren't consistent
+ * (June has "1 Jun" headers, April/May use weekday names), so we don't parse
+ * headers — column A is the row label, day 1 is column B, day 2 is column C, and
+ * so on up to the number of days in the month.
+ * Returns { 0-indexed column -> day number }, e.g. {1:1, 2:2, ... 30:30}.
  */
-function findDayColumns_(values, month) {
-  var abbr = monthAbbr_(month);
-  var best = {}, bestCount = 0;
-  for (var r = 0; r < values.length; r++) {
-    var row = values[r];
-    var map = {}, c = 0;
-    for (var col = 1; col < row.length; col++) {
-      var cell = String(row[col] == null ? '' : row[col]).toLowerCase().trim();
-      var m = cell.match(/^(\d{1,2})\s*([a-z]{3})/);
-      if (m && m[2] === abbr) { map[col] = Number(m[1]); c++; }
-    }
-    if (c > bestCount) { bestCount = c; best = map; }
-  }
-  return best;
+function findDayColumns_(values, year, month) {
+  var days = new Date(year, month, 0).getDate(); // 30, 31, ...
+  var map = {};
+  for (var d = 1; d <= days; d++) map[d] = d; // 0-indexed col d == day d (col A is 0)
+  return map;
 }
