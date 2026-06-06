@@ -61,18 +61,21 @@ per day on a time series. They match the sheet's definitions exactly.
 - **Date range control** defaulting to **This month**.
 - Optional **comparison** = previous period (scorecards → "Comparison date range").
 
-## 4. Profit % tile (needs the cost model)
+## 4. Profit % tile (from the model, via DASH_PROFIT)
 
-Profit lives in the month tabs (drivers + fixed costs), so it isn't in
-`DATA_FEED`. To surface it without rebuilding the maths, add a tiny **helper tab**
-that pulls the model's already-computed daily Profit % into long form, then add
-it to Looker as a blend on `date`.
+Profit lives in the month tabs (drivers + fixed costs), so it isn't a `DATA_FEED`
+ratio. The Apps Script `buildDashProfit()` function reshapes the model's
+**already-computed** `PROFIT` and `Profit %` rows into a long-format **`DASH_PROFIT`**
+tab (`date | profit | profit_pct`) — nothing is recomputed. It runs automatically
+after each daily pipe, and you can run it manually once now.
 
-Create a tab `DASH_PROFIT` with a header `date | profit_pct`, then for each month
-paste a row that reads the month tab. Simplest: one `QUERY`/`INDEX` per day, or
-ask me to add a `buildDashProfit()` function to the Apps Script that reads the
-`PROFIT %` row from each month tab into this long format. (Flagged as a quick
-phase-2 add so v1 can ship with the MER hero now.)
+To add the tiles:
+1. **Add data source** → Google Sheets → worksheet **`DASH_PROFIT`** → set `date`
+   to **Date**, `profit_pct` to **Percent**, `profit` to **Currency (AUD)**.
+2. Either use it as a **second data source** for the Profit scorecards, or **blend**
+   it with `DATA_FEED` on the `date` join key to mix Profit % into combined charts.
+3. Scorecards: `profit_pct` (vs the ~9.35% target) and `profit`. For a daily
+   profit trend, time series on `date` × `profit`.
 
 ## 5. Publish
 

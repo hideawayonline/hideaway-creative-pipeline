@@ -23,6 +23,8 @@ function runPipeForRange_(dateFrom, dateTo) {
     var ads = fetchWindsorSpend_(dateFrom, dateTo);        // {date: {fb_spend,google_spend,tiktok_spend}}
     var records = mergeByDate_(dateFrom, dateTo, shopify, ads);
     var n = upsertDataFeed_(records);
+    SpreadsheetApp.flush(); // let the month tabs recompute before reading profit
+    try { buildDashProfit(); } catch (e) { log_('WARN', 'DASH_PROFIT refresh failed: ' + e, ''); }
     log_('OK', 'range ' + dateFrom + '..' + dateTo + ': ' + n + ' DATA_FEED rows written', Date.now() - t0);
     return n;
   } catch (e) {

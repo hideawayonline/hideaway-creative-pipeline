@@ -8,6 +8,11 @@ The repoint of the month-tab input rows is still a **one-time** step — do it o
 with the Apps Script `setupRepointAllMonths()` (the formulas are permanent). This
 runtime just keeps `DATA_FEED` fed.
 
+The Looker `DASH_PROFIT` tab is built by the Apps Script `buildDashProfit()`
+(reads the model's computed Profit rows). If you run *only* this server-side
+runtime, keep a small Apps Script time-trigger on `buildDashProfit` so the
+Profit % tiles stay current.
+
 ## Setup
 
 1. **Service account** (Google Cloud console):

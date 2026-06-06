@@ -45,6 +45,16 @@ function normalizeLabel_(x) {
   return String(x == null ? '' : x).toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
+/** Like normalizeLabel_ but keeps punctuation, so 'PROFIT' != 'Profit %'. */
+function rawLabel_(x) {
+  return String(x == null ? '' : x).toLowerCase().trim().replace(/\s+/g, ' ');
+}
+
+function findRowByLabel_(values, test) {
+  for (var r = 0; r < values.length; r++) if (test(rawLabel_(values[r][0]))) return r;
+  return -1;
+}
+
 function monthAbbr_(month) {
   return ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'][month - 1];
 }

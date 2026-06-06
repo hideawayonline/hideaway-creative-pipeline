@@ -41,7 +41,9 @@ In the editor's function dropdown, pick and **Run** each, in order:
    run it from the editor after temporarily setting the dates, or just run
    `runDailyPipe` for today. To backfill all history, open the editor console and
    run: `runBackfill('2026-04-01','2026-06-06')`.
-3. `installDailyTrigger` — schedules the ~6am AEST daily run.
+3. `buildDashProfit` — builds the `DASH_PROFIT` tab for the Looker Profit %
+   tiles. (Also runs automatically after every daily pipe.)
+4. `installDailyTrigger` — schedules the ~6am AEST daily run.
 
 > Tip: to run `runBackfill` with arguments, paste this tiny helper above it and
 > run *that* once, then delete it:
