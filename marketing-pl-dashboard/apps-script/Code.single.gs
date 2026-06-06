@@ -36,7 +36,7 @@ var CONFIG = {
       tiktok_spend: { connector: 'tiktok',     account: '6902142628381343746' } // hideAWAY Ads
     }
   },
-  SHOPIFY: { apiVersion: '2025-01' },
+  SHOPIFY: { apiVersion: '2025-01', clientId: 'b9189138a4c8db61910bd8b662e5ff16' },
   FEED_COLUMNS: ['date', 'revenue', 'orders', 'items_sold', 'sessions', 'cogs',
                  'fb_spend', 'google_spend', 'tiktok_spend', '_updated_at'],
   INPUT_ROW_MAP: {
@@ -70,6 +70,30 @@ function firstTimeSetup() {
   runBackfill('2026-04-01', fmtDate_(new Date()));
   installDailyTrigger();
   log_('OK', 'firstTimeSetup complete', '');
+}
+
+/**
+ * One-time: exchange a Shopify OAuth code for a permanent Admin API access token
+ * and save it into SHOPIFY_ADMIN_TOKEN automatically.
+ * Set script properties SHOPIFY_CLIENT_SECRET and SHOPIFY_OAUTH_CODE first.
+ */
+function getShopifyTokenFromCode() {
+  var shop = getSecret_('SHOPIFY_STORE_DOMAIN');
+  var secret = getSecret_('SHOPIFY_CLIENT_SECRET');
+  var code = getSecret_('SHOPIFY_OAUTH_CODE');
+  var resp = UrlFetchApp.fetch('https://' + shop + '/admin/oauth/access_token', {
+    method: 'post',
+    contentType: 'application/json',
+    muteHttpExceptions: true,
+    payload: JSON.stringify({ client_id: CONFIG.SHOPIFY.clientId, client_secret: secret, code: code })
+  });
+  var body = JSON.parse(resp.getContentText() || '{}');
+  if (resp.getResponseCode() !== 200 || !body.access_token) {
+    throw new Error('Token exchange failed HTTP ' + resp.getResponseCode() + ': ' + resp.getContentText().slice(0, 300));
+  }
+  PropertiesService.getScriptProperties().setProperty('SHOPIFY_ADMIN_TOKEN', body.access_token);
+  log_('OK', 'Shopify Admin API token saved. Now run firstTimeSetup.', '');
+  return 'Token saved — now run firstTimeSetup()';
 }
 
 function runDailyPipe() {

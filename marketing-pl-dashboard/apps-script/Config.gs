@@ -34,7 +34,8 @@ var CONFIG = {
   },
 
   SHOPIFY: {
-    apiVersion: '2025-01' // GraphQL Admin API version that exposes shopifyqlQuery
+    apiVersion: '2025-01', // GraphQL Admin API version that exposes shopifyqlQuery
+    clientId: 'b9189138a4c8db61910bd8b662e5ff16' // app Client ID (public OAuth id, not a secret)
   },
 
   // DATA_FEED column layout (order matters; column A is the date key, stored as text).
