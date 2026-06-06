@@ -492,36 +492,48 @@ function sendSlackSummary_() {
 
   var ym = Utilities.formatDate(new Date(), CONFIG.TIMEZONE, 'yyyy-MM');
   var data = feed.getDataRange().getValues();
-  var rev = 0, fb = 0, gg = 0, tt = 0, lastDate = '', lastRev = 0, lastSpend = 0;
+
+  var mRev = 0, mSpend = 0, last = null;
   for (var i = 1; i < data.length; i++) {
     var d = dayKey_(data[i][0]);
-    if (d.slice(0, 7) !== ym) continue;
-    var r = num_(data[i][1]);
-    var s = num_(data[i][6]) + num_(data[i][7]) + num_(data[i][8]);
-    rev += r; fb += num_(data[i][6]); gg += num_(data[i][7]); tt += num_(data[i][8]);
-    if (r > 0 && d > lastDate) { lastDate = d; lastRev = r; lastSpend = s; }
+    var rev = num_(data[i][1]);
+    var spend2 = num_(data[i][6]) + num_(data[i][7]) + num_(data[i][8]);
+    if (d.slice(0, 7) === ym) { mRev += rev; mSpend += spend2; }
+    if (rev > 0 && (!last || d > last.date)) {
+      last = { date: d, rev: rev, orders: num_(data[i][2]), sessions: num_(data[i][4]),
+               fb: num_(data[i][6]), gg: num_(data[i][7]), tt: num_(data[i][8]) };
+    }
   }
-  var spend = fb + gg + tt;
-  var mer = rev > 0 ? spend / rev : 0;
+  if (!last) last = { date: 'n/a', rev: 0, orders: 0, sessions: 0, fb: 0, gg: 0, tt: 0 };
 
-  var profit = 0, dp = ss.getSheetByName('DASH_PROFIT');
+  var spend = last.fb + last.gg + last.tt;
+  var mer = last.rev > 0 ? spend / last.rev : 0;
+  var aov = last.orders > 0 ? last.rev / last.orders : 0;
+  var conv = last.sessions > 0 ? last.orders / last.sessions : 0;
+
+  var profit = 0, profitPct = 0, dp = ss.getSheetByName('DASH_PROFIT');
   if (dp) {
     var dv = dp.getDataRange().getValues();
-    for (var j = 1; j < dv.length; j++) if (dayKey_(dv[j][0]).slice(0, 7) === ym) profit += num_(dv[j][1]);
+    for (var j = 1; j < dv.length; j++) if (dayKey_(dv[j][0]) === last.date) { profit = num_(dv[j][1]); profitPct = num_(dv[j][2]); }
   }
 
+  var mtdMer = mRev > 0 ? mSpend / mRev : 0;
   var light = mer <= 0.30 ? ':large_green_circle:' : (mer <= 0.35 ? ':large_orange_circle:' : ':red_circle:');
+  var label = last.date;
+  try { label = Utilities.formatDate(new Date(last.date + 'T12:00:00'), CONFIG.TIMEZONE, 'EEE d MMM'); } catch (e) {}
+
   var msg = {
     text:
-      ':sunny: *Hideaway — Morning P&L*  (' + ym + ' month-to-date)\n' +
+      ':sunny: *Hideaway — Daily P&L*  —  ' + label + '\n' +
       light + '  *MER: ' + (mer * 100).toFixed(1) + '%*   (target ≤ 30%)\n' +
-      '*Revenue:* ' + money_(rev) + '    *Ad Spend:* ' + money_(spend) + '\n' +
-      '*Profit:* ' + money_(profit) + '  (' + (rev > 0 ? (profit / rev * 100).toFixed(1) : '0') + '%)\n' +
-      'Channels — FB ' + money_(fb) + ' · Google ' + money_(gg) + ' · TikTok ' + money_(tt) + '\n' +
-      'Latest day with revenue: ' + (lastDate || 'n/a') + ' — ' + money_(lastRev) + ' rev, ' + money_(lastSpend) + ' spend'
+      '*Revenue:* ' + money_(last.rev) + '     *Ad Spend:* ' + money_(spend) + '\n' +
+      '*Profit:* ' + money_(profit) + '  (' + (profitPct * 100).toFixed(1) + '%)\n' +
+      '*Orders:* ' + last.orders + '   *AOV:* ' + money_(aov) + '   *Sessions:* ' + last.sessions + '   *Conv:* ' + (conv * 100).toFixed(2) + '%\n' +
+      'Channels — FB ' + money_(last.fb) + ' · Google ' + money_(last.gg) + ' · TikTok ' + money_(last.tt) + '\n' +
+      '_Month to date:_  MER ' + (mtdMer * 100).toFixed(1) + '%  ·  Rev ' + money_(mRev) + '  ·  Spend ' + money_(mSpend)
   };
   UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', muteHttpExceptions: true, payload: JSON.stringify(msg) });
-  log_('OK', 'Slack morning summary sent for ' + ym, '');
+  log_('OK', 'Slack daily summary sent (' + last.date + ')', '');
 }
 
 function installMorningTrigger() {
