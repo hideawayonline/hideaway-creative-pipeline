@@ -39,11 +39,15 @@ function repointMonthTab(sheetName, year, month) {
     Object.keys(dayCols).forEach(function (colStr) {
       var col = Number(colStr);
       var day = dayCols[col];
-      var key = 'TEXT(DATE(' + year + ',' + month + ',' + day + '),"yyyy-mm-dd")';
+      var dateLit = 'DATE(' + year + ',' + month + ',' + day + ')';
       var col$ = '$' + feedCol[field];
+      var idx = 'INDEX(' + CONFIG.DATA_FEED_TAB + '!' + col$ + ':' + col$ + ',';
+      var A = CONFIG.DATA_FEED_TAB + '!$A:$A';
+      // Match on a real date first (DATA_FEED dates as date values), then fall
+      // back to a text match (dates stored as text) — robust either way.
       var formula =
-        '=IFERROR(INDEX(' + CONFIG.DATA_FEED_TAB + '!' + col$ + ':' + col$ + ',' +
-        'MATCH(' + key + ',' + CONFIG.DATA_FEED_TAB + '!$A:$A,0)),0)';
+        '=IFERROR(' + idx + 'MATCH(' + dateLit + ',' + A + ',0)),' +
+        'IFERROR(' + idx + 'MATCH(TEXT(' + dateLit + ',"yyyy-mm-dd"),' + A + ',0)),0))';
       sh.getRange(r + 1, col + 1).setFormula(formula);
     });
     rowsTouched++;

@@ -65,6 +65,17 @@ function getSecret_(key) {
  * It repoints the input rows, loads all history, builds the Profit tab, and
  * schedules the daily 6am refresh. Safe to re-run.
  */
+/**
+ * Re-apply the lookup formulas to all month tabs and rebuild the profit tab.
+ * Run this after loadHistoricalData if the month tabs show 0s.
+ */
+function repointAndRefresh() {
+  setupRepointAllMonths();
+  SpreadsheetApp.flush();
+  buildDashProfit();
+  log_('OK', 'repointAndRefresh complete', '');
+}
+
 function firstTimeSetup() {
   setupRepointAllMonths();
   runBackfill('2026-04-01', fmtDate_(new Date()));
@@ -271,11 +282,13 @@ function repointMonthTab(sheetName, year, month) {
     Object.keys(dayCols).forEach(function (colStr) {
       var col = Number(colStr);
       var day = dayCols[col];
-      var key = 'TEXT(DATE(' + year + ',' + month + ',' + day + '),"yyyy-mm-dd")';
+      var dateLit = 'DATE(' + year + ',' + month + ',' + day + ')';
       var col$ = '$' + feedCol[field];
+      var idx = 'INDEX(' + CONFIG.DATA_FEED_TAB + '!' + col$ + ':' + col$ + ',';
+      var A = CONFIG.DATA_FEED_TAB + '!$A:$A';
       var formula =
-        '=IFERROR(INDEX(' + CONFIG.DATA_FEED_TAB + '!' + col$ + ':' + col$ + ',' +
-        'MATCH(' + key + ',' + CONFIG.DATA_FEED_TAB + '!$A:$A,0)),0)';
+        '=IFERROR(' + idx + 'MATCH(' + dateLit + ',' + A + ',0)),' +
+        'IFERROR(' + idx + 'MATCH(TEXT(' + dateLit + ',"yyyy-mm-dd"),' + A + ',0)),0))';
       sh.getRange(r + 1, col + 1).setFormula(formula);
     });
     rowsTouched++;

@@ -3,6 +3,17 @@
  * It repoints the input rows, loads all history, builds the Profit tab, and
  * schedules the daily 6am refresh. Safe to re-run.
  */
+/**
+ * Re-apply the lookup formulas to all month tabs and rebuild the profit tab.
+ * Run this after loadHistoricalData if the month tabs show 0s.
+ */
+function repointAndRefresh() {
+  setupRepointAllMonths();
+  SpreadsheetApp.flush();
+  buildDashProfit();
+  log_('OK', 'repointAndRefresh complete', '');
+}
+
 function firstTimeSetup() {
   setupRepointAllMonths();
   runBackfill('2026-04-01', fmtDate_(new Date()));
