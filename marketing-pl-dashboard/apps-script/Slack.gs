@@ -71,11 +71,15 @@ function sendSlackSummary_() {
   var aov = last.orders > 0 ? last.rev / last.orders : 0;
   var conv = last.sessions > 0 ? last.orders / last.sessions : 0;
 
-  // that day's profit from DASH_PROFIT
-  var profit = 0, profitPct = 0, dp = ss.getSheetByName('DASH_PROFIT');
+  // that day's profit (+ month-to-date profit) from DASH_PROFIT
+  var profit = 0, profitPct = 0, mProfit = 0, dp = ss.getSheetByName('DASH_PROFIT');
   if (dp) {
     var dv = dp.getDataRange().getValues();
-    for (var j = 1; j < dv.length; j++) if (dayKey_(dv[j][0]) === last.date) { profit = num_(dv[j][1]); profitPct = num_(dv[j][2]); }
+    for (var j = 1; j < dv.length; j++) {
+      var dk = dayKey_(dv[j][0]);
+      if (dk === last.date) { profit = num_(dv[j][1]); profitPct = num_(dv[j][2]); }
+      if (dk.slice(0, 7) === ym) mProfit += num_(dv[j][1]);
+    }
   }
 
   var mtdMer = mRev > 0 ? mSpend / mRev : 0;
@@ -92,7 +96,8 @@ function sendSlackSummary_() {
       '*Orders:* ' + last.orders + '   *AOV:* ' + money_(aov) + '   *Sessions:* ' + last.sessions + '   *Conv:* ' + (conv * 100).toFixed(2) + '%\n' +
       'Channels — FB ' + money_(last.fb) + ' · Google ' + money_(last.gg) + ' · TikTok ' + money_(last.tt) + '\n' +
       ':email: *Emails:* +' + (last.newEmails || 0) + ' new  ·  −' + (last.lostEmails || 0) + ' churn  ·  net ' + ((last.newEmails || 0) - (last.lostEmails || 0)) + '\n' +
-      '_Month to date:_  MER ' + (mtdMer * 100).toFixed(1) + '%  ·  Rev ' + money_(mRev) + '  ·  Spend ' + money_(mSpend)
+      '_Month to date:_  MER ' + (mtdMer * 100).toFixed(1) + '%  ·  Rev ' + money_(mRev) + '  ·  Spend ' + money_(mSpend) +
+      '  ·  Profit ' + money_(mProfit) + ' (' + (mRev > 0 ? (mProfit / mRev * 100).toFixed(1) : '0') + '%)'
   };
   UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', muteHttpExceptions: true, payload: JSON.stringify(msg) });
   log_('OK', 'Slack daily summary sent (' + last.date + ')', '');
