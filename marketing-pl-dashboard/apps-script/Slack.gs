@@ -8,6 +8,7 @@
 
 function runMorningUpdate() {
   try { runDailyAds_(); } catch (e) { log_('WARN', 'ad refresh failed: ' + e, ''); }
+  try { runDailyKlaviyo_(); } catch (e) { log_('WARN', 'klaviyo refresh failed: ' + e, ''); }
   sendSlackSummary_();
 }
 
@@ -59,7 +60,8 @@ function sendSlackSummary_() {
     if (d.slice(0, 7) === ym) { mRev += rev; mSpend += spend; }
     if (rev > 0 && d < todayKey && (!last || d > last.date)) {
       last = { date: d, rev: rev, orders: num_(data[i][2]), sessions: num_(data[i][4]),
-               fb: num_(data[i][6]), gg: num_(data[i][7]), tt: num_(data[i][8]) };
+               fb: num_(data[i][6]), gg: num_(data[i][7]), tt: num_(data[i][8]),
+               newEmails: num_(data[i][10]), lostEmails: num_(data[i][11]) };
     }
   }
   if (!last) last = { date: 'n/a', rev: 0, orders: 0, sessions: 0, fb: 0, gg: 0, tt: 0 };
@@ -89,6 +91,7 @@ function sendSlackSummary_() {
       '*Profit:* ' + money_(profit) + '  (' + (profitPct * 100).toFixed(1) + '%)\n' +
       '*Orders:* ' + last.orders + '   *AOV:* ' + money_(aov) + '   *Sessions:* ' + last.sessions + '   *Conv:* ' + (conv * 100).toFixed(2) + '%\n' +
       'Channels — FB ' + money_(last.fb) + ' · Google ' + money_(last.gg) + ' · TikTok ' + money_(last.tt) + '\n' +
+      ':email: *Emails:* +' + (last.newEmails || 0) + ' new  ·  −' + (last.lostEmails || 0) + ' churn  ·  net ' + ((last.newEmails || 0) - (last.lostEmails || 0)) + '\n' +
       '_Month to date:_  MER ' + (mtdMer * 100).toFixed(1) + '%  ·  Rev ' + money_(mRev) + '  ·  Spend ' + money_(mSpend)
   };
   UrlFetchApp.fetch(url, { method: 'post', contentType: 'application/json', muteHttpExceptions: true, payload: JSON.stringify(msg) });
