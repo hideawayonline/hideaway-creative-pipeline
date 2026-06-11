@@ -1,0 +1,47 @@
+{%- comment -%}
+  ========================================================================
+  price-gst-exclusive.liquid
+  ------------------------------------------------------------------------
+  Renders an ex-GST headline price with GST shown as an added component:
+
+      $20.00  + $2.00 GST   ($22.00 total)
+
+  REQUIRES: Settings > Taxes and duties > "Include tax in prices" = OFF
+  so that the variant price stored in Shopify ($20) is the ex-GST base.
+
+  USAGE (in product/price templates, e.g. price.liquid or main-product):
+      {%- render 'price-gst-exclusive', product: product -%}
+    or for a specific variant:
+      {%- render 'price-gst-exclusive', variant: product.selected_or_first_available_variant -%}
+
+  NOTE: Australian Consumer Law (ACL s48 single-price rule) generally
+  requires the GST-inclusive TOTAL to be displayed at least as prominently
+  as any component. This snippet displays the ex-GST figure as the hero,
+  which is a compliance risk for B2C/retail. Use with that understanding.
+  ========================================================================
+{%- endcomment -%}
+
+{%- liquid
+  assign _variant = variant | default: product.selected_or_first_available_variant
+  assign base_price = _variant.price
+  # GST rate for Australia = 10%. Adjust gst_rate if needed.
+  assign gst_rate = 0.10
+  assign gst_amount = base_price | times: gst_rate | round
+  assign total_price = base_price | plus: gst_amount
+-%}
+
+<div class="price-gst" data-gst-block>
+  <span class="price-gst__base">{{ base_price | money }}</span>
+  <span class="price-gst__add">+ {{ gst_amount | money }} GST</span>
+  <span class="price-gst__total">({{ total_price | money }} total)</span>
+</div>
+
+<style>
+  .price-gst { display: inline-flex; align-items: baseline; gap: 0.4em; flex-wrap: wrap; }
+  /* Headline ex-GST price — the "hero" number */
+  .price-gst__base  { font-size: 1.5rem; font-weight: 700; line-height: 1; }
+  /* GST component — secondary */
+  .price-gst__add   { font-size: 0.85rem; font-weight: 500; opacity: 0.75; }
+  /* Inclusive total — shown for transparency */
+  .price-gst__total { font-size: 0.8rem; opacity: 0.6; }
+</style>
