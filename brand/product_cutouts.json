@@ -35,5 +35,13 @@
   "pipeline_notes": {
     "into_higgsfield": "Real cutouts reach Higgsfield via the user-side upload widget (media_upload_widget) or a public/importable URL (media_import_url). Pass as generate_image medias[] with role 'image'. Prefer marketing_studio_image, which preserves the product reference.",
     "egress": "Sandbox can reach drive.google.com and upload.higgsfield.ai, but NOT Higgsfield's output CDN (cloudfront). So renders are reviewed via CDN links / Slack, not downloaded locally."
+  },
+  "delivery": {
+    "drive_finals_folder_id": "1PnfGkdJhOaVznSISh-jIbNxgHTyCrmdd",
+    "drive_finals_folder_name": "Campaigns",
+    "subfolder_pattern": "<YYYY-MM-DD>_<Campaign>/<size>",
+    "sizes": ["4x5", "1x1", "9x16", "1.91x1"],
+    "batch_on_approval": "approved master (4 sizes) + 5 variations x 4 sizes = 24 files, regional copy frozen",
+    "review": "DM the 4:5 master to Steve (Slack DM D08M8R3GBLG) for approval before generating the batch"
   }
 }
