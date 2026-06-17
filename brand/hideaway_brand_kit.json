@@ -1,0 +1,61 @@
+{
+  "brand_name": "Hideaway",
+  "website_url": "https://hideaway.online",
+  "tagline": "Your passport to affordable luxury.",
+  "short_description": "Australian-made designer-inspired fragrance and body care, handcrafted in Burleigh Heads. Affordable luxury, made fun.",
+  "business_overview": "Hideaway is an Australian-owned fragrance and body care brand, handcrafted in Burleigh Heads on the Gold Coast for 10+ years. 36+ designer-inspired signature scents across perfume, body care, hair, bath, face and home, all around ~$20 versus $50+ designer alternatives. We democratise luxury: designer-quality scents and joyful, indulgent self-care for everyone. Vegan, cruelty-free, paraben-free, silicone-free, petroleum-free.",
+  "industry": "Beauty / Fragrance & Body Care",
+  "company_type": "DTC e-commerce (Australian-owned, made in-house)",
+  "detected_language": "en-AU",
+  "colors": [
+    { "name": "Sunset Sorbet", "hex": "#FC76C4", "usage": "Primary brand pink — logo, headlines, key accents" },
+    { "name": "Golden Daze",   "hex": "#FFED99", "usage": "Warm highlight / background" },
+    { "name": "Azure Cove",    "hex": "#51D1D8", "usage": "Secondary accent — links, section headers" },
+    { "name": "Moon Tide",     "hex": "#303030", "usage": "Body text / dark neutral" },
+    { "name": "Serene Sands",  "hex": "#EEE7E6", "usage": "Soft neutral background" }
+  ],
+  "fonts": [
+    { "name": "Made Tommy Soft", "type": "Bold",    "usage": "Multi-word headlines, sentence case, full stop, kerning +1pt" },
+    { "name": "Made Tommy Soft", "type": "Bold Caps Outline", "usage": "Short headlines / category labels, eye-catching" },
+    { "name": "Made Tommy Soft", "type": "Regular", "usage": "Body copy (web/social)" },
+    { "name": "Made Tommy Soft", "type": "Medium",  "usage": "Body copy (packaging/print)" },
+    { "name": "Monoline Script", "type": "Regular", "usage": "Taglines & hero statements — handwritten feel" }
+  ],
+  "brand_values": [
+    "Uncompromising quality",
+    "Luxury for everyone",
+    "Proudly Australian-made (Burleigh Heads)",
+    "Joy first"
+  ],
+  "brand_aesthetics": [
+    "Bright, saturated, joyful — burst of colour, no muted tones, no moody lighting",
+    "Gold Coast energy — sun-drenched, coastal, tropical, laid-back luxury",
+    "Product-forward — flat lays, lifestyle usage, close-ups of texture/colour",
+    "When using models: candid, real, diverse, joyful"
+  ],
+  "tone_of_voice": [
+    "Witty & clever",
+    "Playful & fun",
+    "Warm & inclusive",
+    "Confidently casual",
+    "Cheeky",
+    "Bold",
+    "Joyful"
+  ],
+  "products_or_services": [
+    "Perfume / fragrance (designer-inspired)",
+    "Body custard",
+    "Whipped soap",
+    "Body mist",
+    "Deodorant",
+    "Hair, bath, face, home (expanding)"
+  ],
+  "keywords": [
+    "affordable luxury", "designer dupes", "australian made", "fragrance",
+    "self-care", "vegan", "cruelty-free", "burleigh heads", "gold coast", "body care"
+  ],
+  "social_links": {
+    "instagram": null, "tiktok": null, "youtube": null,
+    "twitter": null, "linkedin": null, "facebook": null, "pinterest": null
+  }
+}
