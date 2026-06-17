@@ -75,9 +75,15 @@ Australian-made · handcrafted in Burleigh Heads · ~$20 vs $50+ designer · 36+
 vegan · cruelty-free · paraben-free · silicone-free · petroleum-free · 10+ year heritage.
 
 ---
+### Product imagery — HARD RULE
+**Never AI-generate product bottles.** Always composite a real cutout PNG from the Drive
+library (see `product_cutouts.json`). AI may build the surrounding frame/background/text
+only — never the product itself. Designer-original cutouts (the "THEIRS" side) come from
+the Label set; Hideaway bottles (the "OURS" side) from the With Dupe / Bottle set.
+
 ### How the pipeline uses this
 1. **Replicate:** OCR the reference ad's copy → keep the regional copy verbatim.
-2. **Re-skin** the visual in the brand kit palette/aesthetic (Higgsfield).
+2. **Re-skin** the visual in the brand kit palette/aesthetic — compositing the REAL cutout, never an AI bottle.
 3. **Iterate ×5:** vary ONE visual axis each (background · palette · layout · product framing ·
    CTA style). **Copy stays frozen.** If new copy is ever needed, it must follow every rule above.
 4. **Voice-check** any generated copy against Words We Love/Avoid + writing rules before launch.

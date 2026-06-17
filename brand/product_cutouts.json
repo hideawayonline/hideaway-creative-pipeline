@@ -1,0 +1,39 @@
+{
+  "_rule": "HARD CONSTRAINT: never AI-generate product bottles. Always composite a real cutout PNG from the library below. AI may only build the surrounding frame/background/text, never the product itself.",
+  "drive_library": {
+    "all_products_master_folder_id": "1kweJWcCAS7vu5g8RMk73ixvdFHdiyX4L",
+    "root_folder_id": "1lrFvRB5fqpyFGpaFYNJv4xz55hztNMG4",
+    "hideaway_dupe_bottles": {
+      "folder_id": "1MhyS8QZ5uckD0SJN8o6uKHzJwwYBlpK5",
+      "path": "With Dupe / Bottle",
+      "naming": "50ml_Perfume_Bottle_Dupes_<ScentName>.png",
+      "note": "~80 real Hideaway 50ml bottle cutouts on transparent bg. Use the OURS bottle from here."
+    },
+    "designer_references": {
+      "folder_id": "1eW411jQ7IBSXJ_xgAo05msdgAld892Sh",
+      "path": "(2nd folder) / Label",
+      "note": "Real designer-original cutouts for the THEIRS side.",
+      "key_files": {
+        "baccarat_rouge_540": "1VJcJ3IUcN4VOUIhbbnQrlz2wXtKFJXyt",
+        "ysl_black_opium": "1kjNmNt_04vLBq_STCfwLEw_GFMVy3twg",
+        "ysl_black_opium_neon": "1UuwUvo0M1aEfFLwo42MN0piCGuMlveqn"
+      }
+    },
+    "other_sets": {
+      "individual_bottle": "1Pfgn8Fj1Sgw9ceV4SmS6OCuxro4TP5Ej",
+      "with_dupe_box": "1Uqp75dvrF64U1e4Sy8zVbEI3d309-sMP",
+      "with_dupe_floating": "1jAWM3WX0znxw962rYC3rL3XjB05goTgR",
+      "kayalii_collection": "1Lia9rpnKlw4QIhED_mnXX4foRE_DS4oj",
+      "nolabel_bottles": "1Hp5z-U_O4yTJhJnMcGyC_mNMO3_HK53v"
+    }
+  },
+  "scent_to_designer_map": {
+    "_note": "Confirm with Steve. Hideaway scent name -> designer inspiration. Needed to pair OURS cutout with the correct THEIRS designer reference.",
+    "BlackEssence": "YSL Black Opium",
+    "AuroraRouge": "MFK Baccarat Rouge 540 (UNCONFIRMED — verify)"
+  },
+  "pipeline_notes": {
+    "into_higgsfield": "Real cutouts reach Higgsfield via the user-side upload widget (media_upload_widget) or a public/importable URL (media_import_url). Pass as generate_image medias[] with role 'image'. Prefer marketing_studio_image, which preserves the product reference.",
+    "egress": "Sandbox can reach drive.google.com and upload.higgsfield.ai, but NOT Higgsfield's output CDN (cloudfront). So renders are reviewed via CDN links / Slack, not downloaded locally."
+  }
+}
