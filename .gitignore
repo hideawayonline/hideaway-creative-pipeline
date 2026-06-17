@@ -1,0 +1,10 @@
+# Local renders (delivered to Drive, not committed)
+out/
+renders/
+# Product cutouts pulled at runtime (user assets, not committed)
+assets/cutouts/
+*.cutout.png
+# Python
+__pycache__/
+*.pyc
+.venv/
