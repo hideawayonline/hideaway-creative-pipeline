@@ -71,6 +71,26 @@ def _get(url: str, params: dict | None = None) -> dict:
     return {}
 
 
+def list_audiences() -> None:
+    """Print all segments and lists with their sizes, to help pick/build the list."""
+    for kind, path, field in (
+        ("SEGMENTS", "segments", "segment"),
+        ("LISTS", "lists", "list"),
+    ):
+        print(f"\n=== {kind} ===")
+        url = f"{BASE_URL}/{path}/"
+        params = {f"additional-fields[{field}]": "profile_count", "page[size]": 100}
+        while url:
+            data = _get(url, params=params)
+            for item in data.get("data", []):
+                attrs = item.get("attributes", {})
+                count = attrs.get("profile_count")
+                count_str = f"{count:>8,}" if isinstance(count, int) else "       ?"
+                print(f"  {count_str}  {item['id']}  {attrs.get('name', '(unnamed)')}")
+            url = data.get("links", {}).get("next")
+            params = None
+
+
 def fetch_segment_profiles(segment_id: str) -> list[dict]:
     """Page through every profile in a segment, with subscription + predictive data."""
     url = f"{BASE_URL}/segments/{segment_id}/profiles/"
@@ -186,7 +206,12 @@ def write_csv(rows: list[dict], out_path: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--segment-id", required=True, help="Klaviyo segment ID to export")
+    parser.add_argument("--segment-id", help="Klaviyo segment ID to export")
+    parser.add_argument(
+        "--list-audiences",
+        action="store_true",
+        help="List all Klaviyo segments & lists with sizes, then exit (no --segment-id needed)",
+    )
     parser.add_argument("--limit", type=int, default=10000, help="Max contacts to export")
     parser.add_argument("--region", default="AU", help="Default phone region (default AU)")
     parser.add_argument("--out", default="sms_list.csv", help="Output CSV path")
@@ -196,6 +221,13 @@ def main() -> None:
     )
     parser.add_argument("--dry-run", action="store_true", help="Don't write the CSV")
     args = parser.parse_args()
+
+    if args.list_audiences:
+        list_audiences()
+        return
+
+    if not args.segment_id:
+        parser.error("--segment-id is required (or use --list-audiences to browse)")
 
     print(f"Fetching segment {args.segment_id} from Klaviyo...")
     profiles = fetch_segment_profiles(args.segment_id)

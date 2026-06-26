@@ -55,6 +55,9 @@ KLAVIYO_API_KEY=pk_xxxxxxxxxxxxxxxxxxxx
 ```bash
 pip install -r requirements.txt
 
+# don't know the segment ID? browse all segments & lists with their sizes:
+python klaviyo_sms_export.py --list-audiences
+
 # preview counts + cost, write nothing:
 python klaviyo_sms_export.py --segment-id XXXXXX --dry-run
 
