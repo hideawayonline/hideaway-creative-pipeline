@@ -84,6 +84,30 @@ What the script does:
 
 4. Send a test to your own mobile, confirm it lands as **1 part**, then schedule.
 
+## The BOGO discount code itself
+
+`create_bogo_discount.py` creates the actual **Buy One Get One Free** code in
+Shopify (native Buy X Get Y discount: buy 1, get 1 at 100% off). This is the
+code your SMS points people to.
+
+```bash
+# preview the discount payload, create nothing:
+python create_bogo_discount.py --code BOGOFREE --ends 2026-06-30 --dry-run
+
+# create it (4-day window, one per customer, capped at 10k redemptions):
+python create_bogo_discount.py --code BOGOFREE --ends 2026-06-30 --usage-limit 10000
+
+# scope to a single collection instead of the whole store:
+python create_bogo_discount.py --code BOGOFREE --collection-id 123456789 --ends 2026-06-30
+```
+
+Needs `SHOPIFY_STORE` + `SHOPIFY_ADMIN_TOKEN` (Admin API scope `write_discounts`)
+in `.env`. Match `--usage-limit` to your list size and set `--ends` to the
+offer deadline that's in the SMS copy.
+
+> Not on Shopify? Tell me your platform (WooCommerce / BigCommerce / Magento)
+> and I'll add the equivalent script — the SMS exporter is platform-agnostic.
+
 ## Compliance notes (AU Spam Act)
 
 - Only send to contacts who **consented to SMS marketing** — the script enforces
