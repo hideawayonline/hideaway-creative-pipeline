@@ -78,6 +78,22 @@ def score_images(images: list[bytes], prompt: str) -> list[float] | None:
     except ImportError:
         print("  hpsv2 not installed; skipping quality scoring (pip install hpsv2).")
         return None
+    # The hpsv2 wheel omits the CLIP BPE vocab its tokenizer needs; fetch the
+    # standard file from open_clip into place on first run.
+    vocab_path = Path(hpsv2.__file__).parent / "src" / "open_clip" / "bpe_simple_vocab_16e6.txt.gz"
+    if not vocab_path.exists():
+        print("  Fetching missing CLIP vocab for hpsv2 (one-time)...")
+        vocab_url = (
+            "https://raw.githubusercontent.com/mlfoundations/open_clip/"
+            "main/src/open_clip/bpe_simple_vocab_16e6.txt.gz"
+        )
+        try:
+            vocab_response = requests.get(vocab_url, timeout=60)
+            vocab_response.raise_for_status()
+            vocab_path.write_bytes(vocab_response.content)
+        except Exception as exc:
+            print(f"  Could not fetch CLIP vocab ({exc}); skipping quality scoring.")
+            return None
     print(f"  Scoring {len(images)} variant(s) with HPSv2...")
     try:
         with tempfile.TemporaryDirectory() as tmpdir:
