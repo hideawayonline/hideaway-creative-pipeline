@@ -64,6 +64,15 @@ def score_images(images: list[bytes], prompt: str) -> list[float] | None:
     per image, or None if hpsv2 isn't installed or scoring fails — the
     pipeline degrades gracefully either way. Scores are only comparable
     among images generated from the same prompt."""
+    # hpsv2's bundled open_clip has a stray `from turtle import forward`,
+    # which drags in tkinter and crashes on headless machines. Stub it out;
+    # nothing here uses turtle graphics.
+    import sys
+    import types
+    if "turtle" not in sys.modules:
+        turtle_stub = types.ModuleType("turtle")
+        turtle_stub.forward = None
+        sys.modules["turtle"] = turtle_stub
     try:
         import hpsv2
     except ImportError:
