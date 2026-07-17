@@ -105,31 +105,29 @@ Three conclusions:
 
 **First-order break-even is acceptable here.** At $50 CPA the US order at retail rates makes ~$11 — the real profit is the reorder (Klaviyo flows, subscription-style replenishment on lube/deodorant/balm) and second-bundle upsells that carry no CPA.
 
-## 4c. Corrected economics at actual COGS ≈ 35% (this supersedes all earlier contribution figures)
+## 4c. Corrected economics at actual COGS ≈ $3.50/unit (this supersedes all earlier contribution figures)
 
-Contribution after 35% COGS on RRP, 3% fees, packaging, and **$50 CPA**:
+Confirmed COGS: **~$35 total for a 10-product box → ~$3.50 per full-size unit** (flat average across formats). Contribution after per-unit COGS, 3% fees, packaging, and **$50 CPA**, at **retail** postage:
 
-| Bundle | Price | NZ retail | US retail | UK retail | NZ contract* | US contract* | UK contract* |
-|---|---|---|---|---|---|---|---|
-| Skin to Skin | $90 | −$30 | −$45 | **−$1 pre-ads** ❌ | −$21 | −$32 | −$16 |
-| Worldwide Deluxe | $149 | +$4 | −$10 | −$17 | +$13 | +$3 | −$2 |
-| Couples' Ultimate | $169 | −$6 | −$28 | −$41 | +$7 | −$8 | −$17 |
-| One of Everything | $199 | +$17 ✅ | −$5 | −$18 | +$30 ✅ | +$15 ✅ | +$6 ✅ |
-| Whole Hideaway | $249 | +$31 ✅ | −$5 | −$22 | +$45 ✅ | +$21 ✅ | +$9 ✅ |
+| Bundle | Price | Items | COGS | NZ | US | UK |
+|---|---|---|---|---|---|---|
+| Skin to Skin | $90 | 5 | ~$18 | −$12 | −$27 | −$33 |
+| Worldwide Deluxe | $149 | 7 | ~$25 | **+$38** ✅ | **+$23** ✅ | **+$17** ✅ |
+| Couples' Ultimate | $169 | 8 | ~$28 | **+$37** ✅ | **+$15** ✅ | +$2 (breakeven; fine on contract) |
+| Hideaway 10 | $169 | 10 | ~$35 | **+$30** ✅ | **+$8** ✅ | −$5 (price UK $179 or wait for contract) |
+| One of Everything | $199 | 10 | ~$35 | **+$59** ✅ | **+$37** ✅ | **+$25** ✅ |
+| Whole Hideaway | $249 | 13 | ~$46 | **+$89** ✅ | **+$53** ✅ | **+$36** ✅ |
 
-\* contract modelled at ~30% off retail postage — indicative only, confirm actual rate card.
+(Skin to Skin remains a zero-CPA-channel offer — but it's comfortably profitable there: +$17 UK / +$23 US / +$38 NZ pre-ads.)
 
-**Three rules at 35% COGS:**
-1. **Contract shipping rates are the business case, not an optimisation.** US/UK paid traffic does not launch until the AusPost (or consolidator) rate card is signed. NZ can launch on retail rates today.
-2. **Cap bundle discounts at 15–20% off RRP.** At 35% COGS a 30%-off bundle hands over most of the gross margin. The headline "gift" is the freight, not the discount.
-3. **Free items beat % off 3-to-1.** A gifted $33 oil costs $11.55 in COGS but anchors $33 of value. The gift ladder is the primary value mechanic; percentage discounts are the fallback.
+**What changes at $3.50/unit COGS:**
+1. **US/UK paid traffic can launch on retail postage** — contract rates become upside (~$10–20/order), not a launch gate. NZ, US, UK all go-live capable.
+2. **The $149 Deluxe is the cold-traffic hero** — best contribution-to-price ratio in all three markets, under 1kg. The $199 One of Everything is the AOV push right behind it.
+3. **The 15–20% discount cap is lifted.** At ~70%+ product margin, "$220 value for $169"-style value math is affordable. The gift ladder remains the preferred mechanic (a gifted $33 oil costs $3.50), but deep bundle discounts are back on the table where conversion needs them.
+4. **The 10-for-$169 offer is viable** for NZ/US cold traffic at retail rates; UK at $179 or on contract rates.
+5. **Big boxes are the profit engine:** $53–89 per order after ad spend on the $249 tier — prioritise it in retargeting and email, and scale spend against it in weeks 3+.
 
-**Revised price ladder:**
-- Skin to Skin → **$99** (NZ + zero-CPA channels only; never UK at retail rates)
-- Worldwide Deluxe stays **$149** (it's only ~10% off RRP already — discount-light by design)
-- Couples' Ultimate → **$189** for any paid use; $169 acceptable as a subscriber/VIP exclusive on zero-CPA channels
-- One of Everything → **$219** cold-traffic list price (works at retail US: ~+$14 after CPA; ~$169–199 reserved as launch/subscriber pricing per §5d)
-- Whole Hideaway stays **$249** (retargeting/VIP/gifting)
+**Price ladder (final):** $90 Skin to Skin (email/organic) → **$149 Deluxe (paid hero)** → $169 Ultimate / Hideaway 10 → $199 One of Everything → $249 Whole Hideaway. UK-only +$10 adjustments on the two $169 offers via Shopify Markets if launching before contract rates.
 
 ## 5. The international bundle lineup (rebuilt for a $50 CPA)
 
