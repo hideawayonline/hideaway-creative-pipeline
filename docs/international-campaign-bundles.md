@@ -228,6 +228,24 @@ Supporting: exit-intent email capture saves builder state → Klaviyo "abandoned
 4. **Influencer seeding:** 30 micro-creators (10 NZ / 10 US / 10 UK) get the hero bundle; brief them on the "Aussie prices worldwide" line and a market-specific code (tracks by geo).
 5. **Landing page:** dedicated `/worldwide` collection page — shipping-promise banner, delivery time by country, duties-included badge (US), bundle builder embed, Coconu/Woo price-comparison module for US visitors.
 
+### 7b. Creative themes for the two lead offers
+
+The two offers occupy opposite emotional territories — **Deluxe = self-indulgence ("my ritual"), Ultimate = connection ("us, tonight")** — which keeps the ad account cleanly segmented.
+
+**$149 Worldwide Deluxe — "the glow-up box"**
+1. **"Australia's Best-Kept Secret, Airdropped"** (hero, offer-led): "Australians pay $149 for this. Now so do you — we cover the freight." Executions: parcel-journey video (Sunshine Coast → doorstep, customs-stamp graphics), itemised value-receipt static styled as a boarding pass, unboxing UGC with "AUSSIE PRICES ONLY" packing tape as a brand asset. Meta-safe (oils/deodorant lead), localises by swapping the currency overlay.
+2. **"Dessert for Your Skin"** (gourmand): "A five-course dessert menu. For your body." Food-styling photography (oil as caramel drizzle, mousse piped like cream), scent-story carousels, creator brief: describe the scent without saying "smells nice".
+3. **"The Everything Shower, Upgraded"** (trend-jack): "POV: your everything shower flew 15,000km to get here." Routine-stack videos, duet/stitch bait.
+
+**$169 Couples' Ultimate Night In — "date night, delivered"**
+1. **"Cancel the Reservation"** (price-anchor, leads paid): "Dinner for two: $180. Staying in: $169." Split-screen restaurant-receipt vs box statics; cozy night-in staging; policy-safe — it's a date-night ritual box, lube never leads the creative.
+2. **"The Long-Distance Love Language"** (the international twist): "Distance is temporary. Ship the chemistry." Gift-note feature, LDR/expat/military community seeding, Valentine's + anniversary Klaviyo flows with ships-in-time countdowns.
+3. **"Skin to Skin Sundays"** (intimacy-as-wellness, email/organic/TikTok Shop only): "Made for moments worth savouring." The channel where contents are named explicitly and the $203 value math runs uncensored.
+
+**Hideaway 10 variant:** "Ten Picks. Zero Regrets." — maximiser angle ("$245 worth. You choose every piece."), group-chat-builds-my-box interactive UGC.
+
+**Calendar:** Deluxe = always-on + Q4 self-gifting. Ultimate = Valentine's (both hemispheres), US cuffing season (Oct–Dec), anniversaries. Test order: both offer-led themes first (cheapest to produce), emotional themes layered in once the account has data.
+
 ### Budget guide (first 6 weeks)
 - 60% Meta (Worldwide Deluxe $149 for US/UK; Glow Ritual $90 for NZ), 20% TikTok Spark, 10% influencer seeding, 10% testing reserve.
 - Planning CPA: **$50 per new international customer.** At $149 the first order roughly breaks even at retail postage (+$11 US) and makes money on contract rates; the model's profit is reorders + zero-CPA upsells, so LTV tracking is not optional.
