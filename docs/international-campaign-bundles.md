@@ -84,25 +84,48 @@ That's +$8 RRP and ~80g of weight (still ~860g packed, inside 1kg) for a dramati
 
 **Ad-policy caveat (important):** Meta restricts ads for products positioned around sexual pleasure; lubricant-led creative risks rejections/account flags. Run the lube bundle through **email, organic social, TikTok Shop and the landing page**, and let **paid ads lead with body-care bundles** (below) that click through to a page where Skin to Skin Worldwide is merchandised alongside.
 
-## 5. The international bundle lineup (all ≤1kg, all $90+ AOV)
+## 4b. Re-run with a $50 CPA — the AOV floor moves to ~$150 for paid traffic
+
+Working assumptions: product COGS ≈ 22% of RRP, payment fees ≈ 3%, packaging $3, AusPost **retail** rates (contract rates improve every line by ~$10–20). Contribution per paid-acquired order:
+
+| Offer price | Packed weight | US postage | Pre-ads contribution (US) | **After $50 CPA (US)** | After $50 CPA (NZ) |
+|---|---|---|---|---|---|
+| $90 | ≤1kg | $43.60 | ~$19 | **−$31** ❌ | ~−$16 ❌ |
+| $129 | ~1.4kg (2kg band) | ~$66 | ~$20 | **−$30** ❌ | ~−$8 ❌ |
+| **$149** | **≤1kg (dense)** | $43.60 | ~$61 | **+$11 ✅ (retail) / ~+$25 (contract)** | **+$26 ✅** |
+| $169 | ~1.8kg (2kg band) | ~$66 | ~$47 | −$3 ❌ retail / ~+$18 contract | ~+$19 ✅ |
+
+Three conclusions:
+
+1. **$90 is not a paid-traffic offer.** It stays alive as the email/organic/retention offer (zero CPA channels), where it contributes ~$19–40/order.
+2. **The paid hero must be ~$149 AND stay under 1kg.** Crossing into the 2kg band eats the entire price increase — a $129 two-kilo bundle is *worse* than a $90 one-kilo bundle. Density wins, not just price.
+3. **RRP-per-gram is the design metric.** Lip Balm ($533/kg), Body Butter Oil & Deodorant (~$183/kg), Shower Mousse ($167/kg), Lubricant ($133/kg) are the bundle builders. Body Custard ($90/kg) and Body Wash ($73/kg) are weight traps — keep them for NZ-only bundles and free-gift minis.
+
+**First-order break-even is acceptable here.** At $50 CPA the US order at retail rates makes ~$11 — the real profit is the reorder (Klaviyo flows, subscription-style replenishment on lube/deodorant/balm) and second-bundle upsells that carry no CPA.
+
+## 5. The international bundle lineup (rebuilt for a $50 CPA)
 
 | # | Bundle | Contents | RRP | Price | Packed weight | Role |
 |---|---|---|---|---|---|---|
-| 1 | **Skin to Skin Worldwide** (hero) | 3× Natural Lubricant + FREE Body Butter Oil + FREE mini custard | $101 | **$90** | ~860g | Hero AOV offer — email/organic/TikTok |
-| 2 | **The Glow Ritual** | Body Scrub + Body Custard + Shower Mousse + Body Butter Oil (one scent story or mix) | $105 | **$90** | ~900g | Paid-ads-safe hero (Meta/TikTok ads) |
-| 3 | **Build-Your-Own Body Bar** | Pick any 4: mousse / scrub / custard (custard capped at 2) + FREE Natural Lubricant | up to $108 | **$90** | ≤980g | Bundle-builder engagement; reuses existing easy-bundle infra |
-| 4 | **Couples' Night In** | 2× Natural Lubricant + Body Butter Oil + Shower Mousse + 2 mini custards | $114 | **$99** | ~950g | Premium tier; Valentine's/gifting spikes |
-| 5 | **Mini World Tour** (add-on, not standalone) | 6 minis + Cloud Pouch, add-on only at checkout | $58 | **+$29** | +560g ⚠️ | Cart upsell — only offer when cart <400g so combined parcel stays ≤1kg, otherwise it tips the 2kg band |
+| 1 | **The Worldwide Deluxe** (paid hero) | 2× Body Butter Oil + 2× Natural Lubricant + Deodorant + 2× FREE Lip Balm | ~$166 | **$149** | ~950g ✅ | The Meta/TikTok ads offer — only bundle that clears $50 CPA in US/UK at retail postage. Lead creative with the oils/deodorant (ad-policy-safe); lube is "inside the box" |
+| 2 | **Skin to Skin Worldwide** | 3× Natural Lubricant + FREE Body Butter Oil + FREE mini custard | $101 | **$90** | ~860g | Email / organic / TikTok Shop / retention only (zero-CPA channels) |
+| 3 | **The Glow Ritual** | Body Scrub + Body Custard + Shower Mousse + Body Butter Oil | $105 | **$90** | ~900g | NZ paid traffic (works at NZ postage) + worldwide email/organic |
+| 4 | **Couples' Ultimate Night In** | 3× Natural Lubricant + 2× Body Butter Oil + Shower Mousse + 2× FREE Lip Balm | ~$203 | **$169** | ~1.9kg (2kg band) | Premium tier for gifting spikes (Valentine's) and repeat buyers; profitable on contract rates / zero-CPA channels |
+| 5 | **Mini World Tour** (add-on, not standalone) | 6 minis + Cloud Pouch, add-on only at checkout | $58 | **+$29** | +560g ⚠️ | Post-purchase upsell — only offer when cart <400g so the parcel stays ≤1kg, otherwise it tips the 2kg band |
+
+AOV ladder mechanics (this is how blended AOV gets pushed past $150):
+- **Free international shipping unlocks at $120** — not on everything. Sub-$120 carts see "you're $X away from free worldwide shipping". The $90 bundles + one add-on clears it.
+- **Gift ladder:** $120 → free mini duo ($16 RRP) · $150 → free Lip Balm duo ($32 RRP) · $200 → free Deodorant ($27.50 RRP). Gifts are chosen for density (high perceived value, ≤150g).
+- **Post-purchase one-click upsell:** "Add a second bundle, 20% off — ships in the same box." Two bundles ≈ 1.8kg still ride one 2kg satchel, so the second bundle carries no CPA and ~$22 incremental postage at most.
 
 Notes:
-- #3 needs a weight guardrail: 4× Body Custard = 1,112g product and blows the 1kg band — hence "max 2 custards" (or price the all-custard combo at $95). This is exactly what the existing Mix & Match easy-bundle setup can enforce with option caps.
-- The existing **Skin to Skin Set ($50)** should be hidden from international markets so it doesn't cannibalise the $90 hero.
-- Second-bundle discount: "Add any second bundle for 15% off" — two bundles ≈ 1.8kg still ships as one 2kg parcel.
+- Deodorant weight is estimated (~150g) — confirm actual before locking bundle #1's contents; if heavier, swap for a Shower Mousse (150g, $25).
+- The existing **Skin to Skin Set ($50)** should be hidden from international markets so it doesn't cannibalise the ladder.
 
 ## 6. Pricing & storefront mechanics
 
 - **Shopify Markets** (already on Shopify Plus): enable NZ, US, UK, CA, IE, SG as active markets; present local currency converted from AUD at **0% price markup** — that IS the "Australian prices" promise. Show "Free international shipping" as the default rate for the bundle collection; exclude/blanket-block Perfume, Perfume (Travel), Body Mist product types from international markets via market catalogs.
-- **Free-shipping threshold:** set international free shipping at **$90+** (i.e. any bundle qualifies; à-la-carte singles either unavailable internationally or charged real postage — this funnels everyone into bundles).
+- **Free-shipping threshold:** set international free shipping at **$120+** (à-la-carte singles either unavailable internationally or charged real postage — this funnels everyone into bundles and up the gift ladder).
 - **Duties & taxes:**
   - **US:** de minimis ended Aug 2025 — every parcel is now assessed duties. Cosmetics from AU carry the ~10% baseline tariff. Decide DDP (collect duties at checkout via Shopify Managed Markets — recommended, no doorstep surprise) vs DDU (cheaper sticker, angry customers). DDP is strongly recommended for the US.
   - **UK:** consignments ≤£135 require the seller to register and collect 20% UK VAT at checkout. Either register for UK VAT or launch UK via Managed Markets (merchant of record handles it).
@@ -138,17 +161,22 @@ Notes:
 5. **Landing page:** dedicated `/worldwide` collection page — shipping-promise banner, delivery time by country, duties-included badge (US), bundle builder embed, Coconu/Woo price-comparison module for US visitors.
 
 ### Budget guide (first 6 weeks)
-- 60% Meta (Glow Ritual, NZ→US/UK), 20% TikTok Spark, 10% influencer seeding, 10% testing reserve.
-- Gate: each market must hit **contribution ≥ $20/order after postage + COGS + ads** by end of week 4 or price/offer gets restructured before more spend.
+- 60% Meta (Worldwide Deluxe $149 for US/UK; Glow Ritual $90 for NZ), 20% TikTok Spark, 10% influencer seeding, 10% testing reserve.
+- Planning CPA: **$50 per new international customer.** At $149 the first order roughly breaks even at retail postage (+$11 US) and makes money on contract rates; the model's profit is reorders + zero-CPA upsells, so LTV tracking is not optional.
+- Gate: each market must hit **first-order contribution ≥ $0 after postage + COGS + $50 CPA** by end of week 4, with ≥ 15% 60-day reorder rate forecast, or the offer gets restructured before more spend.
 
 ### KPIs
 | KPI | Target |
 |---|---|
 | International (ex-AU) orders/week | 150 by week 6 |
-| International AOV | ≥ $90 AUD |
-| Blended postage per intl order | ≤ $40 (retail), ≤ $32 (contract) |
-| Contribution per order (pre-ads) | ≥ $35 |
-| NZ AOV | $57 → $75 |
+| International blended AOV | ≥ $120 AUD, target $150 |
+| Paid-traffic AOV (Worldwide Deluxe funnel) | ≥ $149 |
+| CPA (paid, new intl customer) | ≤ $50 |
+| First-order contribution after CPA (US/UK) | ≥ $0 retail rates / ≥ $20 contract |
+| Post-purchase upsell take rate | ≥ 12% |
+| Blended postage per intl order | ≤ $45 (retail), ≤ $35 (contract) |
+| NZ AOV | $57 → $85 |
+| 60-day reorder rate (intl) | ≥ 15% |
 | Delivery complaints / WISMO rate | < 5% of intl orders |
 
 ## 8. Implementation checklist
@@ -156,9 +184,11 @@ Notes:
 - [ ] Confirm Body Mist formulation (alcohol?) and Shower Mousse container (aerosol?) → include/exclude from intl catalog
 - [ ] Confirm NZ GST registration; decide US DDP via Managed Markets; UK VAT decision
 - [ ] Rename lubricant to "Intimate Body Oil" for US market copy (pending legal check)
-- [ ] Build 4 bundle products (reuse easy-bundle / Mix & Match infra; cap custard qty in builder)
+- [ ] Confirm Deodorant unit weight (bundle #1 assumes ~150g)
+- [ ] Build 5 bundle products (reuse easy-bundle / Mix & Match infra; cap custard qty in builder)
 - [ ] Shopify Markets: activate NZ/US/UK/CA/IE/SG, 0% markup, exclude perfume + mists + Skin to Skin $50 set
-- [ ] Shipping profile: free intl shipping ≥$90; verify contract/MyPost rates vs the retail ceiling used here
+- [ ] Shipping profile: free intl shipping ≥$120; verify contract/MyPost rates vs the retail ceiling used here
+- [ ] Configure gift ladder ($120/$150/$200 tiers) + post-purchase one-click second-bundle upsell (20% off)
 - [ ] Klaviyo: geo segments + 3 flows (announce, intl abandoned cart, intl post-purchase)
 - [ ] Landing page `/worldwide` + Meta/TikTok creative brief to pipeline
 - [ ] Melt-care insert card printed
