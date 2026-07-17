@@ -122,6 +122,24 @@ Notes:
 - Deodorant weight is estimated (~150g) — confirm actual before locking bundle #1's contents; if heavier, swap for a Shower Mousse (150g, $25).
 - The existing **Skin to Skin Set ($50)** should be hidden from international markets so it doesn't cannibalise the ladder.
 
+### 5b. Flagship focus: Couples' Ultimate Night In
+
+Contents: 3× Natural Lubricant + 2× Body Butter Oil + Shower Mousse + 2× FREE Lip Balm → **$203 RRP**, ~1,020g product (~1.15kg packed → 2kg band).
+
+Per-market contribution (22% COGS, 3% fees, $3 packaging, retail postage):
+
+| Market | 2kg postage | Pre-ads contribution @ $169 | After $50 CPA @ $169 | After $50 CPA @ $179 |
+|---|---|---|---|---|
+| NZ | $43.80 | ~$72 | **+$22** ✅ | +$32 |
+| US | ~$66 | ~$50 | **±$0** — break-even retail, ~+$18 contract | +$10 retail |
+| UK | $78.50 | ~$38 | **−$12** ❌ retail | −$2 retail, ~+$15 contract |
+
+How to run it:
+- **$169 works today for NZ paid + all zero-CPA channels; US paid is break-even-to-positive.** For the UK, either hold it out of paid until contract rates are confirmed, or list at **$179** there (Shopify Markets allows per-market pricing — a $10 UK-only adjustment is invisible to other markets and still "Aussie-priced" in spirit).
+- **Funnel placement:** don't sell the upgrade from the $149 Deluxe for +$20 — the extra ~$22 of 2kg-band postage plus ~$8 COGS makes a +$20 upgrade lose ~$10/order. Either run Ultimate as its own standalone offer, or price the upgrade at **+$30**.
+- **Ad policy:** this is the most lube-forward bundle. For Meta paid, creative must sell "the ultimate date-night ritual box" led by the oils/mousse imagery — no explicit pleasure positioning — or keep paid spend on the Deluxe and push Ultimate through email, TikTok Shop, influencer seeding, and the landing page where policy doesn't apply.
+- **Seasonal spikes to plan around:** Valentine's Day (both hemispheres), US "cuffing season" (Oct–Dec), wedding season gifting. This bundle is the anchor creative for those calendar moments.
+
 ## 6. Pricing & storefront mechanics
 
 - **Shopify Markets** (already on Shopify Plus): enable NZ, US, UK, CA, IE, SG as active markets; present local currency converted from AUD at **0% price markup** — that IS the "Australian prices" promise. Show "Free international shipping" as the default rate for the bundle collection; exclude/blanket-block Perfume, Perfume (Travel), Body Mist product types from international markets via market catalogs.
