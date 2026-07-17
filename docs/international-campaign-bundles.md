@@ -86,6 +86,8 @@ That's +$8 RRP and ~80g of weight (still ~860g packed, inside 1kg) for a dramati
 
 ## 4b. Re-run with a $50 CPA — the AOV floor moves to ~$150 for paid traffic
 
+> **⚠️ Superseded on COGS:** this section and the contribution figures in §5–5d were first modelled at 22% COGS. Actual COGS is **~35%** — see **§4c** for the corrected economics and revised pricing; the structural conclusions here (density, 1kg band, $90 not a paid offer) all still hold, and get stricter.
+
 Working assumptions: product COGS ≈ 22% of RRP, payment fees ≈ 3%, packaging $3, AusPost **retail** rates (contract rates improve every line by ~$10–20). Contribution per paid-acquired order:
 
 | Offer price | Packed weight | US postage | Pre-ads contribution (US) | **After $50 CPA (US)** | After $50 CPA (NZ) |
@@ -102,6 +104,32 @@ Three conclusions:
 3. **RRP-per-gram is the design metric.** Lip Balm ($533/kg), Body Butter Oil & Deodorant (~$183/kg), Shower Mousse ($167/kg), Lubricant ($133/kg) are the bundle builders. Body Custard ($90/kg) and Body Wash ($73/kg) are weight traps — keep them for NZ-only bundles and free-gift minis.
 
 **First-order break-even is acceptable here.** At $50 CPA the US order at retail rates makes ~$11 — the real profit is the reorder (Klaviyo flows, subscription-style replenishment on lube/deodorant/balm) and second-bundle upsells that carry no CPA.
+
+## 4c. Corrected economics at actual COGS ≈ 35% (this supersedes all earlier contribution figures)
+
+Contribution after 35% COGS on RRP, 3% fees, packaging, and **$50 CPA**:
+
+| Bundle | Price | NZ retail | US retail | UK retail | NZ contract* | US contract* | UK contract* |
+|---|---|---|---|---|---|---|---|
+| Skin to Skin | $90 | −$30 | −$45 | **−$1 pre-ads** ❌ | −$21 | −$32 | −$16 |
+| Worldwide Deluxe | $149 | +$4 | −$10 | −$17 | +$13 | +$3 | −$2 |
+| Couples' Ultimate | $169 | −$6 | −$28 | −$41 | +$7 | −$8 | −$17 |
+| One of Everything | $199 | +$17 ✅ | −$5 | −$18 | +$30 ✅ | +$15 ✅ | +$6 ✅ |
+| Whole Hideaway | $249 | +$31 ✅ | −$5 | −$22 | +$45 ✅ | +$21 ✅ | +$9 ✅ |
+
+\* contract modelled at ~30% off retail postage — indicative only, confirm actual rate card.
+
+**Three rules at 35% COGS:**
+1. **Contract shipping rates are the business case, not an optimisation.** US/UK paid traffic does not launch until the AusPost (or consolidator) rate card is signed. NZ can launch on retail rates today.
+2. **Cap bundle discounts at 15–20% off RRP.** At 35% COGS a 30%-off bundle hands over most of the gross margin. The headline "gift" is the freight, not the discount.
+3. **Free items beat % off 3-to-1.** A gifted $33 oil costs $11.55 in COGS but anchors $33 of value. The gift ladder is the primary value mechanic; percentage discounts are the fallback.
+
+**Revised price ladder:**
+- Skin to Skin → **$99** (NZ + zero-CPA channels only; never UK at retail rates)
+- Worldwide Deluxe stays **$149** (it's only ~10% off RRP already — discount-light by design)
+- Couples' Ultimate → **$189** for any paid use; $169 acceptable as a subscriber/VIP exclusive on zero-CPA channels
+- One of Everything → **$219** cold-traffic list price (works at retail US: ~+$14 after CPA; ~$169–199 reserved as launch/subscriber pricing per §5d)
+- Whole Hideaway stays **$249** (retargeting/VIP/gifting)
 
 ## 5. The international bundle lineup (rebuilt for a $50 CPA)
 
