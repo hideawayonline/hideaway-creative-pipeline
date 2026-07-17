@@ -140,6 +140,30 @@ How to run it:
 - **Ad policy:** this is the most lube-forward bundle. For Meta paid, creative must sell "the ultimate date-night ritual box" led by the oils/mousse imagery — no explicit pleasure positioning — or keep paid spend on the Deluxe and push Ultimate through email, TikTok Shop, influencer seeding, and the landing page where policy doesn't apply.
 - **Seasonal spikes to plan around:** Valentine's Day (both hemispheres), US "cuffing season" (Oct–Dec), wedding season gifting. This bundle is the anchor creative for those calendar moments.
 
+### 5c. Bundle-builder UX: fixed slots, free scents
+
+Design principle: **all the margin risk is weight, so customers never choose formats — they choose a tier, then fill fixed slots with scents.** Weight stays deterministic per tier; the 5-scent range across every format makes it feel fully custom anyway.
+
+Flow:
+1. **Pick your box** — tier cards, anchored high: The Whole Hideaway $249 → One of Everything $199 ("Best Value") → Worldwide Deluxe $149 ("Most Popular") → Skin to Skin $90. Each card leads with the value receipt ("$220 product + $66 freight = $286 value → $199").
+2. **Fill your slots** — each tier renders fixed slots (e.g. Deluxe: Oil ×2, Lubricant ×2, Deodorant, gift Balm ×2); every slot is a 5-scent chip row with a "Make it all one scent" one-tap toggle. Substitutions only at equal weight (deodorant ↔ mousse); no wash↔custard style swaps.
+3. **Value stacks visibly** — sticky bar: "Your box: $203 value · FREE worldwide shipping ✓ · FREE gifts ✓". Gifts auto-add as wins, never as decisions. Never surface weight.
+4. **One upgrade nudge at review** — "+$30 to unlock [next tier delta + gift]" only where +$30 clears the postage-band jump; no nudge on the top tier.
+5. **Checkout reassurance** — delivery window by country, duties-included badge (US/DDP), Shipping Protection pre-ticked at $5 intl, then post-purchase one-click "second box 20% off, same parcel".
+
+Supporting: exit-intent email capture saves builder state → Klaviyo "abandoned builder" flow rendering the box contents; implementation reuses the existing easy-bundle / Mix & Match fixed-slot + option-cap machinery (`easy-bundle`, `smart-cart-hide-bundle-options`), with tier cards layered on top.
+
+### 5d. Catalog-wide bundles (everything except perfume & mists)
+
+| Tier | Contents | RRP | Price | Weight | After $50 CPA (retail post) |
+|---|---|---|---|---|---|
+| **One of Everything** | 1× each: Lubricant, Body Butter Oil, Custard, Scrub, Body Wash, Mousse, Deodorant, Lip Balm, Hand Wash, Hand Cream (no hair care) | ~$220 | **$199** | ~1.9kg → 2kg band ✅ | NZ +$36 · US +$25 · UK +$12 |
+| **The Whole Hideaway** | Everything above + Shampoo, Conditioner, Hair Mask | ~$296 | **$249** | ~2.6kg → boxed >2kg (est. US $85–90, UK $100–110) | NZ ~+$68 · US ~+$32 · UK ~+$15 |
+
+- $199 is the cold-traffic "whole brand in one box" offer — the only sub-$249 structure profitable on ads in all three markets at retail postage. $249 is the capstone for retargeting/VIP/gifting (real-world CPA on a $249 offer will exceed $50 — don't plan it as a cold offer).
+- Hand Wash / Shampoo / Hand Cream weights are estimated from comparable bottles — confirm before locking contents.
+- Domestic proof the format sells: Dad's Fragrance Wardrobe ($450, all 9 men's perfumes) and Founder Starter Pack ($99).
+
 ## 6. Pricing & storefront mechanics
 
 - **Shopify Markets** (already on Shopify Plus): enable NZ, US, UK, CA, IE, SG as active markets; present local currency converted from AUD at **0% price markup** — that IS the "Australian prices" promise. Show "Free international shipping" as the default rate for the bundle collection; exclude/blanket-block Perfume, Perfume (Travel), Body Mist product types from international markets via market catalogs.
