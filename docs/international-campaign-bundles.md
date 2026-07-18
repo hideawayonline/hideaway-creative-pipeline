@@ -190,11 +190,19 @@ Supporting: exit-intent email capture saves builder state → Klaviyo "abandoned
 - Hand Wash / Shampoo / Hand Cream weights are estimated from comparable bottles — confirm before locking contents.
 - Domestic proof the format sells: Dad's Fragrance Wardrobe ($450, all 9 men's perfumes) and Founder Starter Pack ($99).
 
-### 5e. Scent-story ladder: Vanilla Delight · Black Essence · Aurora Rouge
+### 5e. Scent-story ladder: five scents, per-item choice
 
-**Offer update:** the bundle builder offers all three hero scents — every slot carries a 3-scent chip row (VD / BE / AR), with the "Make it all one scent" toggle producing the Vanilla Delight / Black Essence / Aurora Rouge Everything in one tap. All three scents exist in every format used, at identical weights — so pricing, weight bands and margins below apply to all three (Black Essence shown as the worked example). Lubricant is unscented and shared. Mixed-scent picks are allowed (weight-identical).
+**Offer (final):** the bundle builder offers per-item fragrance choice across the five scents with real body-product ranges — **Vanilla Delight · Black Essence · Aurora Rouge · Vanilla Caramel · Pineapple Coconut** — plus the "Make it all one scent" toggle. Mixed-scent picks allowed (formats weigh the same in every scent, so any combination holds the weight band and margins; Black Essence shown as the worked example below).
 
-**Stock gates before launch:** VD Shampoo 39 units · VD Hair Mask 27 · AR Hair Mask 26 — production top-up required before ad spend.
+Per-slot chip availability (builder simply shows fewer chips where the catalog is thinner):
+- Custard / Wash / Shampoo / Body Butter Oil / Scrub / Hair Mask / Mousse: **all 5 scents**
+- Deodorant: **4** (VD·BE·AR·VC — no PC deodorant exists). **No deodorant→mousse substitution**: real deodorant weight is 50g vs mousse 150g; the swap pushes the box to ~2.01kg and out of the satchel band.
+- Mini Conditioner: **3** (VD·BE·AR — minis only made in those scents)
+- Lubricant: unscented, shared
+
+**Lime Coconut excluded:** it exists only as Body Mist and Perfume (both clearance-tagged) — the two formats barred from international air freight. Requires a LC body-product run before it can join the builder.
+
+**Stock gates before launch:** VD Shampoo 39 · VD Hair Mask 27 · AR Hair Mask 26 · PC Body Wash 52 · VC Deodorant 53 — production top-up required before ad spend.
 
 Contribution figures use the §4c model ($3.50/unit COGS, 3% fees, packaging, retail postage):
 
