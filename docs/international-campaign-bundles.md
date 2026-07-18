@@ -200,7 +200,9 @@ Black Essence (the Black Opium dupe, bestseller) exists in 11 full-size formats 
 | **BE Deluxe** (paid hero) | 2× Oil + Mousse + Deodorant + FREE 2× Lip Balm + FREE mini custard | $158.50 | **$149** | ~890g / 1kg ✅ | **NZ +$38 / US +$23 / UK +$17** |
 | **The BE Everything** | All 11 full sizes | $259.50 | **$219** | ~2.55kg boxed | **NZ +$67 / US +$31 / UK +$14** |
 | (variant) BE Everything "After Dark" | + Natural Lubricant (12 items) | $279.50 | $229 | 2,336g product / ~2.59kg boxed (verified) | Zero-CPA channels (lube-forward): after $50 CPA NZ +$73 / US +$37 / UK +$20 |
-| (variant) BE "Everything-That-Matters" | After Dark minus Hand Wash + Conditioner (or swap in their minis: ~1.95kg) | $233.50 | $199–209 | 1,768g / ~1.88kg → **2kg satchel** ✅ | Saves $8–27 postage vs boxed |
+| **BE Everything + Lube — 2kg Edition (chosen)** | Custard, Wash, Shampoo, Oil, Scrub, Hair Mask, Mousse, Lubricant, Mini Conditioner, Deodorant (10 items; cut Hand Wash, full Conditioner→mini, Hand Cream) | $230.50 | **$199** | 1,778g product / **~1.91kg → 2kg satchel** ✅ (~90g safety margin) | **NZ +$59 / US +$37 / UK +$25** |
+
+2kg-Edition guardrails: no substitutions above 80g; the mini conditioner is load-bearing (full conditioner = 105g over). The ~90g buffer absorbs tape/insert/scale variance — tipping into the boxed band costs ~$25/order. Paid-ads variant if policy risk is unwanted: swap lube for a second mini ($218.50 RRP, 1,708g); lube edition runs email/TikTok Shop.
 
 Verified BE unit weights (Shopify inventory records): Hand Wash 293g · Custard 278g · Wash/Shampoo/Conditioner 275g each · Oil 180g · Scrub 175g · Hair Mask 165g · Mousse/Lubricant 150g each · Hand Cream 70g · **Deodorant 50g** (lighter than the 150g estimate used earlier — all deodorant-bearing bundles have extra weight headroom).
 
