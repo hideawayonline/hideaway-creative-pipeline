@@ -197,7 +197,7 @@ Supporting: exit-intent email capture saves builder state → Klaviyo "abandoned
 Per-slot chip availability (builder simply shows fewer chips where the catalog is thinner):
 - Custard / Wash / Shampoo / Body Butter Oil / Scrub / Hair Mask / Mousse: **all 5 scents**
 - Deodorant: **4** (VD·BE·AR·VC — no PC deodorant exists). **No deodorant→mousse substitution**: real deodorant weight is 50g vs mousse 150g; the swap pushes the box to ~2.01kg and out of the satchel band.
-- Mini Conditioner: **3** (VD·BE·AR — minis only made in those scents)
+- Lip Balm: **6 flavours** (Vanilla Caramel, Fairy Floss, Watermelon Crush, Bubba Hubba, Kiwi Berry Bang, Strawberry Gelato — flavour choice, not scent-story)
 - Lubricant: unscented, shared
 
 **Lime Coconut excluded:** it exists only as Body Mist and Perfume (both clearance-tagged) — the two formats barred from international air freight. Requires a LC body-product run before it can join the builder.
@@ -212,7 +212,7 @@ Contribution figures use the §4c model ($3.50/unit COGS, 3% fees, packaging, re
 | **BE Deluxe** (paid hero) | 2× Oil + Mousse + Deodorant + FREE 2× Lip Balm + FREE mini custard | $158.50 | **$149** | ~890g / 1kg ✅ | **NZ +$38 / US +$23 / UK +$17** |
 | **The BE Everything** | All 11 full sizes | $259.50 | **$219** | ~2.55kg boxed | **NZ +$67 / US +$31 / UK +$14** |
 | (variant) BE Everything "After Dark" | + Natural Lubricant (12 items) | $279.50 | $229 | 2,336g product / ~2.59kg boxed (verified) | Zero-CPA channels (lube-forward): after $50 CPA NZ +$73 / US +$37 / UK +$20 |
-| **BE Everything + Lube — 2kg Edition (chosen)** | Custard, Wash, Shampoo, Oil, Scrub, Hair Mask, Mousse, Lubricant, Mini Conditioner, Deodorant (10 items; cut Hand Wash, full Conditioner→mini, Hand Cream) | $230.50 | **$199** | 1,768g product / **~1.90kg → 2kg satchel** ✅ (~100g safety margin; weight verified identical across all scents per format) | **NZ +$59 / US +$37 / UK +$25** |
+| **BE Everything + Lube — 2kg Edition (chosen)** | Custard, Wash, Shampoo, Oil, Scrub, Hair Mask, Mousse, Lubricant, Lip Balm, Deodorant (10 items; Lip Balm replaced Mini Conditioner per Steve — +$8 RRP, −50g) | $238.50 | **$199** | 1,718g product / **~1.85kg → 2kg satchel** ✅ (~150g safety margin; weights verified identical across scents per format) | **NZ +$59 / US +$37 / UK +$25** |
 
 2kg-Edition guardrails: no substitutions above 80g; the mini conditioner is load-bearing (full conditioner = 105g over). The ~90g buffer absorbs tape/insert/scale variance — tipping into the boxed band costs ~$25/order. Paid-ads variant if policy risk is unwanted: swap lube for a second mini ($218.50 RRP, 1,708g); lube edition runs email/TikTok Shop.
 
