@@ -190,9 +190,13 @@ Supporting: exit-intent email capture saves builder state → Klaviyo "abandoned
 - Hand Wash / Shampoo / Hand Cream weights are estimated from comparable bottles — confirm before locking contents.
 - Domestic proof the format sells: Dad's Fragrance Wardrobe ($450, all 9 men's perfumes) and Founder Starter Pack ($99).
 
-### 5e. Single-scent franchise: the Black Essence ladder
+### 5e. Scent-story ladder: Vanilla Delight · Black Essence · Aurora Rouge
 
-Black Essence (the Black Opium dupe, bestseller) exists in 11 full-size formats ex-perfume/mist — enough for a complete one-scent bundle ladder. Contribution figures use the §4c model ($3.50/unit COGS, 3% fees, packaging, retail postage):
+**Offer update:** the bundle builder offers all three hero scents — every slot carries a 3-scent chip row (VD / BE / AR), with the "Make it all one scent" toggle producing the Vanilla Delight / Black Essence / Aurora Rouge Everything in one tap. All three scents exist in every format used, at identical weights — so pricing, weight bands and margins below apply to all three (Black Essence shown as the worked example). Lubricant is unscented and shared. Mixed-scent picks are allowed (weight-identical).
+
+**Stock gates before launch:** VD Shampoo 39 units · VD Hair Mask 27 · AR Hair Mask 26 — production top-up required before ad spend.
+
+Contribution figures use the §4c model ($3.50/unit COGS, 3% fees, packaging, retail postage):
 
 | Tier | Contents | RRP | Price | Weight/band | After $50 CPA |
 |---|---|---|---|---|---|
