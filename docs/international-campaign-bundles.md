@@ -312,8 +312,9 @@ The two offers occupy opposite emotional territories — **Deluxe = self-indulge
 - [ ] Confirm Body Mist formulation (alcohol?) and Shower Mousse container (aerosol?) → include/exclude from intl catalog
 - [ ] Confirm NZ GST registration; decide US DDP via Managed Markets; UK VAT decision
 - [ ] Rename lubricant to "Intimate Body Oil" for US market copy (pending legal check)
-- [ ] Confirm Deodorant unit weight (bundle #1 assumes ~150g)
-- [ ] Build 5 bundle products (reuse easy-bundle / Mix & Match infra; cap custard qty in builder)
+- [x] Confirm Deodorant unit weight — verified 50g (all deo bundles have extra headroom)
+- [x] **BUILT: The Worldwide Everything Box** — draft product `gid://shopify/Product/14910025892035`, SKU `BUN-INTL-EVERYTHING`, $199, shipping weight 1.9kg, tags `easy-bundle`/`smart-cart-hide-bundle-options`/`intl-bundle`, featured image = approved 10-product composite + scent-choice gallery image (both on store CDN), description carries customer copy + internal fulfilment spec (slot weights, ≤2kg rule, banned substitutions). Also drafted earlier: Couples' Ultimate `BUN-INTL-ULTIMATE` ($169). **Remaining to go live:** wire the 10 slots + 5-scent chips in the bundle app (per §5c/5e), publish to international markets only, remaining ladder tiers ($90/$149/$249) as needed
+- [ ] Build remaining ladder tiers (reuse easy-bundle / Mix & Match infra; cap custard qty in builder)
 - [ ] Shopify Markets: activate NZ/US/UK/CA/IE/SG, 0% markup, exclude perfume + mists + Skin to Skin $50 set
 - [ ] Shipping profile: free intl shipping ≥$120; verify contract/MyPost rates vs the retail ceiling used here
 - [ ] Configure gift ladder ($120/$150/$200 tiers) + post-purchase one-click second-bundle upsell (20% off)
