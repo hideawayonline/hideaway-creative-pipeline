@@ -234,6 +234,16 @@ Verified BE unit weights (Shopify inventory records): Hand Wash 293g · Custard 
 - **Regulatory (US) — flag for a 30-min legal check:** the US FDA classifies *personal lubricants* as Class II medical devices. Most indie brands route around this by marketing the product as an "intimate body oil / massage oil" (cosmetic). Recommend the US-market product copy uses "Intimate Body Oil" naming and avoids explicit lubricant claims until reviewed.
 - **Shipping Protection:** keep the $3 attach for international; consider raising to $5 on international orders (loss/theft rates are higher, perceived value is higher).
 
+### 6b. True worldwide rollout — three rings
+
+Free worldwide shipping holds globally for the $199 flagship: Zone 2 Asia-Pacific 2kg ≈ $55–60 (~+$40 after $50 CPA), Zone 5 rest-of-world ≈ $85 (~+$18). Structure via Shopify Markets:
+
+- **Ring 1 (launch):** NZ, US, UK, CA, IE, SG — full ladder, paid traffic.
+- **Ring 2 (fast follow):** EU (IOSS — $199 ≈ €122, under the €150 threshold — or Managed Markets as merchant of record), JP, HK, wider Asia-Pacific — full ladder, email + selective paid.
+- **Ring 3 (everywhere else, "ships to 180+ countries"):** $199/$249 tiers only (cheaper tiers can't carry Zone 5 postage on ads), Shipping Protection auto-attached, honest 10–25 business-day delivery windows, no paid ads.
+
+Guardrails: Gulf states (UAE/SA/QA/KW) seize intimate products at customs — regional edition auto-swaps the lubricant slot for a mini duo (140g, weight-safe) or exclude those countries; mirror AusPost's live suspended-destinations list in the shipping profile; kill any country whose loss rate exceeds ~5% via Markets.
+
 ## 7. Marketing plan
 
 ### Positioning
