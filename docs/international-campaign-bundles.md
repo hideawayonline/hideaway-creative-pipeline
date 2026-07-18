@@ -199,7 +199,10 @@ Black Essence (the Black Opium dupe, bestseller) exists in 11 full-size formats 
 | **BE Starter Ritual** | Oil + Mousse + Scrub + Deodorant + FREE mini custard | $115.50 | **$99** | ~850g / 1kg | Pre-ads NZ $47 / US $32 / UK $26 — zero-CPA channels only |
 | **BE Deluxe** (paid hero) | 2× Oil + Mousse + Deodorant + FREE 2× Lip Balm + FREE mini custard | $158.50 | **$149** | ~890g / 1kg ✅ | **NZ +$38 / US +$23 / UK +$17** |
 | **The BE Everything** | All 11 full sizes | $259.50 | **$219** | ~2.55kg boxed | **NZ +$67 / US +$31 / UK +$14** |
-| (variant) BE Everything "After Dark" | + Natural Lubricant | $279.50 | $229 | ~2.7kg | Zero-CPA channels (lube-forward) |
+| (variant) BE Everything "After Dark" | + Natural Lubricant (12 items) | $279.50 | $229 | 2,336g product / ~2.59kg boxed (verified) | Zero-CPA channels (lube-forward): after $50 CPA NZ +$73 / US +$37 / UK +$20 |
+| (variant) BE "Everything-That-Matters" | After Dark minus Hand Wash + Conditioner (or swap in their minis: ~1.95kg) | $233.50 | $199–209 | 1,768g / ~1.88kg → **2kg satchel** ✅ | Saves $8–27 postage vs boxed |
+
+Verified BE unit weights (Shopify inventory records): Hand Wash 293g · Custard 278g · Wash/Shampoo/Conditioner 275g each · Oil 180g · Scrub 175g · Hair Mask 165g · Mousse/Lubricant 150g each · Hand Cream 70g · **Deodorant 50g** (lighter than the 150g estimate used earlier — all deodorant-bearing bundles have extra weight headroom).
 
 - Creative: "Smell like Black Opium. Everywhere. All day." — dupe value-math vs a $200+ designer bottle, black-and-gold identity, no scent picker (simpler page, higher CVR).
 - Template: swap in Vanilla Delight / Aurora Rouge / Vanilla Caramel for a repeatable single-scent franchise.
