@@ -190,6 +190,21 @@ Supporting: exit-intent email capture saves builder state → Klaviyo "abandoned
 - Hand Wash / Shampoo / Hand Cream weights are estimated from comparable bottles — confirm before locking contents.
 - Domestic proof the format sells: Dad's Fragrance Wardrobe ($450, all 9 men's perfumes) and Founder Starter Pack ($99).
 
+### 5e. Single-scent franchise: the Black Essence ladder
+
+Black Essence (the Black Opium dupe, bestseller) exists in 11 full-size formats ex-perfume/mist — enough for a complete one-scent bundle ladder. Contribution figures use the §4c model ($3.50/unit COGS, 3% fees, packaging, retail postage):
+
+| Tier | Contents | RRP | Price | Weight/band | After $50 CPA |
+|---|---|---|---|---|---|
+| **BE Starter Ritual** | Oil + Mousse + Scrub + Deodorant + FREE mini custard | $115.50 | **$99** | ~850g / 1kg | Pre-ads NZ $47 / US $32 / UK $26 — zero-CPA channels only |
+| **BE Deluxe** (paid hero) | 2× Oil + Mousse + Deodorant + FREE 2× Lip Balm + FREE mini custard | $158.50 | **$149** | ~890g / 1kg ✅ | **NZ +$38 / US +$23 / UK +$17** |
+| **The BE Everything** | All 11 full sizes | $259.50 | **$219** | ~2.55kg boxed | **NZ +$67 / US +$31 / UK +$14** |
+| (variant) BE Everything "After Dark" | + Natural Lubricant | $279.50 | $229 | ~2.7kg | Zero-CPA channels (lube-forward) |
+
+- Creative: "Smell like Black Opium. Everywhere. All day." — dupe value-math vs a $200+ designer bottle, black-and-gold identity, no scent picker (simpler page, higher CVR).
+- Template: swap in Vanilla Delight / Aurora Rouge / Vanilla Caramel for a repeatable single-scent franchise.
+- Stock gates: BE Deodorant 81 units, Hand Wash 108 — fine for testing, flag to production before scale; Tier 3 is gated by the lowest-stock format.
+
 ## 6. Pricing & storefront mechanics
 
 - **Shopify Markets** (already on Shopify Plus): enable NZ, US, UK, CA, IE, SG as active markets; present local currency converted from AUD at **0% price markup** — that IS the "Australian prices" promise. Show "Free international shipping" as the default rate for the bundle collection; exclude/blanket-block Perfume, Perfume (Travel), Body Mist product types from international markets via market catalogs.
