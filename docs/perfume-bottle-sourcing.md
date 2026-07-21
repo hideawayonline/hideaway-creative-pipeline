@@ -117,7 +117,10 @@ Also scan the dedicated [eBay AU Empty Perfume Bottle category](https://www.ebay
 Rule of thumb: offer 50–60% of asking. Empties have almost no market floor — sellers usually accept or counter close.
 
 ### eBay seller with multiple empties (combined postage)
-> Hi! I can see you sell a few empty fragrance bottles. I'm putting together a set for a photo shoot — if I buy [list], could you do $X total including combined postage to [postcode]? Can pay today.
+> Hi! I can see you sell a few empty fragrance bottles. I'm putting together a set for a photo shoot — if I buy [list], could you do $X total including combined postage to 4218? Can pay today.
+
+### Offer amounts — quick maths
+Offer **55% of asking, rounded down to the nearest dollar**; accept any counter within 80% of ask. Examples: $15 ask → offer $8; $25 ask → offer $13; $40 ask → offer $22. Empties have no market floor — the worst case is a counter-offer, never a lost listing.
 
 ### Facebook Marketplace — search terms (run on Steve's account)
 Sorted "Date listed: newest first", save each search for alerts:
@@ -134,7 +137,19 @@ Sorted "Date listed: newest first", save each search for alerts:
 
 ---
 
-## 4. Order of operations
+## 4. The 30-minute buying run (Steve's checklist)
+
+Delivery: home address, postcode 4218 (Mermaid Waters QLD). Payments by Steve; everything else is pre-done below.
+
+1. **(2 min)** Message Deb on Marketplace: *"Hi Deb! Is this still available? Would you take $10 if I pick up this week?"* — or just pay $12. Flowerbomb ✔
+2. **(5 min)** Marketplace search `empty perfume bottles` sorted newest, within ~25 km of 4218. Save the search. Message every lot containing a mapped bottle with the single-listing script.
+3. **(15 min)** eBay AU Tier 1 run — open each search link in section 2, filter **Item location: Australia**, sort **Price + postage: lowest**. For the cheapest genuine listing of each bottle: *Buy It Now* if ≤ target price; otherwise *Make Offer* at 55% of ask with the Best Offer script.
+4. **(5 min)** Set saved-search alerts (bell icon) on the Tier 3 searches: `empty baccarat rouge 540 bottle`, `empty tom ford perfume bottle`, `empty creed aventus bottle`, `empty melanie martinez cry baby perfume milk`, `empty vilhelm parfumerie bottle`, `empty le labo santal 33 bottle`. Buy when an AU-located one lands inside the target range.
+5. **(3 min)** Post the "wanted" blast in 2–3 local Gold Coast buy/sell groups.
+
+Expected outcome: Tier 1 (13 bottles) locked in this week for ~$150–250; Tier 2 within a fortnight; Tier 3 trickles in via alerts.
+
+## 5. Order of operations
 
 1. **Buy Deb's $12 lot** (Flowerbomb ✔ + 4 spare bottles).
 2. **FB Marketplace sweep** — run the searches above; grab any lot containing a mapped bottle.
