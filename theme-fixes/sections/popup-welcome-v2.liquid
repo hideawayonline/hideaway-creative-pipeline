@@ -1,0 +1,686 @@
+{%- comment -%}
+  ============================================================
+  hideAWAY Welcome Popup V2 — Shopify section
+  ============================================================
+
+  Custom Klaviyo-integrated popup that subscribes visitors to:
+    • hideAWAY Welcome 2026 — Email   (list id: UiypqE)
+    • hideAWAY Welcome 2026 — SMS     (list id: V7rcLr)
+
+  3-step flow, no OTP verification: Email → SMS (optional) → Success
+  with an instant on-screen discount code (static code, no click-out).
+
+  Note: this section uses Klaviyo's public Client API so no server-side
+  secret is needed. The company_id is public-safe. The discount code is
+  a real, static, uncapped code (WELCOME12) — no backend call required
+  to reveal it.
+
+  Mobile hardening (Jul 2026):
+    • Scroll lock now uses the position:fixed body technique — iOS Safari
+      and in-app browsers (Instagram/Facebook) ignore body overflow:hidden,
+      which let the page keep scrolling behind the overlay while the overlay
+      swallowed every tap (reported as "page endlessly scrolls, can't add
+      to cart" on product pages).
+    • Scroll-percent trigger is disabled on /products/ pages — reading a
+      product description on a phone is 30% scroll, so the popup was
+      interrupting every PDP read. Timer trigger still applies.
+    • Dismissal is remembered in BOTH localStorage and a cookie — in-app
+      browsers frequently drop localStorage, which made the popup reappear
+      on every page view.
+    • Inputs are only auto-focused on desktop so the mobile keyboard does
+      not pop over the sheet.
+
+  Toggle "Enabled" off in Theme Customizer to disable without removing code.
+  ============================================================
+{%- endcomment -%}
+
+{%- liquid
+  assign s = section.settings
+  assign current_path = request.path | downcase
+  assign exclude_csv = s.exclude_paths | default: '/cart,/checkout,/account'
+  comment
+    Bundle builder pages (/apps/gbb) are always excluded — bundle pricing is
+    already marked down, so no welcome-code stacking (margin protection).
+  endcomment
+  assign exclude_csv = exclude_csv | append: ',/apps/gbb'
+  assign exclude_paths = exclude_csv | split: ','
+-%}
+
+{%- if s.enabled -%}
+
+  {%- comment -%} Suppress on excluded paths server-side too (one less render) {%- endcomment -%}
+  {%- assign suppress = false -%}
+  {%- for path in exclude_paths -%}
+    {%- assign p = path | strip | downcase -%}
+    {%- if p != blank and current_path contains p -%}
+      {%- assign suppress = true -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- unless suppress -%}
+
+    <style>
+      .hwp-overlay {
+        position: fixed; inset: 0;
+        background: rgba(20, 20, 20, 0.55);
+        display: none; align-items: center; justify-content: center;
+        z-index: 999998;
+        opacity: 0; transition: opacity 0.25s ease;
+        padding: 16px;
+        overscroll-behavior: contain;
+      }
+      .hwp-overlay.hwp-visible { display: flex; opacity: 1; }
+
+      .hwp-popup {
+        position: relative;
+        width: 480px; max-width: 100%;
+        max-height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+        background: {{ s.bg_color | default: '#EEE7E6' }};
+        color: {{ s.text_color | default: '#303030' }};
+        border-radius: {{ s.card_radius | default: 16 }}px;
+        box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+        font-family: var(--font-primary, 'MADETommySoft', 'Helvetica Neue', Helvetica, Arial, sans-serif);
+        -webkit-font-smoothing: antialiased;
+        animation: hwp-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      @keyframes hwp-pop {
+        from { opacity: 0; transform: scale(0.94) translateY(16px); }
+        to   { opacity: 1; transform: scale(1) translateY(0); }
+      }
+
+      .hwp-close {
+        position: absolute; top: 14px; right: 14px;
+        width: 30px; height: 30px; border-radius: 50%;
+        background: rgba(0,0,0,0.08); border: 0;
+        color: {{ s.text_color | default: '#303030' }}; font-size: 20px; line-height: 1;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: background 0.15s; z-index: 5;
+      }
+      .hwp-close:hover { background: rgba(0,0,0,0.15); }
+
+      .hwp-band {
+        background: {{ s.band_color | default: '#FFED99' }};
+        padding: 20px 0;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .hwp-wordmark {
+        font-weight: 700; font-size: 16px;
+        color: {{ s.text_color | default: '#303030' }};
+        letter-spacing: 0.2px;
+      }
+      .hwp-wordmark img { height: 22px; display: block; }
+
+      .hwp-body { padding: 40px 40px 36px; text-align: left; }
+      .hwp-headline {
+        font-size: 28px; font-weight: 700; line-height: 1.2;
+        margin: 0 0 10px; color: {{ s.text_color | default: '#303030' }};
+      }
+      .hwp-sub {
+        font-size: 15px; line-height: 1.5; font-weight: 400;
+        color: {{ s.body_text_color | default: '#666666' }};
+        margin: 0 0 20px;
+      }
+
+      .hwp-form { display: flex; flex-direction: column; gap: 16px; }
+
+      .hwp-input {
+        width: 100%; box-sizing: border-box; padding: 14px 16px;
+        border: 1px solid {{ s.input_border_color | default: '#E5E5E5' }};
+        background: #FFFFFF; border-radius: 8px;
+        font-family: inherit; font-size: 15px;
+        color: {{ s.text_color | default: '#303030' }}; outline: none;
+        transition: box-shadow 0.15s;
+        -webkit-appearance: none;
+      }
+      .hwp-input:focus { box-shadow: 0 0 0 3px {{ s.accent_color | default: '#FC76C4' }}55; }
+      .hwp-input::placeholder { color: #999999; }
+
+      .hwp-input-phone {
+        display: flex; align-items: stretch; padding: 0; overflow: hidden;
+        background: #FFFFFF; border: 1px solid {{ s.input_border_color | default: '#E5E5E5' }};
+        border-radius: 8px;
+      }
+      .hwp-input-phone .hwp-country {
+        padding: 14px 10px 14px 16px;
+        color: {{ s.text_color | default: '#303030' }}; font-size: 15px; font-weight: 500;
+        display: flex; align-items: center;
+        user-select: none; white-space: nowrap;
+      }
+      .hwp-input-phone input {
+        flex: 1; min-width: 0; border: 0; padding: 14px 16px 14px 0;
+        font-family: inherit; font-size: 15px; color: {{ s.text_color | default: '#303030' }}; outline: none;
+        background: transparent; -webkit-appearance: none;
+      }
+
+      .hwp-error {
+        color: #C0392B; font-size: 12px;
+        margin: -8px 2px 0; min-height: 1em; text-align: left;
+      }
+
+      .hwp-btn {
+        display: block; box-sizing: border-box; text-align: center; text-decoration: none;
+        width: 100%; padding: 14px 16px;
+        border: 0; border-radius: 8px;
+        font-family: inherit; font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        background: {{ s.accent_color | default: '#FC76C4' }}; color: #FFFFFF;
+        transition: background 0.15s;
+      }
+      .hwp-btn:hover:not(:disabled) { background: {{ s.accent_hover_color | default: '#E15BA9' }}; }
+      .hwp-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+      .hwp-btn-secondary {
+        background: transparent; color: #999999;
+        text-decoration: underline; text-underline-offset: 3px;
+        font-size: 13px; font-weight: 400; font-family: inherit;
+        padding: 4px; margin: 0; text-align: center; cursor: pointer; border: 0;
+      }
+      .hwp-btn-secondary:hover:not(:disabled) { color: {{ s.text_color | default: '#303030' }}; }
+
+      .hwp-fineprint {
+        font-size: 12px; line-height: 1.5;
+        color: #999999; margin-top: 4px;
+      }
+      .hwp-fineprint a { color: #999999; }
+
+      .hwp-coupon {
+        width: 100%; box-sizing: border-box; text-align: center;
+        padding: 18px 16px; margin-bottom: 20px;
+        border: 2px dashed {{ s.accent_color | default: '#FC76C4' }};
+        border-radius: 8px; background: #FFFFFF;
+        display: flex; flex-direction: column; gap: 4px;
+        cursor: pointer; position: relative;
+      }
+      .hwp-coupon-label {
+        font-size: 11px; font-weight: 700; letter-spacing: 1px;
+        color: #999999; text-transform: uppercase;
+      }
+      .hwp-coupon-code {
+        font-size: 24px; font-weight: 700; letter-spacing: 1px;
+        color: {{ s.accent_hover_color | default: '#E15BA9' }};
+      }
+      .hwp-coupon-copied {
+        position: absolute; top: -10px; right: 12px;
+        background: {{ s.text_color | default: '#303030' }}; color: #FFFFFF;
+        font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px;
+        opacity: 0; transition: opacity 0.2s;
+        pointer-events: none;
+      }
+      .hwp-coupon-copied.hwp-show { opacity: 1; }
+
+      .hwp-step { display: none; }
+      .hwp-step.hwp-active { display: block; }
+
+      .hwp-teaser {
+        position: fixed; bottom: 24px; left: 24px;
+        background: {{ s.band_color | default: '#FFED99' }}; color: {{ s.text_color | default: '#303030' }};
+        padding: 12px 20px; border-radius: 999px;
+        font-size: 12px; font-weight: 700; letter-spacing: 0.3px;
+        cursor: pointer; box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+        display: none; align-items: center; gap: 10px;
+        z-index: 999997; border: 0; font-family: inherit;
+        animation: hwp-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .hwp-teaser.hwp-visible { display: flex; }
+      .hwp-teaser-dot {
+        width: 8px; height: 8px; border-radius: 50%;
+        background: {{ s.accent_color | default: '#FC76C4' }};
+        animation: hwp-pulse 2s infinite;
+      }
+      @keyframes hwp-pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50%      { transform: scale(1.3); opacity: 0.6; }
+      }
+
+      @media (max-width: 540px) {
+        .hwp-overlay { padding: 0; align-items: flex-end; }
+        .hwp-popup {
+          width: 100%; max-width: 100%;
+          border-radius: 20px 20px 0 0;
+          animation: hwp-slide-up 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .hwp-body { padding: 28px 24px 28px; }
+        .hwp-headline { font-size: 24px; }
+        .hwp-handle {
+          width: 40px; height: 4px; border-radius: 2px;
+          background: rgba(0,0,0,0.15);
+          position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+          z-index: 6;
+        }
+      }
+      @media (min-width: 541px) { .hwp-handle { display: none; } }
+      @keyframes hwp-slide-up {
+        from { transform: translateY(100%); }
+        to   { transform: translateY(0); }
+      }
+    </style>
+
+    <div class="hwp-overlay" id="hwp-overlay" role="dialog" aria-modal="true" aria-labelledby="hwp-headline" aria-hidden="true">
+      <div class="hwp-popup" role="document">
+        <div class="hwp-handle"></div>
+        <button class="hwp-close" id="hwp-close" aria-label="Close">×</button>
+
+        <div class="hwp-step hwp-active" data-step="1">
+          <div class="hwp-band">
+            {%- if s.logo_image != blank -%}
+              <span class="hwp-wordmark"><img src="{{ s.logo_image | image_url: width: 200 }}" alt="hideaway."></span>
+            {%- else -%}
+              <span class="hwp-wordmark">hideaway.</span>
+            {%- endif -%}
+          </div>
+          <div class="hwp-body">
+            <h2 class="hwp-headline" id="hwp-headline">{{ s.email_headline | default: "Get 12% off your first order." }}</h2>
+            <p class="hwp-sub">{{ s.email_sub | default: "Pop in your email and we'll send your code straight away. No spam, just scents." }}</p>
+            <form class="hwp-form" id="hwp-email-form" novalidate>
+              <div>
+                <input type="email" class="hwp-input" id="hwp-email" placeholder="you@email.com" autocomplete="email" required>
+                <div class="hwp-error" id="hwp-email-error"></div>
+              </div>
+              <button type="submit" class="hwp-btn" id="hwp-email-submit">{{ s.email_cta | default: "Get my code" }}</button>
+              <button type="button" class="hwp-btn-secondary" data-action="dismiss">{{ s.email_skip | default: "No thanks, I'll pass on the discount" }}</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="hwp-step" data-step="2">
+          <div class="hwp-band">
+            {%- if s.logo_image != blank -%}
+              <span class="hwp-wordmark"><img src="{{ s.logo_image | image_url: width: 200 }}" alt="hideaway."></span>
+            {%- else -%}
+              <span class="hwp-wordmark">hideaway.</span>
+            {%- endif -%}
+          </div>
+          <div class="hwp-body">
+            <h2 class="hwp-headline">{{ s.sms_headline | default: "Want first dibs on drops too?" }}</h2>
+            <p class="hwp-sub">{{ s.sms_sub | default: "Add your number for text-exclusive offers. Zero spam, promise." }}</p>
+            <form class="hwp-form" id="hwp-sms-form" novalidate>
+              <div>
+                <div class="hwp-input-phone">
+                  <span class="hwp-country">🇦🇺 +61</span>
+                  <input type="tel" id="hwp-phone" placeholder="4XX XXX XXX" autocomplete="tel-national" inputmode="tel" required>
+                </div>
+                <div class="hwp-error" id="hwp-phone-error"></div>
+              </div>
+              <button type="submit" class="hwp-btn" id="hwp-sms-submit">{{ s.sms_cta | default: "Yes, sign me up" }}</button>
+              <button type="button" class="hwp-btn-secondary" data-action="skip-sms">{{ s.sms_skip | default: "Skip this step" }}</button>
+            </form>
+            <div class="hwp-fineprint">{{ s.sms_fineprint | default: "By adding your number you agree to receive marketing texts from hideaway. (Platinum Investment Group Pty Ltd) at the number provided. Consent isn't a condition of purchase, msg & data rates may apply, frequency varies. Unsubscribe anytime by replying STOP or using the link in any message." }}</div>
+          </div>
+        </div>
+
+        <div class="hwp-step" data-step="3">
+          <div class="hwp-band">
+            {%- if s.logo_image != blank -%}
+              <span class="hwp-wordmark"><img src="{{ s.logo_image | image_url: width: 200 }}" alt="hideaway."></span>
+            {%- else -%}
+              <span class="hwp-wordmark">hideaway.</span>
+            {%- endif -%}
+          </div>
+          <div class="hwp-body">
+            <h2 class="hwp-headline">{{ s.success_headline | default: "You're in." }}</h2>
+            <p class="hwp-sub">{{ s.success_sub | default: "Copy your code, use it at checkout, thank us later." }}</p>
+            <div class="hwp-coupon" id="hwp-coupon" data-code="{{ s.coupon_code | default: 'WELCOME12' }}">
+              <span class="hwp-coupon-copied" id="hwp-coupon-copied">Copied!</span>
+              <span class="hwp-coupon-label">Your code</span>
+              <span class="hwp-coupon-code">{{ s.coupon_code | default: "WELCOME12" }}</span>
+            </div>
+            <div class="hwp-form" style="margin-top: 0;">
+              <a class="hwp-btn" href="{{ s.success_link | default: '/discount/WELCOME12?redirect=/collections/perfume' }}" data-action="dismiss-track">{{ s.success_cta | default: "Shop now" }}</a>
+            </div>
+            <p class="hwp-fineprint" style="text-align: center; margin-top: 16px;">{{ s.success_fineprint | default: "For first-time customers only." }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="hwp-teaser" id="hwp-teaser" type="button" aria-label="Open offer">
+      <span class="hwp-teaser-dot"></span>
+      {{ s.teaser_text | default: "GET 12% OFF" }}
+    </button>
+
+    <script>
+    (function () {
+      'use strict';
+      const CFG = {
+        companyId:   {{ s.klaviyo_company_id | default: 'M7xxfa' | json }},
+        emailListId: {{ s.email_list_id      | default: 'UiypqE' | json }},
+        smsListId:   {{ s.sms_list_id        | default: 'V7rcLr' | json }},
+        delayMs:     {{ s.delay_seconds      | default: 8 | times: 1000 | json }},
+        scrollPercent: {{ s.scroll_percent   | default: 30 | json }},
+        enableExitIntent: {{ s.enable_exit_intent | default: true | json }},
+        cooldownDays: {{ s.cooldown_days     | default: 30 | json }},
+        excludePaths: {{ exclude_csv | split: ',' | json }}
+      };
+
+      const $ = (sel) => document.querySelector(sel);
+      const overlay = $('#hwp-overlay');
+      const teaser  = $('#hwp-teaser');
+      const STORAGE_DISMISSED  = 'hwp-popup-dismissed';
+      const STORAGE_SUBSCRIBED = 'hwp-popup-subscribed';
+      const isDesktop = () => window.matchMedia('(min-width: 768px)').matches;
+
+      let capturedEmail = null;
+
+      // iOS Safari and in-app browsers (Instagram/Facebook) ignore
+      // body{overflow:hidden}, so the page kept scrolling behind the overlay
+      // while the overlay swallowed taps. Locking with position:fixed and
+      // restoring the scroll offset works everywhere.
+      let lockedScrollY = null;
+      function lockScroll() {
+        if (lockedScrollY !== null) return;
+        lockedScrollY = window.scrollY || document.documentElement.scrollTop || 0;
+        document.body.style.position = 'fixed';
+        document.body.style.top = '-' + lockedScrollY + 'px';
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.style.width = '100%';
+      }
+      function unlockScroll() {
+        if (lockedScrollY === null) return;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.width = '';
+        window.scrollTo(0, lockedScrollY);
+        lockedScrollY = null;
+      }
+
+      function show() {
+        overlay.classList.add('hwp-visible');
+        overlay.setAttribute('aria-hidden', 'false');
+        teaser.classList.remove('hwp-visible');
+        lockScroll();
+        if (isDesktop()) setTimeout(() => $('#hwp-email')?.focus(), 300);
+      }
+      function dismiss() {
+        unlockScroll();
+        overlay.classList.remove('hwp-visible');
+        overlay.setAttribute('aria-hidden', 'true');
+        setExpiry(STORAGE_DISMISSED, CFG.cooldownDays);
+        if (!isSubscribed()) showTeaser();
+      }
+      function showTeaser() {
+        if (isSubscribed()) return;
+        teaser.classList.add('hwp-visible');
+      }
+      function goto(step) {
+        document.querySelectorAll('.hwp-step').forEach(el => el.classList.remove('hwp-active'));
+        const target = document.querySelector('.hwp-step[data-step="' + step + '"]');
+        if (target) {
+          target.classList.add('hwp-active');
+          if (isDesktop()) {
+            const firstInput = target.querySelector('input');
+            if (firstInput) setTimeout(() => firstInput.focus(), 200);
+          }
+        }
+      }
+
+      // Dismissal is stored in localStorage AND a cookie: in-app browsers
+      // frequently drop localStorage between visits, which made the popup
+      // reappear on every page view for Instagram/Facebook traffic.
+      function setExpiry(key, days) {
+        const exp = String(Date.now() + days * 86400000);
+        try { localStorage.setItem(key, exp); } catch (e) {}
+        try {
+          document.cookie = key + '=' + exp + '; max-age=' + (days * 86400) + '; path=/; SameSite=Lax';
+        } catch (e) {}
+      }
+      function readExpiry(key) {
+        let best = 0;
+        try {
+          const v = localStorage.getItem(key);
+          if (v) best = Math.max(best, parseInt(v, 10) || 0);
+        } catch (e) {}
+        try {
+          const m = document.cookie.match(new RegExp('(?:^|;\\s*)' + key + '=([^;]+)'));
+          if (m) best = Math.max(best, parseInt(m[1], 10) || 0);
+        } catch (e) {}
+        return best;
+      }
+      function isExpired(key) {
+        const v = readExpiry(key);
+        if (!v) return true;
+        return Date.now() > v;
+      }
+      function isDismissedRecently() { return !isExpired(STORAGE_DISMISSED); }
+      function isSubscribed()        { return !isExpired(STORAGE_SUBSCRIBED); }
+
+      function validEmail(s) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(s).trim()); }
+      function validPhoneAU(s) {
+        const digits = String(s).replace(/\D/g, '');
+        if (digits.length === 9 && digits[0] === '4')         return '+61' + digits;
+        if (digits.length === 10 && digits.startsWith('04'))  return '+61' + digits.slice(1);
+        if (digits.length === 11 && digits.startsWith('614')) return '+' + digits;
+        return null;
+      }
+
+      async function klaviyoSubscribe({ email, phone, listId }) {
+        const profileAttrs = {};
+        if (email) profileAttrs.email = email;
+        if (phone) profileAttrs.phone_number = phone;
+        const subscriptions = {};
+        if (email) subscriptions.email = { marketing: { consent: 'SUBSCRIBED' } };
+        if (phone) subscriptions.sms   = { marketing: { consent: 'SUBSCRIBED' } };
+        profileAttrs.subscriptions = subscriptions;
+        const body = {
+          data: {
+            type: 'subscription',
+            attributes: {
+              custom_source: 'hideAWAY Welcome Popup V2',
+              profile: { data: { type: 'profile', attributes: profileAttrs } }
+            },
+            relationships: { list: { data: { type: 'list', id: listId } } }
+          }
+        };
+        const url = 'https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(CFG.companyId);
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'revision': '2026-04-15' },
+          body: JSON.stringify(body)
+        });
+        if (!res.ok) {
+          const text = await res.text().catch(() => '');
+          throw new Error('Klaviyo error ' + res.status + ': ' + text.slice(0, 200));
+        }
+        return { ok: true };
+      }
+
+      function setError(field, msg) {
+        const el = $('#hwp-' + field + '-error');
+        if (el) el.textContent = msg || '';
+      }
+      function setBusy(btn, busy, busyLabel) {
+        if (!btn) return;
+        if (busy) { btn.dataset.label = btn.textContent; btn.textContent = busyLabel; btn.disabled = true; }
+        else { btn.textContent = btn.dataset.label || btn.textContent; btn.disabled = false; }
+      }
+
+      $('#hwp-email-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        setError('email', '');
+        const email = $('#hwp-email').value.trim();
+        if (!validEmail(email)) { setError('email', 'Looks like that email is missing something.'); return; }
+        const btn = $('#hwp-email-submit');
+        setBusy(btn, true, 'Sending…');
+        try {
+          await klaviyoSubscribe({ email, listId: CFG.emailListId });
+          capturedEmail = email;
+          setExpiry(STORAGE_SUBSCRIBED, 365);
+          goto(2);
+        } catch (err) {
+          console.error('[hwp-popup]', err);
+          setError('email', "Hmm, that didn't go through. Try again?");
+        } finally { setBusy(btn, false); }
+      });
+
+      $('#hwp-sms-form').addEventListener('submit', async function (e) {
+        e.preventDefault();
+        setError('phone', '');
+        const phone = validPhoneAU($('#hwp-phone').value);
+        if (!phone) { setError('phone', 'Aussie mobile number, please (e.g. 0412 345 678)'); return; }
+        const btn = $('#hwp-sms-submit');
+        setBusy(btn, true, 'Sending…');
+        try {
+          await klaviyoSubscribe({ email: capturedEmail, phone, listId: CFG.smsListId });
+          goto(3);
+        } catch (err) {
+          console.error('[hwp-popup]', err);
+          setError('phone', "Hmm, that didn't go through. Try again?");
+        } finally { setBusy(btn, false); }
+      });
+
+      const coupon = $('#hwp-coupon');
+      if (coupon) {
+        coupon.addEventListener('click', function () {
+          const code = coupon.dataset.code;
+          if (!code) return;
+          const copyFallback = () => {
+            const ta = document.createElement('textarea');
+            ta.value = code; ta.style.position = 'fixed'; ta.style.opacity = '0';
+            document.body.appendChild(ta); ta.select();
+            try { document.execCommand('copy'); } catch (e) {}
+            document.body.removeChild(ta);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code).catch(copyFallback);
+          } else {
+            copyFallback();
+          }
+          const badge = $('#hwp-coupon-copied');
+          if (badge) {
+            badge.classList.add('hwp-show');
+            setTimeout(() => badge.classList.remove('hwp-show'), 1400);
+          }
+        });
+      }
+
+      document.addEventListener('click', function (e) {
+        const t = e.target;
+        if (t === overlay) { dismiss(); return; }
+        const action = t.dataset && t.dataset.action;
+        if (!action) return;
+        if (action === 'dismiss')       { dismiss(); }
+        if (action === 'dismiss-track') { setExpiry(STORAGE_SUBSCRIBED, 365); unlockScroll(); }
+        if (action === 'skip-sms')      { goto(3); }
+      });
+      $('#hwp-close').addEventListener('click', dismiss);
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('hwp-visible')) dismiss();
+      });
+      teaser.addEventListener('click', show);
+
+      function shouldSuppress() {
+        const path = location.pathname.toLowerCase();
+        if (CFG.excludePaths.some(p => path.startsWith(String(p).trim()))) return true;
+        if (isDismissedRecently()) return true;
+        if (isSubscribed()) return true;
+        return false;
+      }
+
+      function armTriggers() {
+        if (shouldSuppress()) {
+          if (isDismissedRecently() && !isSubscribed()) showTeaser();
+          return;
+        }
+        let triggered = false;
+        const fire = () => { if (triggered) return; triggered = true; show(); };
+        setTimeout(fire, CFG.delayMs);
+        // No scroll trigger on product pages: reading a product description
+        // on a phone is 30% scroll, so the popup was interrupting every PDP
+        // read. The timer above still fires once.
+        const isProductPage = location.pathname.toLowerCase().indexOf('/products/') !== -1;
+        if (!isProductPage) {
+          function onScroll() {
+            const h = document.documentElement;
+            const total = h.scrollHeight - h.clientHeight;
+            if (total <= 0) return;
+            const pct = (h.scrollTop / total) * 100;
+            if (pct >= CFG.scrollPercent) fire();
+          }
+          window.addEventListener('scroll', onScroll, { passive: true });
+        }
+        if (CFG.enableExitIntent && isDesktop()) {
+          document.addEventListener('mouseout', function (e) {
+            if (e.clientY <= 0 && !e.relatedTarget) fire();
+          });
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', armTriggers);
+      } else {
+        armTriggers();
+      }
+
+      window.HWP = { show, dismiss, goto, showTeaser, _cfg: CFG };
+    })();
+    </script>
+
+  {%- endunless -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "hideAWAY Welcome Popup V2",
+  "settings": [
+    { "type": "header", "content": "Behavior" },
+    { "type": "checkbox", "id": "enabled", "label": "Enabled — turn ON to go live", "default": true },
+    { "type": "range", "id": "delay_seconds", "label": "Show after delay (seconds)", "min": 1, "max": 60, "step": 1, "default": 8 },
+    { "type": "range", "id": "scroll_percent", "label": "OR show after scroll % (not on product pages)", "min": 5, "max": 90, "step": 5, "default": 30 },
+    { "type": "checkbox", "id": "enable_exit_intent", "label": "Trigger on exit intent (desktop only)", "default": true },
+    { "type": "range", "id": "cooldown_days", "label": "Don't reshow for (days) after dismiss", "min": 1, "max": 90, "step": 1, "default": 30 },
+    { "type": "text", "id": "exclude_paths", "label": "Exclude paths (comma separated)", "default": "/cart,/checkout,/account" },
+
+    { "type": "header", "content": "Klaviyo IDs" },
+    { "type": "text", "id": "klaviyo_company_id", "label": "Klaviyo public company ID", "default": "M7xxfa" },
+    { "type": "text", "id": "email_list_id", "label": "Email list ID", "default": "UiypqE", "info": "hideAWAY Welcome 2026 — Email" },
+    { "type": "text", "id": "sms_list_id",   "label": "SMS list ID",   "default": "V7rcLr", "info": "hideAWAY Welcome 2026 — SMS" },
+
+    { "type": "header", "content": "Discount code" },
+    { "type": "text", "id": "coupon_code", "label": "Code shown on success screen", "default": "WELCOME12", "info": "Must be a real, active, standalone Shopify discount code — not a Klaviyo unique-code pool name." },
+    { "type": "text", "id": "success_link", "label": "Shop now button link", "default": "/discount/WELCOME12?redirect=/collections/perfume", "info": "Shopify auto-apply pattern: /discount/CODE?redirect=/path — applies the code automatically when clicked." },
+
+    { "type": "header", "content": "Copy — Step 1: Email" },
+    { "type": "text", "id": "email_headline", "label": "Headline", "default": "Get 12% off your first order." },
+    { "type": "richtext", "id": "email_sub", "label": "Subhead", "default": "<p>Pop in your email and we'll send your code straight away. No spam, just scents.</p>" },
+    { "type": "text", "id": "email_cta",   "label": "Button", "default": "Get my code" },
+    { "type": "text", "id": "email_skip",  "label": "Dismiss link", "default": "No thanks, I'll pass on the discount" },
+
+    { "type": "header", "content": "Copy — Step 2: SMS" },
+    { "type": "text", "id": "sms_headline", "label": "Headline", "default": "Want first dibs on drops too?" },
+    { "type": "richtext", "id": "sms_sub", "label": "Subhead", "default": "<p>Add your number for text-exclusive offers. Zero spam, promise.</p>" },
+    { "type": "text", "id": "sms_cta",  "label": "Button", "default": "Yes, sign me up" },
+    { "type": "text", "id": "sms_skip", "label": "Skip link", "default": "Skip this step" },
+    { "type": "richtext", "id": "sms_fineprint", "label": "Consent fine print", "default": "<p>By adding your number you agree to receive marketing texts from hideaway. (Platinum Investment Group Pty Ltd) at the number provided. Consent isn't a condition of purchase, msg &amp; data rates may apply, frequency varies. Unsubscribe anytime by replying STOP or using the link in any message.</p>" },
+
+    { "type": "header", "content": "Copy — Step 3: Success" },
+    { "type": "text", "id": "success_headline", "label": "Headline", "default": "You're in." },
+    { "type": "richtext", "id": "success_sub", "label": "Subhead", "default": "<p>Copy your code, use it at checkout, thank us later.</p>" },
+    { "type": "text", "id": "success_cta", "label": "Button", "default": "Shop now" },
+    { "type": "text", "id": "success_fineprint", "label": "Fine print", "default": "For first-time customers only." },
+
+    { "type": "header", "content": "Teaser pill" },
+    { "type": "text", "id": "teaser_text", "label": "Teaser pill text", "default": "GET 12% OFF" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color",          "label": "Card background",    "default": "#EEE7E6" },
+    { "type": "color", "id": "band_color",        "label": "Logo band background", "default": "#FFED99" },
+    { "type": "color", "id": "text_color",         "label": "Headline / body text", "default": "#303030" },
+    { "type": "color", "id": "body_text_color",    "label": "Sub-copy text", "default": "#666666" },
+    { "type": "color", "id": "accent_color",       "label": "Button / accent",    "default": "#FC76C4" },
+    { "type": "color", "id": "accent_hover_color", "label": "Button hover / coupon text", "default": "#E15BA9" },
+    { "type": "color", "id": "input_border_color", "label": "Input border", "default": "#E5E5E5" },
+    { "type": "range", "id": "card_radius", "label": "Card corner radius", "min": 0, "max": 32, "step": 1, "default": 16 },
+
+    { "type": "header", "content": "Logo" },
+    { "type": "image_picker", "id": "logo_image", "label": "Logo image (optional — falls back to styled \"hideaway.\" text if empty)" }
+  ],
+  "presets": [{ "name": "hideAWAY Welcome Popup V2", "category": "Popup" }]
+}
+{% endschema %}
