@@ -1,0 +1,36 @@
+# Backup server-side runtime for the P&L pipe.
+# To activate: move this file to .github/workflows/pl-pipeline.yml on the
+# repo's DEFAULT branch (scheduled workflows only run from the default branch).
+name: P&L pipeline (daily)
+
+on:
+  schedule:
+    - cron: "0 20 * * *"   # 06:00 AEST (UTC+10) = 20:00 UTC the day before
+  workflow_dispatch:        # manual run; optionally pass a backfill range below
+    inputs:
+      date_from:
+        description: "Backfill start (YYYY-MM-DD), optional"
+        required: false
+      date_to:
+        description: "Backfill end (YYYY-MM-DD), optional"
+        required: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r marketing-pl-dashboard/actions/requirements.txt
+      - name: Run pipeline
+        env:
+          SHOPIFY_STORE_DOMAIN: ${{ secrets.SHOPIFY_STORE_DOMAIN }}
+          SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+          WINDSOR_API_KEY: ${{ secrets.WINDSOR_API_KEY }}
+          SHEET_ID: ${{ secrets.SHEET_ID }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          python marketing-pl-dashboard/actions/pipeline_pl.py \
+            ${{ github.event.inputs.date_from }} ${{ github.event.inputs.date_to }}
