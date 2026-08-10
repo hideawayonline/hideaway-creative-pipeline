@@ -2,6 +2,7 @@ import json
 import sys
 import base64
 import datetime
+import tempfile
 import requests
 from pathlib import Path
 from dotenv import load_dotenv
@@ -58,6 +59,67 @@ def generate_images(prompt: str, count: int = 3) -> list[bytes]:
     return images
 
 
+def score_images(images: list[bytes], prompt: str) -> list[float] | None:
+    """Score variants with HPSv2 (human-preference model). Returns one score
+    per image, or None if hpsv2 isn't installed or scoring fails — the
+    pipeline degrades gracefully either way. Scores are only comparable
+    among images generated from the same prompt."""
+    # hpsv2's bundled open_clip has a stray `from turtle import forward`,
+    # which drags in tkinter and crashes on headless machines. Stub it out;
+    # nothing here uses turtle graphics.
+    import sys
+    import types
+    if "turtle" not in sys.modules:
+        turtle_stub = types.ModuleType("turtle")
+        turtle_stub.forward = None
+        sys.modules["turtle"] = turtle_stub
+    try:
+        import hpsv2
+    except ImportError:
+        print("  hpsv2 not installed; skipping quality scoring (pip install hpsv2).")
+        return None
+    # The hpsv2 wheel omits the CLIP BPE vocab its tokenizer needs; fetch the
+    # standard file from open_clip into place on first run.
+    vocab_path = Path(hpsv2.__file__).parent / "src" / "open_clip" / "bpe_simple_vocab_16e6.txt.gz"
+    if not vocab_path.exists():
+        print("  Fetching missing CLIP vocab for hpsv2 (one-time)...")
+        vocab_url = (
+            "https://raw.githubusercontent.com/mlfoundations/open_clip/"
+            "main/src/open_clip/bpe_simple_vocab_16e6.txt.gz"
+        )
+        try:
+            vocab_response = requests.get(vocab_url, timeout=60)
+            vocab_response.raise_for_status()
+            vocab_path.write_bytes(vocab_response.content)
+        except Exception as exc:
+            print(f"  Could not fetch CLIP vocab ({exc}); skipping quality scoring.")
+            return None
+    print(f"  Scoring {len(images)} variant(s) with HPSv2...")
+    try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            paths = []
+            for i, image_bytes in enumerate(images):
+                path = Path(tmpdir) / f"variant_{i}.png"
+                path.write_bytes(image_bytes)
+                paths.append(str(path))
+            scores = hpsv2.score(paths, prompt, hps_version="v2.1")
+    except Exception as exc:
+        print(f"  HPSv2 scoring failed ({exc}); continuing without scores.")
+        return None
+    scores = [float(s) for s in scores]
+    for i, s in enumerate(scores, start=1):
+        print(f"    Variant {i}: HPS {s:.4f}")
+    return scores
+
+
+def rank_images(images: list[bytes], scores: list[float] | None) -> tuple[list[bytes], list[float] | None]:
+    """Order images best-first by HPS score so variant_1 is always the top pick."""
+    if not scores:
+        return images, scores
+    ranked = sorted(zip(images, scores), key=lambda pair: pair[1], reverse=True)
+    return [img for img, _ in ranked], [s for _, s in ranked]
+
+
 def get_drive_service():
     creds = service_account.Credentials.from_service_account_file(
         GOOGLE_DRIVE_CREDENTIALS_FILE, scopes=DRIVE_SCOPES
@@ -83,7 +145,9 @@ def get_or_create_folder(service, name: str, parent_id: str = None) -> str:
     return folder["id"]
 
 
-def upload_images_to_drive(service, images: list[bytes], channel: str, date_str: str) -> str:
+def upload_images_to_drive(
+    service, images: list[bytes], channel: str, date_str: str, scores: list[float] | None = None
+) -> str:
     print("  Setting up Google Drive folders...")
     root_id = get_or_create_folder(service, ROOT_FOLDER_NAME)
     channel_id = get_or_create_folder(service, channel.capitalize(), root_id)
@@ -91,8 +155,11 @@ def upload_images_to_drive(service, images: list[bytes], channel: str, date_str:
 
     print(f"  Uploading {len(images)} image(s) to Drive...")
     for i, image_bytes in enumerate(images, start=1):
+        name = f"creative_variant_{i}.png"
+        if scores:
+            name = f"creative_variant_{i}_HPS-{scores[i - 1]:.4f}.png"
         file_metadata = {
-            "name": f"creative_variant_{i}.png",
+            "name": name,
             "parents": [date_id],
         }
         media = MediaInMemoryUpload(image_bytes, mimetype="image/png")
@@ -109,8 +176,18 @@ def upload_images_to_drive(service, images: list[bytes], channel: str, date_str:
     return folder_link
 
 
-def send_slack_notification(ad_data: dict, folder_link: str, image_count: int):
+def send_slack_notification(
+    ad_data: dict, folder_link: str, image_count: int, scores: list[float] | None = None
+):
     print("  Sending Slack notification...")
+    if scores:
+        score_line = (
+            f"*HPSv2 scores (best-first):* "
+            + ", ".join(f"#{i} {s:.4f}" for i, s in enumerate(scores, start=1))
+            + "\n"
+        )
+    else:
+        score_line = ""
     message = {
         "text": (
             f":art: *New Creatives Ready for Review*\n"
@@ -120,6 +197,7 @@ def send_slack_notification(ad_data: dict, folder_link: str, image_count: int):
             f"*Audience:* {ad_data['audience']}\n"
             f"*Style:* {ad_data['creative_style']}\n"
             f"*Variants generated:* {image_count}\n"
+            f"{score_line}"
             f"*Drive folder:* {folder_link}"
         )
     }
@@ -137,19 +215,26 @@ def run_pipeline(ad_data: dict):
     date_str = datetime.date.today().isoformat()
 
     # 1. Generate images
-    print("[1/3] Generating images...")
+    print("[1/4] Generating images...")
     prompt = build_prompt(ad_data)
     images = generate_images(prompt, count=3)
 
-    # 2. Upload to Google Drive
-    print("[2/3] Uploading to Google Drive...")
+    # 2. Score and rank variants (best-first)
+    print("[2/4] Scoring variants with HPSv2...")
+    scores = score_images(images, prompt)
+    images, scores = rank_images(images, scores)
+
+    # 3. Upload to Google Drive
+    print("[3/4] Uploading to Google Drive...")
     drive_service = get_drive_service()
-    folder_link = upload_images_to_drive(drive_service, images, ad_data["channel"], date_str)
+    folder_link = upload_images_to_drive(
+        drive_service, images, ad_data["channel"], date_str, scores
+    )
     print(f"  Folder link: {folder_link}")
 
-    # 3. Notify Slack
-    print("[3/3] Notifying Slack (#creatives-review)...")
-    send_slack_notification(ad_data, folder_link, len(images))
+    # 4. Notify Slack
+    print("[4/4] Notifying Slack (#creatives-review)...")
+    send_slack_notification(ad_data, folder_link, len(images), scores)
 
     print("\n=== Pipeline complete ===")
     print(f"Drive folder: {folder_link}")
