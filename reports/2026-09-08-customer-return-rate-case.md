@@ -13,9 +13,11 @@ All figures are Australian dollars, pulled from Shopify (hideaway.online), Meta 
 
 Nearly half of everything we sold in the last 12 months, A$5.0M of A$10.75M, came from customers buying for a second, third or tenth time. That revenue cost us almost nothing to generate. The other half came from 72,868 first-time buyers, and we spent A$3.87M on Meta to find them. At today's cost per new customer, the first order loses money. We only make money when a customer comes back.
 
+It is also the biggest lever on our conversion rate. A visit from someone who has bought before is many times more likely to end in an order than a visit from a stranger, so the mix of who visits sets our conversion rate more than anything on the website does. The mix is set by how many customers come back.
+
 Right now, one in four new customers ever comes back. That number has not moved in two years. Published benchmarks for direct-to-consumer beauty sit at 30 to 45%. Lifting our second-purchase rate from 25% to 30% is worth roughly A$500k of net sales a year at about 55% contribution margin, with no ad spend attached. Reactivating just 5% of the 61,000 people who bought once in the last year and have not been back is another A$245k before Christmas.
 
-I want us to treat the second-purchase rate as a company KPI and run a 90-day retention sprint into Black Friday: a named owner, a A$30k cash cap and three specific moves. The decision I need from you is in section 8.
+I want us to treat the second-purchase rate as a company KPI and run a 90-day retention sprint into Black Friday: a named owner, a A$30k cash cap and three specific moves. The decision I need from you is in section 9.
 
 ---
 
@@ -52,7 +54,31 @@ Every first order is a bet that the customer comes back. A customer who buys twi
 
 ---
 
-## 3. What the dashboard says, and what is true
+## 3. It is also the biggest thing driving our conversion rate
+
+Our store converts about 1.4% of visits into orders (27 August to 8 September, the only window Shopify has tracked sessions for). That single number hides two very different groups of people.
+
+| Who is visiting (Shopify sessions, 27 Aug to 8 Sep) | Visits | Orders | Conversion |
+|---|---:|---:|---:|
+| Visits Shopify can tie to a champion | 2,896 | 763 | 26% |
+| Visits it can tie to an active customer | 1,032 | 251 | 24% |
+| Visits from customers with two or more orders | 2,627 | 566 | 22% |
+| Clicks from our emails (Klaviyo) | 1,876 | 64 | 3.4% |
+| Untagged visits (direct, organic, SMS, apps) | 37,537 | 561 | 1.5% |
+| Paid social (Meta, Instagram, TikTok) | 33,551 | 357 | 1.1% |
+| Whole store | 75,048 | 1,023 | 1.4% |
+
+Shopify only ties a visit to a customer when it recognises them (logged in, clicked through from an email or SMS, or completed checkout), so the top three rows are generous. Even if they were half as good, a visit from someone who has bought before would be more than ten times as likely to end in an order as the average visit.
+
+Meta says the same thing in its own numbers. Over the last 90 days our retargeting campaigns, aimed at people who already know us, turned 5.3% of clicks into purchases at A$41 each, with a return on ad spend of 2.7. Prospecting turned 3.0% of clicks into purchases at A$51 each, with a return of 1.8. Klaviyo attributes A$457k of orders in the same 90 days to email and SMS, about a third of what we sold, from sends that cost nothing per message.
+
+Here is why this matters more than anything on the website. Conversion rate is a weighted average of two populations: people who know us, where roughly one visit in five ends in an order, and strangers, where it is closer to one in a hundred. Paid social is 45% of our visits and converts at 1.1%. A faster page, a better product page or a sharper offer moves the stranger number by fractions of a point. The mix moves the blended number by whole points, and the mix is set by one thing: how many customers come back. Every customer who buys a second time becomes a visitor who converts at many times the rate of a stranger, and joins the retargeting audience that gives Meta its cheapest purchases.
+
+In the fortnight Shopify has tracked, visits it could tie to a known customer were 7% of traffic. Lift that share to 10%, with everyone converting as they do today, and store conversion rises from about 1.4% to about 1.9%. No landing page test delivers a lift of a third.
+
+---
+
+## 4. What the dashboard says, and what is true
 
 Shopify's dashboard shows a "returning customer rate" of 58% for August. That looks great and it is misleading. It is the share of this month's buyers who had bought before, and it went up because new customers collapsed, not because more people came back.
 
@@ -74,7 +100,7 @@ Our own history says we can do better. Customers who first bought in 2017 to 201
 
 ---
 
-## 4. What we are sitting on
+## 5. What we are sitting on
 
 - **376,000 people** have bought from us at least once.
 - **139,500** bought for the first time in the last two years and never came back. **61,300** of those are from the last 12 months, and we paid about A$53 each to find them.
@@ -83,17 +109,19 @@ Our own history says we can do better. Customers who first bought in 2017 to 201
 
 ---
 
-## 5. What is actually switched on (Klaviyo, 8 September)
+## 6. What is actually switched on (Klaviyo, 8 September)
 
 **Live:** Welcome 2026 (email and SMS), Customer Thank You (2025 version), Abandon Checkout v2 (free mini), Browse, Collection and Add-to-Cart abandonment, Lapsed Buyer Win-Back 45/65/85 (live since 26 August), Dream Five giveaway and Spin the Bottle prize-claim flows.
 
-**Not live:** Replenishment, AI Predicted (in draft since July), 2026 Customer Thank You (draft), every LoyaltyLion flow (draft or manual since May 2025), Birthday flows (manual), Sunset (manual).
+**Not live:** Replenishment, AI Predicted (ran briefly, then switched off in July after 17,000 emails produced 5 orders), 2026 Customer Thank You (draft), every LoyaltyLion flow (draft or manual since May 2025), Birthday flows (manual), Sunset (manual).
 
-Read that as: almost everything live is aimed at getting the first order. Nothing purpose-built is aimed at the second order in the three to eight weeks after someone's first bottle arrives. The replenishment reminder for a consumable product is sitting in draft, and the win-back flow is two weeks old. That is not a criticism of the team. It is the gap, and it is fixable in weeks, not quarters.
+Three more things Klaviyo's last 90 days tell us. The only live post-purchase flow, the 2025 Customer Thank You, sent 6,500 emails and produced 16 orders. The Lapsed Buyer Win-Back went live on 26 August and has not sent a message yet. And no SMS campaign has gone out in 90 days; SMS has only run inside flows, 14,000 messages in total.
+
+Read that as: almost everything live is aimed at getting the first order. Nothing purpose-built is aimed at the second order in the three to eight weeks after someone's first bottle arrives. The replenishment reminder for a product people use up was tried once, underperformed and was switched off, which tells us the timing or the offer was wrong, not that replenishment cannot work. That is not a criticism of the team. It is the gap, and it is fixable in weeks, not quarters.
 
 ---
 
-## 6. What it is worth
+## 7. What it is worth
 
 | Move | Working | Net sales | Contribution (about 55%) |
 |---|---|---:|---:|
@@ -106,11 +134,11 @@ Buying those same 3,064 first orders on Meta at the June to August cost per new 
 
 ---
 
-## 7. The 90-day plan (to 8 December, through Black Friday)
+## 8. The 90-day plan (to 8 December, through Black Friday)
 
 Black Friday is our biggest month: A$3.0M of net sales and 37,946 orders last November, 21,900 of them first-time buyers. The plan is timed so the second-purchase machinery is live before the Black Friday cohort arrives, and so our warmest audience hears from us before Meta's auction gets expensive.
 
-**Move 1. Turn on the second-purchase journey (live by 1 October).** Put the Replenishment flow live. Build a "your next scent" sequence at days 21 to 35 after a first order, with one bounded incentive (a free mini or A$10 off a second bottle, no more than A$5 landed cost). Move the 2026 Thank You flow live. SMS on the key touch.
+**Move 1. Turn on the second-purchase journey (live by 1 October).** Rebuild the Replenishment flow around when a bottle actually runs out rather than Klaviyo's predicted date, and give it a real offer. Build a "your next scent" sequence at days 21 to 35 after a first order, with one bounded incentive (a free mini or A$10 off a second bottle, no more than A$5 landed cost). Move the 2026 Thank You flow live. SMS on the key touch.
 
 **Move 2. Win back the 61,300 (October, before Black Friday).** A three-touch email and SMS sequence to everyone who bought once since September 2025, sequenced by the scent they bought, with early access to Black Friday as the hook. Target: 5% reactivation.
 
@@ -122,11 +150,11 @@ Black Friday is our biggest month: A$3.0M of net sales and 37,946 orders last No
 
 **Cash:** about A$15k of SMS and about A$15k of incentives at target volumes. A$30k cap. Cash-positive from the first send, because nothing here is paid up front the way ads are.
 
-**Weekly scorecard:** second-purchase rate at 60 and 120 days by cohort; returning orders per month (1,907 in August, target 3,000 or more in December); reactivations from the win-back; Klaviyo-attributed net sales; contribution per order after marketing.
+**Weekly scorecard:** second-purchase rate at 60 and 120 days by cohort; returning orders per month (1,907 in August, target 3,000 or more in December); reactivations from the win-back; store conversion rate by traffic source and the share of visits from known customers; Klaviyo-attributed net sales; contribution per order after marketing.
 
 ---
 
-## 8. What I need from you
+## 9. What I need from you
 
 1. Agree that the second-purchase rate is a company KPI, reported weekly next to cost per new customer and marketing efficiency ratio.
 2. Approve the 90-day sprint: the owner, the guardrails and the A$30k cash cap.
@@ -143,7 +171,8 @@ If this works, we go into 2027 with a business whose growth does not depend on M
 - **Sales, customers and cohorts:** Shopify analytics (ShopifyQL) for hideaway-infinity.myshopify.com, queried 8 September 2026. "New" and "returning" follow Shopify's definitions. Cohorts are grouped by the month of a customer's first order. "Bought again" means two or more orders, ever, as of 8 September. The age-matched comparison counts customers with two or more orders placed before the end of the third month after their first-order month.
 - **Meta spend:** Ads Manager totals for the "Hideaway" ad account (September 2025 to March 2026) and "HW 2" (April 2026 onward). No other ad channels are included, so the true cost per new customer is higher than shown.
 - **Unit economics:** house averages used in the weekly affiliate commission audit (cost of goods A$20.50 and shipping A$14 per order). Verify against Xero actuals before relying on them for a material decision.
-- **Klaviyo:** flow status from the account on 8 September 2026.
+- **Conversion:** Shopify sessions from 27 August 2026, the day session tracking began, to 8 September. Visitor type uses the customer attributes Shopify attaches to a recognised session. Meta figures are campaign-level, last 90 days, HW 2 account, with "retargeting" meaning the three campaigns named as retargeting (the NZ closure campaign is excluded from both groups). Klaviyo figures use the Shopify "Placed Order" metric, last 90 days, Klaviyo's own attribution.
+- **Klaviyo:** flow status and flow and campaign performance from the account on 8 September 2026.
 - **Benchmarks:** published 2026 posts: Foundry CRO, "DTC Beauty Marketing Benchmarks 2026" (https://foundrycro.com/blog/dtc-beauty-marketing-benchmarks-2026/); MageLoyalty, "Beauty & Skincare Repeat Purchase Rate Benchmarks for 2026" (https://www.mageloyalty.com/blog/beauty-skincare-repeat-purchase-rate-benchmarks-for-2026); Data Analytics Stack, "What Is a Good Repeat Purchase Rate for Shopify Stores?" (https://dataanalyticsstack.com/whats-a-good-repeat-purchase-rate-for-a-shopify-store/). These are industry blog figures, not audited data. Treat them as a range, not a target.
 - Raw monthly and cohort tables are in `reports/data/`.
 
@@ -227,10 +256,34 @@ By year of first order, lifetime orders per customer: 2017 4.9, 2018 4.3, 2019 3
 | Dormant | 81,270 | 1.0 | A$62 | 2,112 |
 | Prospects (never bought) | 147,960 | 0 | 0 | n/a |
 
-### E. Caveats
+### E. Conversion detail
+
+Shopify sessions by tagged source, 27 August to 8 September:
+
+| Source (UTM) | Visits | Orders | Conversion |
+|---|---:|---:|---:|
+| Klaviyo email | 1,876 | 64 | 3.4% |
+| Google Shopping (product sync) | 1,513 | 25 | 1.7% |
+| Untagged | 37,537 | 561 | 1.5% |
+| Meta paid social | 16,841 | 199 | 1.2% |
+| Facebook paid | 10,988 | 134 | 1.2% |
+| Instagram | 2,521 | 10 | 0.4% |
+| TikTok paid | 977 | 1 | 0.1% |
+
+Meta, HW 2 account, last 90 days, campaign level:
+
+| Audience | Spend | Link clicks | Purchases (Meta-attributed) | Clicks that bought | Cost per purchase | Return on ad spend |
+|---|---:|---:|---:|---:|---:|---:|
+| Retargeting (3 campaigns) | A$55,165 | 25,376 | 1,354 | 5.3% | A$41 | 2.7 |
+| Prospecting (all other campaigns) | A$372,841 | 241,535 | 7,309 | 3.0% | A$51 | 1.8 |
+
+Klaviyo, last 90 days, Placed Order: campaigns 3.6M emails delivered, 19,587 unique clicks, 1,628 orders, A$291k; flows 155k emails and 14k SMS delivered, 909 orders, A$167k. Meta and Klaviyo each claim orders under their own attribution windows and overlap each other, so use the ratios, not the totals.
+
+### F. Caveats
 
 - Meta is the only acquisition cost included. Google, TikTok, affiliates, creator fees and giveaway prizes would all push the real cost per new customer higher, which strengthens the case rather than weakening it.
-- Contribution per order uses house averages, not Xero actuals. Payment fees and packaging are not deducted. If the real contribution is A$40 rather than A$44, every figure in section 6 scales down by about 10% and the conclusion does not change.
+- Contribution per order uses house averages, not Xero actuals. Payment fees and packaging are not deducted. If the real contribution is A$40 rather than A$44, every figure in section 7 scales down by about 10% and the conclusion does not change.
 - The 12-month cohort repeat rate (15.9%) will rise as those cohorts mature. The settled rate to plan against is the mature-cohort figure of 24.8%.
 - Shopify's "returning customer rate" and "returning customers" count a customer as returning if they had any prior order, including orders older than the period.
+- Shopify has tracked sessions only since 27 August 2026, so the conversion figures cover 13 days. It ties a visit to a customer only when it recognises them, which flatters known-customer conversion and understates anonymous conversion. The direction of the gap is not in doubt; the exact multiple is.
 - Klaviyo statuses reflect 8 September 2026 and will change as the team ships flows.
