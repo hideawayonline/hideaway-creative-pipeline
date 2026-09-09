@@ -1,0 +1,571 @@
+<title>hideaway. Return Rate Case</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --page:#F7F5F9; --surface:#FBFAFC; --ink:#211A2B; --ink-2:#5B5266; --muted:#877E92;
+  --hair:#E4DFEA; --hair-2:#D3CBDB; --accent:#B12A6B; --accent-soft:rgba(177,42,107,.10);
+  --series-ret:#B12A6B; --series-new:#2A78D6;
+  --panel-bg:#2A1F35; --panel-ink:#F7F5F9; --panel-muted:#C9BFD6;
+  --fd:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --fb:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --fu:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --page:#15121A; --surface:#1C1822; --ink:#EEE8F2; --ink-2:#B7ADC2; --muted:#8C8494;
+    --hair:#2E2837; --hair-2:#3B3346; --accent:#E0609C; --accent-soft:rgba(224,96,156,.16);
+    --series-ret:#E0609C; --series-new:#3987E5;
+    --panel-bg:#EEE8F2; --panel-ink:#211A2B; --panel-muted:#5B5266;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --page:#15121A; --surface:#1C1822; --ink:#EEE8F2; --ink-2:#B7ADC2; --muted:#8C8494;
+  --hair:#2E2837; --hair-2:#3B3346; --accent:#E0609C; --accent-soft:rgba(224,96,156,.16);
+  --series-ret:#E0609C; --series-new:#3987E5;
+  --panel-bg:#EEE8F2; --panel-ink:#211A2B; --panel-muted:#5B5266;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--fb);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.doc{max-width:960px;margin:0 auto;padding:48px 24px 96px}
+.prose{max-width:68ch}
+h1,h2,h3{font-family:var(--fd);text-wrap:balance;margin:0;line-height:1.1;font-weight:600}
+h1{font-size:clamp(30px,4.4vw,44px);font-weight:700;letter-spacing:-.01em;margin:10px 0 28px}
+h2{font-size:26px;margin:0 0 14px}
+h3{font-size:18px;margin:26px 0 8px}
+p{margin:0 0 16px}
+section{margin:56px 0 0}
+.eyebrow{font-family:var(--fu);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0}
+.brand{color:var(--accent);font-weight:600}
+.memo{border-bottom:1px solid var(--hair-2);padding-bottom:28px}
+.memo-meta{display:grid;grid-template-columns:max-content 1fr;gap:6px 22px;margin:0;font-size:16px;max-width:72ch}
+.memo-meta dt{font-family:var(--fu);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.memo-meta dd{margin:0}
+.note{font-family:var(--fu);font-size:14px;color:var(--ink-2);max-width:72ch;margin:20px 0 0}
+.lede{font-size:19px;line-height:1.5}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0 28px;margin:34px 0 8px}
+.stat{border-top:1px solid var(--hair-2);padding:14px 0 6px}
+.stat .lab{font-family:var(--fu);font-size:13px;color:var(--ink-2);line-height:1.35;min-height:36px}
+.stat .val{font-family:var(--fd);font-size:40px;font-weight:600;line-height:1.05;margin:8px 0 6px;letter-spacing:-.01em}
+.stat .sub{font-family:var(--fu);font-size:12.5px;color:var(--muted);line-height:1.4}
+.scroll{overflow-x:auto;margin:18px 0 6px}
+table.tbl{border-collapse:collapse;width:100%;font-family:var(--fu);font-size:14px}
+.tbl th{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:left;padding:8px 10px 8px 0;border-bottom:1px solid var(--hair-2);vertical-align:bottom}
+.tbl td{padding:9px 10px 9px 0;border-bottom:1px solid var(--hair);vertical-align:top}
+.tbl .n,.tbl th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl tr.key td{font-weight:600}
+.tbl td:first-child{color:var(--ink)}
+.tbl .neg{color:var(--accent)}
+.tbl caption{caption-side:bottom;text-align:left;font-family:var(--fu);font-size:12.5px;color:var(--muted);padding:10px 0 0}
+.fig{position:relative;background:var(--surface);border:1px solid var(--hair);padding:20px 20px 14px;margin:26px 0 8px}
+.fig-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.fig-title{font-family:var(--fd);font-size:16px;font-weight:600;margin:0}
+.fig-sub{font-family:var(--fu);font-size:13px;color:var(--muted);margin:2px 0 0}
+.legend{display:flex;gap:16px;font-family:var(--fu);font-size:12.5px;color:var(--ink-2);align-items:center;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.sw.ret{background:var(--series-ret)} .sw.new{background:var(--series-new)} .sw.soft{background:var(--series-ret);opacity:.42}
+.fig svg{display:block;width:100%;height:auto;overflow:visible}
+.fig .cap{font-family:var(--fu);font-size:12.5px;color:var(--muted);margin:10px 0 0;line-height:1.45}
+.tick{font:12px var(--fu);fill:var(--muted);font-variant-numeric:tabular-nums}
+.grid{stroke:var(--hair);stroke-width:1}
+.base{stroke:var(--hair-2);stroke-width:1}
+.bar-ret{fill:var(--series-ret)} .bar-new{fill:var(--series-new)} .soft{opacity:.42}
+.hit{fill:transparent;outline:none}
+.hit:focus-visible{stroke:var(--ink);stroke-width:1.5}
+.lbl{font:600 12px var(--fu);fill:var(--ink-2)}
+.rowlbl{font:13px var(--fu);fill:var(--ink)}
+.bar-dim{fill:var(--hair-2)}
+.ref{stroke:var(--muted);stroke-width:1}
+.ref-lbl{font:12px var(--fu);fill:var(--ink-2)}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--page);font-family:var(--fu);font-size:12.5px;line-height:1.4;padding:8px 10px;border-radius:4px;max-width:220px;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.tip b{display:block;font-weight:600;margin-bottom:2px}
+.tip span{display:block;font-variant-numeric:tabular-nums}
+ul,ol{padding-left:22px;margin:0 0 16px}
+li{margin:0 0 8px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px 32px;margin:8px 0 12px}
+.two h3{margin-top:0}
+.two ul{font-size:16px}
+.move{margin:0 0 18px;padding-left:18px;border-left:2px solid var(--hair-2)}
+.move h3{margin:0 0 6px}
+.kv{display:grid;grid-template-columns:max-content 1fr;gap:8px 20px;margin:18px 0 0;font-size:16px}
+.kv dt{font-family:var(--fd);font-weight:600;padding-top:1px}
+.kv dd{margin:0}
+.decision{background:var(--panel-bg);color:var(--panel-ink);padding:34px 36px 30px;margin-top:56px}
+.decision h2{color:var(--panel-ink)}
+.decision ol{font-size:18px}
+.decision li{margin-bottom:10px}
+.decision p{color:var(--panel-ink)}
+.decision .eyebrow{color:var(--panel-muted)}
+.appendix{margin-top:64px;padding-top:24px;border-top:1px solid var(--hair-2);font-size:15.5px}
+.appendix h2{font-size:22px}
+.appendix h3{font-size:16px;margin-top:30px}
+.appendix ul{font-size:15px}
+.appendix .tbl{font-size:13px}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:760px){
+  .stats{grid-template-columns:1fr 1fr}
+  .two{grid-template-columns:1fr}
+  .memo-meta{grid-template-columns:1fr;gap:2px}
+  .memo-meta dd{margin-bottom:8px}
+  .decision{padding:26px 22px}
+  .doc{padding:32px 18px 72px}
+  .kv{grid-template-columns:1fr}
+}
+@media print{
+  .tip{display:none} .fig,.tbl,.decision,.stat{break-inside:avoid}
+  body{font-size:12pt} .doc{padding:0}
+}
+@media (prefers-reduced-motion:no-preference){ .tip{transition:opacity .12s} }
+</style>
+
+<main class="doc">
+<header class="memo">
+  <p class="eyebrow"><span class="brand">hideaway.</span> &nbsp;·&nbsp; internal memo &nbsp;·&nbsp; confidential</p>
+  <h1>Customer return rate: the case for a 90-day retention sprint</h1>
+  <dl class="memo-meta">
+    <dt>To</dt><dd>Chris, CEO</dd>
+    <dt>From</dt><dd>Steve</dd>
+    <dt>Date</dt><dd>8 September 2026 (AEST)</dd>
+    <dt>Re</dt><dd>Second purchases are the lever that fixes our economics. Here is the evidence and what I want us to do about it before Black Friday.</dd>
+  </dl>
+  <p class="note">All figures are Australian dollars, pulled from Shopify (hideaway.online), Meta Ads Manager and Klaviyo on 8 September 2026. "Net sales" is Shopify's definition: after discounts and refunds, before GST and shipping. Sources and caveats are in the appendix.</p>
+</header>
+
+<section class="prose">
+  <h2>The short version</h2>
+  <p class="lede">Nearly half of everything we sold in the last 12 months, A$5.0M of A$10.75M, came from customers buying for a second, third or tenth time. That revenue cost us almost nothing to generate. The other half came from 72,868 first-time buyers, and we spent A$3.87M on Meta to find them. At today's cost per new customer, the first order loses money. We only make money when a customer comes back.</p>
+  <p>It is also the biggest lever on our conversion rate. A visit from someone who has bought before is many times more likely to end in an order than a visit from a stranger, so the mix of who visits sets our conversion rate more than anything on the website does. The mix is set by how many customers come back.</p>
+  <p>Right now, one in four new customers ever comes back. That number has not moved in two years. Published benchmarks for direct-to-consumer beauty sit at 30 to 45%. Lifting our second-purchase rate from 25% to 30% is worth roughly A$500k of net sales a year at about 55% contribution margin, with no ad spend attached. Reactivating just 5% of the 61,000 people who bought once in the last year and have not been back is another A$245k before Christmas.</p>
+  <p>I want us to treat the second-purchase rate as a company KPI and run a 90-day retention sprint into Black Friday: a named owner, a A$30k cash cap and three specific moves. The decision I need from you is in section 9.</p>
+</section>
+
+<div class="stats" aria-label="Headline figures">
+  <div class="stat"><div class="lab">Net sales from returning customers, last 12 months</div><div class="val">47%</div><div class="sub">A$5.01M of A$10.75M</div></div>
+  <div class="stat"><div class="lab">New customers who ever buy again</div><div class="val">1 in 4</div><div class="sub">24.8% of customers acquired Sep 2024 to Aug 2025</div></div>
+  <div class="stat"><div class="lab">Meta cost per new customer</div><div class="val">A$71</div><div class="sub">Jun to Aug 2026. A$53 average over 12 months</div></div>
+  <div class="stat"><div class="lab">Bought once in the last 12 months, not back yet</div><div class="val">61,300</div><div class="sub">Found with roughly A$3.2M of Meta spend</div></div>
+</div>
+
+<section>
+  <div class="prose">
+    <h2>1. Where the money comes from today</h2>
+  </div>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Last 12 months (Sep 2025 to Aug 2026)</th><th class="n">New customers</th><th class="n">Returning customers</th></tr></thead>
+    <tbody>
+      <tr><td>Orders</td><td class="n">72,868</td><td class="n">62,428</td></tr>
+      <tr><td>Net sales</td><td class="n">A$5.74M</td><td class="n">A$5.01M</td></tr>
+      <tr class="key"><td>Share of net sales</td><td class="n">53%</td><td class="n">47%</td></tr>
+      <tr><td>Net sales per order</td><td class="n">A$79</td><td class="n">A$80</td></tr>
+      <tr><td>Meta spend behind these orders</td><td class="n">A$3.87M</td><td class="n">close to nil</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="prose">
+    <p>We have pulled Meta back hard: A$347k in September last year, A$99k in August this year. New-customer revenue in August was down 80% on August 2025 (1,323 new customers against 6,681). Returning-customer revenue fell too, by 60%, but it held up better and it has been more than half of everything we sell since May. The customer base is our shock absorber.</p>
+  </div>
+  <figure class="fig" id="figA">
+    <div class="fig-head">
+      <div><p class="fig-title" id="ca-title">Monthly net sales: returning customers vs new customers</p><p class="fig-sub">September 2024 to August 2026, A$. Returning customers are the base of each column.</p></div>
+      <div class="legend" aria-hidden="true"><span><i class="sw ret"></i>Returning customers</span><span><i class="sw new"></i>New customers</span></div>
+    </div>
+    <div id="chartA"></div>
+    <div class="tip" id="tipA" hidden></div>
+    <figcaption class="cap">Hover or tab across a column for the split. Full monthly figures are in Appendix B.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>The catch: the base only refills if the customers we acquire come back. Fewer new customers now means fewer returning customers in six months, unless a bigger share of each cohort returns.</p>
+  </div>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>2. Our unit economics only work on the second order</h2>
+    <p>Using the house averages from the weekly affiliate audit (cost of goods A$20.50 and shipping A$14 per order), a typical order leaves about A$44 of contribution before marketing.</p>
+  </div>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Per order</th><th class="n">First order (new customer)</th><th class="n">Second order (returning)</th></tr></thead>
+    <tbody>
+      <tr><td>Net sales</td><td class="n">A$79</td><td class="n">A$80</td></tr>
+      <tr><td>Cost of goods</td><td class="n">(A$20.50)</td><td class="n">(A$20.50)</td></tr>
+      <tr><td>Shipping</td><td class="n">(A$14)</td><td class="n">(A$14)</td></tr>
+      <tr><td>Contribution before marketing</td><td class="n">A$44</td><td class="n">A$45</td></tr>
+      <tr><td>Cost to generate the order</td><td class="n">Meta: A$53 (12-month average)<br>A$71 (Jun to Aug)</td><td class="n">Email and SMS plus a small incentive:<br>about A$5</td></tr>
+      <tr class="key"><td>What we keep</td><td class="n neg">A$9 to A$26 loss</td><td class="n">about A$40 profit</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="prose">
+    <p>Every first order is a bet that the customer comes back. A customer who buys twice turns a A$9 loss into a A$30 profit. That is why the return rate is not a marketing metric. It is the profitability metric, and it is the one number in this business that we control more than Meta does.</p>
+  </div>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>3. It is also the biggest thing driving our conversion rate</h2>
+    <p>Our store converts about 1.4% of visits into orders (27 August to 8 September, the only window Shopify has tracked sessions for). That single number hides two very different groups of people.</p>
+  </div>
+  <figure class="fig" id="figC">
+    <div class="fig-head">
+      <div><p class="fig-title" id="cc-title">Share of visits that end in an order, by who is visiting</p><p class="fig-sub">Shopify sessions, 27 August to 8 September 2026. Known-customer rows in colour.</p></div>
+    </div>
+    <div id="chartC"></div>
+    <div class="tip" id="tipC" hidden></div>
+    <figcaption class="cap">Shopify only ties a visit to a customer when it recognises them (logged in, clicked through from an email or SMS, or completed checkout), so the top three bars are generous. Even at half their value, a visit from someone who has bought before is more than ten times as likely to end in an order as the average visit.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>Meta says the same thing in its own numbers. Over the last 90 days our retargeting campaigns, aimed at people who already know us, turned 5.3% of clicks into purchases at A$41 each, with a return on ad spend of 2.7. Prospecting turned 3.0% of clicks into purchases at A$51 each, with a return of 1.8. Klaviyo attributes A$457k of orders in the same 90 days to email and SMS, about a third of what we sold, from sends that cost nothing per message.</p>
+    <p>Here is why this matters more than anything on the website. Conversion rate is a weighted average of two populations: people who know us, where roughly one visit in five ends in an order, and strangers, where it is closer to one in a hundred. Paid social is 45% of our visits and converts at 1.1%. A faster page, a better product page or a sharper offer moves the stranger number by fractions of a point. The mix moves the blended number by whole points, and the mix is set by one thing: how many customers come back. Every customer who buys a second time becomes a visitor who converts at many times the rate of a stranger, and joins the retargeting audience that gives Meta its cheapest purchases.</p>
+    <p>In the fortnight Shopify has tracked, visits it could tie to a known customer were 7% of traffic. Lift that share to 10%, with everyone converting as they do today, and store conversion rises from about 1.4% to about 1.9%. No landing page test delivers a lift of a third.</p>
+  </div>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>4. What the dashboard says, and what is true</h2>
+    <p>Shopify's dashboard shows a "returning customer rate" of 58% for August. That looks great and it is misleading. It is the share of this month's buyers who had bought before, and it went up because new customers collapsed, not because more people came back.</p>
+    <p>The number that matters is: of the customers we paid to acquire, how many ever buy again?</p>
+    <ul>
+      <li>Customers whose first order was between September 2024 and August 2025 (old enough to judge): <strong>24.8% have bought again.</strong> They average 1.43 orders and A$122 of spend each.</li>
+      <li>Customers whose first order was in the last 12 months: <strong>15.9% so far</strong>, and still maturing.</li>
+      <li>Compared at the same age (bought again within four months of the first order), so recent cohorts are judged fairly:</li>
+    </ul>
+  </div>
+  <div class="scroll" style="max-width:520px">
+  <table class="tbl">
+    <thead><tr><th>First order in</th><th class="n">2024/25 cohort</th><th class="n">2025/26 cohort</th></tr></thead>
+    <tbody>
+      <tr><td>October</td><td class="n">19.3%</td><td class="n">19.4%</td></tr>
+      <tr><td>November (Black Friday)</td><td class="n">12.0%</td><td class="n">12.5%</td></tr>
+      <tr><td>March</td><td class="n">11.8%</td><td class="n">12.8%</td></tr>
+    </tbody>
+    <caption>Share of each cohort with a second order before the end of the third month after their first-order month.</caption>
+  </table>
+  </div>
+  <div class="prose">
+    <p>It is not getting worse. It is stuck, at the same level for two years, while acquisition costs went up and volume came down. Published 2026 benchmarks for direct-to-consumer beauty put annual repeat purchase rates at 30 to 45%. We are at 25%.</p>
+  </div>
+  <figure class="fig" id="figB">
+    <div class="fig-head">
+      <div><p class="fig-title" id="cb-title">Share of each monthly cohort that has ever bought a second time</p><p class="fig-sub">By month of first order, as at 8 September 2026. Younger cohorts have had less time to come back.</p></div>
+      <div class="legend" aria-hidden="true"><span><i class="sw ret"></i>Settled (12+ months old)</span><span><i class="sw soft"></i>Still maturing</span></div>
+    </div>
+    <div id="chartB"></div>
+    <div class="tip" id="tipB" hidden></div>
+    <figcaption class="cap">Reference lines: the published benchmark floor for direct-to-consumer beauty (30%) and our settled-cohort average (24.8%). Cohort detail is in Appendix C.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>Our own history says we can do better. Customers who first bought in 2017 to 2019 have averaged three to five orders each. The 2024 and 2025 cohorts, acquired at scale through Meta and Black Friday, are tracking at 1.3 to 1.6.</p>
+  </div>
+</section>
+
+<section class="prose">
+  <h2>5. What we are sitting on</h2>
+  <ul>
+    <li><strong>376,000 people</strong> have bought from us at least once.</li>
+    <li><strong>139,500</strong> bought for the first time in the last two years and never came back. <strong>61,300</strong> of those are from the last 12 months, and we paid about A$53 each to find them.</li>
+    <li><strong>71,400 champions and loyal customers</strong> (Shopify's RFM segments) average four to five orders and A$390 to A$420 of spend each. They are the best asset in the business and we have no live loyalty mechanics for them.</li>
+    <li>We can reach all of them through Klaviyo, which we already pay for.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="prose"><h2>6. What is actually switched on (Klaviyo, 8 September)</h2></div>
+  <div class="two">
+    <div>
+      <h3>Live</h3>
+      <ul>
+        <li>Welcome 2026 (email and SMS)</li>
+        <li>Customer Thank You (2025 version)</li>
+        <li>Abandon Checkout v2 (free mini)</li>
+        <li>Browse, Collection and Add-to-Cart abandonment</li>
+        <li>Lapsed Buyer Win-Back 45/65/85 (live since 26 August)</li>
+        <li>Dream Five giveaway and Spin the Bottle prize-claim flows</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Not live</h3>
+      <ul>
+        <li><strong>Replenishment, AI Predicted</strong> (ran briefly, then switched off in July after 17,000 emails produced 5 orders)</li>
+        <li>2026 Customer Thank You (draft)</li>
+        <li>Every LoyaltyLion flow (draft or manual since May 2025)</li>
+        <li>Birthday flows (manual)</li>
+        <li>Sunset (manual)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="prose">
+    <p>Three more things Klaviyo's last 90 days tell us. The only live post-purchase flow, the 2025 Customer Thank You, sent 6,500 emails and produced 16 orders. The Lapsed Buyer Win-Back went live on 26 August and has not sent a message yet. And no SMS campaign has gone out in 90 days; SMS has only run inside flows, 14,000 messages in total.</p>
+    <p>Read that as: almost everything live is aimed at getting the first order. Nothing purpose-built is aimed at the second order in the three to eight weeks after someone's first bottle arrives. The replenishment reminder for a product people use up was tried once, underperformed and was switched off, which tells us the timing or the offer was wrong, not that replenishment cannot work. That is not a criticism of the team. It is the gap, and it is fixable in weeks, not quarters.</p>
+  </div>
+</section>
+
+<section>
+  <div class="prose"><h2>7. What it is worth</h2></div>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Move</th><th>Working</th><th class="n">Net sales</th><th class="n">Contribution (about 55%)</th></tr></thead>
+    <tbody>
+      <tr><td>Every +1 point of second-purchase rate on a year's new customers</td><td>729 customers × 1.7 extra orders × A$80</td><td class="n">about A$100k a year</td><td class="n">about A$55k</td></tr>
+      <tr><td>Lift the settled rate from 25% to 30% (benchmark floor)</td><td>5 points</td><td class="n">about A$500k a year</td><td class="n">about A$275k</td></tr>
+      <tr><td>Lift it to 35% (mid-benchmark)</td><td>10 points</td><td class="n">about A$1.0M a year</td><td class="n">about A$550k</td></tr>
+      <tr class="key"><td>Reactivate 5% of the 61,300 recent one-time buyers before Christmas</td><td>3,064 orders × A$80</td><td class="n">about A$245k, one-off</td><td class="n">about A$120k after incentives</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="prose">
+    <p>Buying those same 3,064 first orders on Meta at the June to August cost per new customer would take A$217k of cash and lose money on each one.</p>
+  </div>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>8. The 90-day plan (to 8 December, through Black Friday)</h2>
+    <p>Black Friday is our biggest month: A$3.0M of net sales and 37,946 orders last November, 21,900 of them first-time buyers. The plan is timed so the second-purchase machinery is live before the Black Friday cohort arrives, and so our warmest audience hears from us before Meta's auction gets expensive.</p>
+    <div class="move">
+      <h3>Move 1. Turn on the second-purchase journey (live by 1 October)</h3>
+      <p>Rebuild the Replenishment flow around when a bottle actually runs out rather than Klaviyo's predicted date, and give it a real offer. Build a "your next scent" sequence at days 21 to 35 after a first order, with one bounded incentive (a free mini or A$10 off a second bottle, no more than A$5 landed cost). Move the 2026 Thank You flow live. SMS on the key touch.</p>
+    </div>
+    <div class="move">
+      <h3>Move 2. Win back the 61,300 (October, before Black Friday)</h3>
+      <p>A three-touch email and SMS sequence to everyone who bought once since September 2025, sequenced by the scent they bought, with early access to Black Friday as the hook. Target: 5% reactivation.</p>
+    </div>
+    <div class="move">
+      <h3>Move 3. Give champions and loyal customers a reason (November)</h3>
+      <p>Refer-a-friend with a mini for both sides, early Black Friday access, and a build-a-box offer that rewards the second bottle. Decide on loyalty: the LoyaltyLion flows have sat in draft since May 2025. Either switch them on or remove the program.</p>
+    </div>
+    <dl class="kv">
+      <dt>Owner</dt><dd>[name], the person who runs Klaviyo day to day, reporting a one-page scorecard every Monday. Decisions inside the guardrails below do not come to you or me.</dd>
+      <dt>Guardrails</dt><dd>Incentive cost of A$5 or less per order; no discount above 20% on the core range; every "was/now" claim checked against the live storefront (Australian Consumer Law); every flow gets an end date and an owner.</dd>
+      <dt>Cash</dt><dd>About A$15k of SMS and about A$15k of incentives at target volumes. A$30k cap. Cash-positive from the first send, because nothing here is paid up front the way ads are.</dd>
+      <dt>Weekly scorecard</dt><dd>Second-purchase rate at 60 and 120 days by cohort; returning orders per month (1,907 in August, target 3,000 or more in December); reactivations from the win-back; store conversion rate by traffic source and the share of visits from known customers; Klaviyo-attributed net sales; contribution per order after marketing.</dd>
+    </dl>
+  </div>
+</section>
+
+<section class="decision">
+  <p class="eyebrow">Decision requested</p>
+  <h2>9. What I need from you</h2>
+  <ol>
+    <li>Agree that the second-purchase rate is a company KPI, reported weekly next to cost per new customer and marketing efficiency ratio.</li>
+    <li>Approve the 90-day sprint: the owner, the guardrails and the A$30k cash cap.</li>
+    <li>Back the sequencing: Move 1 live by 1 October, Move 2 running by mid-October.</li>
+  </ol>
+  <p>If this works, we go into 2027 with a business whose growth does not depend on Meta's auction. If it does not, we will know by December, and we will have spent less than a week of last year's ad budget finding out.</p>
+</section>
+
+<section class="appendix">
+  <h2>Appendix</h2>
+
+  <h3>A. Sources and method</h3>
+  <ul>
+    <li><strong>Sales, customers and cohorts:</strong> Shopify analytics (ShopifyQL) for hideaway-infinity.myshopify.com, queried 8 September 2026. "New" and "returning" follow Shopify's definitions. Cohorts are grouped by the month of a customer's first order. "Bought again" means two or more orders, ever, as of 8 September. The age-matched comparison counts customers with two or more orders placed before the end of the third month after their first-order month.</li>
+    <li><strong>Meta spend:</strong> Ads Manager totals for the "Hideaway" ad account (September 2025 to March 2026) and "HW 2" (April 2026 onward). No other ad channels are included, so the true cost per new customer is higher than shown.</li>
+    <li><strong>Unit economics:</strong> house averages used in the weekly affiliate commission audit (cost of goods A$20.50 and shipping A$14 per order). Verify against Xero actuals before relying on them for a material decision.</li>
+    <li><strong>Conversion:</strong> Shopify sessions from 27 August 2026, the day session tracking began, to 8 September. Visitor type uses the customer attributes Shopify attaches to a recognised session. Meta figures are campaign-level, last 90 days, HW 2 account, with "retargeting" meaning the three campaigns named as retargeting (the NZ closure campaign is excluded from both groups). Klaviyo figures use the Shopify "Placed Order" metric, last 90 days, Klaviyo's own attribution.</li>
+    <li><strong>Klaviyo:</strong> flow status and flow and campaign performance from the account on 8 September 2026.</li>
+    <li><strong>Benchmarks:</strong> published 2026 posts: <a href="https://foundrycro.com/blog/dtc-beauty-marketing-benchmarks-2026/">Foundry CRO, DTC Beauty Marketing Benchmarks 2026</a>; <a href="https://www.mageloyalty.com/blog/beauty-skincare-repeat-purchase-rate-benchmarks-for-2026">MageLoyalty, Beauty &amp; Skincare Repeat Purchase Rate Benchmarks for 2026</a>; <a href="https://dataanalyticsstack.com/whats-a-good-repeat-purchase-rate-for-a-shopify-store/">Data Analytics Stack, What Is a Good Repeat Purchase Rate for Shopify Stores?</a> These are industry blog figures, not audited data. Treat them as a range, not a target.</li>
+  </ul>
+
+  <h3>B. Monthly: new vs returning (net sales, A$)</h3>
+  <div class="scroll">
+  <table class="tbl" id="tblB">
+    <thead><tr><th>Month</th><th class="n">Orders</th><th class="n">Net sales</th><th class="n">New customers</th><th class="n">Returning customers</th><th class="n">New net sales</th><th class="n">Returning net sales</th><th class="n">Meta spend</th><th class="n">Shopify "returning rate"</th></tr></thead>
+    <tbody></tbody>
+    <caption>Meta spend for months before September 2025 was not pulled. September 2024 runs from the 8th. Refunds ran at about 1% of gross sales over the last 12 months, so product returns are not the issue here.</caption>
+  </table>
+  </div>
+
+  <h3>C. Cohorts by month of first order</h3>
+  <div class="scroll">
+  <table class="tbl" id="tblC">
+    <thead><tr><th>First order in</th><th class="n">Customers</th><th class="n">Bought again (ever)</th><th class="n">Rate</th><th class="n">Lifetime orders per customer</th><th class="n">Spend per customer</th><th class="n">Age (months)</th></tr></thead>
+    <tbody></tbody>
+    <caption>Younger cohorts have had less time to come back, which is why the rate falls toward the bottom of the table. "Spend" is Shopify's total amount spent, which includes GST and shipping.</caption>
+  </table>
+  </div>
+  <p>By year of first order, lifetime orders per customer: 2017 4.9, 2018 4.3, 2019 3.2, 2020 2.7, 2021 2.5, 2022 2.3, 2023 2.2, 2024 1.6, 2025 1.3, 2026 to date 1.2. Older cohorts have had more years to buy, so read this as direction, not a like-for-like comparison.</p>
+
+  <h3>D. Customer base by Shopify RFM segment (all time)</h3>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Segment</th><th class="n">Customers</th><th class="n">Average orders</th><th class="n">Average spend</th><th class="n">Average days since last order</th></tr></thead>
+    <tbody>
+      <tr><td>Champions</td><td class="n">29,244</td><td class="n">4.7</td><td class="n">A$423</td><td class="n">161</td></tr>
+      <tr><td>Loyal</td><td class="n">42,142</td><td class="n">4.4</td><td class="n">A$390</td><td class="n">509</td></tr>
+      <tr><td>Active</td><td class="n">78,635</td><td class="n">1.1</td><td class="n">A$96</td><td class="n">334</td></tr>
+      <tr><td>New</td><td class="n">16,581</td><td class="n">1.0</td><td class="n">A$51</td><td class="n">217</td></tr>
+      <tr><td>Promising</td><td class="n">1,792</td><td class="n">1.0</td><td class="n">A$41</td><td class="n">478</td></tr>
+      <tr><td>Needs attention</td><td class="n">15,841</td><td class="n">1.2</td><td class="n">A$120</td><td class="n">665</td></tr>
+      <tr><td>Almost lost</td><td class="n">41,539</td><td class="n">1.0</td><td class="n">A$60</td><td class="n">666</td></tr>
+      <tr><td>At risk</td><td class="n">43,809</td><td class="n">2.2</td><td class="n">A$154</td><td class="n">1,970</td></tr>
+      <tr><td>Previously loyal</td><td class="n">25,437</td><td class="n">6.6</td><td class="n">A$559</td><td class="n">1,741</td></tr>
+      <tr><td>Dormant</td><td class="n">81,270</td><td class="n">1.0</td><td class="n">A$62</td><td class="n">2,112</td></tr>
+      <tr><td>Prospects (never bought)</td><td class="n">147,960</td><td class="n">0</td><td class="n">0</td><td class="n">n/a</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>E. Conversion detail</h3>
+  <p>Shopify sessions by tagged source, 27 August to 8 September:</p>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Source (UTM)</th><th class="n">Visits</th><th class="n">Orders</th><th class="n">Conversion</th></tr></thead>
+    <tbody>
+      <tr><td>Klaviyo email</td><td class="n">1,876</td><td class="n">64</td><td class="n">3.4%</td></tr>
+      <tr><td>Google Shopping (product sync)</td><td class="n">1,513</td><td class="n">25</td><td class="n">1.7%</td></tr>
+      <tr><td>Untagged</td><td class="n">37,537</td><td class="n">561</td><td class="n">1.5%</td></tr>
+      <tr><td>Meta paid social</td><td class="n">16,841</td><td class="n">199</td><td class="n">1.2%</td></tr>
+      <tr><td>Facebook paid</td><td class="n">10,988</td><td class="n">134</td><td class="n">1.2%</td></tr>
+      <tr><td>Instagram</td><td class="n">2,521</td><td class="n">10</td><td class="n">0.4%</td></tr>
+      <tr><td>TikTok paid</td><td class="n">977</td><td class="n">1</td><td class="n">0.1%</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Meta, HW 2 account, last 90 days, campaign level:</p>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Audience</th><th class="n">Spend</th><th class="n">Link clicks</th><th class="n">Purchases (Meta-attributed)</th><th class="n">Clicks that bought</th><th class="n">Cost per purchase</th><th class="n">Return on ad spend</th></tr></thead>
+    <tbody>
+      <tr><td>Retargeting (3 campaigns)</td><td class="n">A$55,165</td><td class="n">25,376</td><td class="n">1,354</td><td class="n">5.3%</td><td class="n">A$41</td><td class="n">2.7</td></tr>
+      <tr><td>Prospecting (all other campaigns)</td><td class="n">A$372,841</td><td class="n">241,535</td><td class="n">7,309</td><td class="n">3.0%</td><td class="n">A$51</td><td class="n">1.8</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Klaviyo, last 90 days, Placed Order: campaigns 3.6M emails delivered, 19,587 unique clicks, 1,628 orders, A$291k; flows 155k emails and 14k SMS delivered, 909 orders, A$167k. Meta and Klaviyo each claim orders under their own attribution windows and overlap each other, so use the ratios, not the totals.</p>
+
+  <h3>F. Caveats</h3>
+  <ul>
+    <li>Meta is the only acquisition cost included. Google, TikTok, affiliates, creator fees and giveaway prizes would all push the real cost per new customer higher, which strengthens the case rather than weakening it.</li>
+    <li>Contribution per order uses house averages, not Xero actuals. Payment fees and packaging are not deducted. If the real contribution is A$40 rather than A$44, every figure in section 7 scales down by about 10% and the conclusion does not change.</li>
+    <li>The 12-month cohort repeat rate (15.9%) will rise as those cohorts mature. The settled rate to plan against is the mature-cohort figure of 24.8%.</li>
+    <li>Shopify's "returning customer rate" and "returning customers" count a customer as returning if they had any prior order, including orders older than the period.</li>
+    <li>Shopify has tracked sessions only since 27 August 2026, so the conversion figures cover 13 days. It ties a visit to a customer only when it recognises them, which flatters known-customer conversion and understates anonymous conversion. The direction of the gap is not in doubt; the exact multiple is.</li>
+    <li>Klaviyo statuses reflect 8 September 2026 and will change as the team ships flows.</li>
+  </ul>
+</section>
+</main>
+
+<script>
+(function(){
+  const M=["Sep 2024","Oct 2024","Nov 2024","Dec 2024","Jan 2025","Feb 2025","Mar 2025","Apr 2025","May 2025","Jun 2025","Jul 2025","Aug 2025","Sep 2025","Oct 2025","Nov 2025","Dec 2025","Jan 2026","Feb 2026","Mar 2026","Apr 2026","May 2026","Jun 2026","Jul 2026","Aug 2026"];
+  const ORD=[10275,17921,34056,14308,17865,11246,11350,12910,8273,9696,13168,11459,9067,7609,37946,20457,10214,6744,10056,7647,10554,6928,4848,3231];
+  const NET=[724548,1461180,2515072,1040357,1180773,648325,713517,867854,701447,839701,1139113,952409,865827,727949,3019758,1565213,774901,513098,706464,583652,800751,489996,439166,265006];
+  const NEWC=[7339,9851,22202,7557,10535,7879,6243,7132,4816,5456,8370,6681,4479,4086,21900,12117,5559,3894,5216,4465,4615,2836,2378,1323];
+  const RETC=[2816,7382,10961,6223,6754,3215,4821,5290,3226,3940,4516,4470,4260,3306,14695,7713,4227,2672,4556,3077,5392,3844,2361,1813];
+  const NEW=[487752,711447,1574941,525833,671568,434255,375701,464675,417398,481401,736934,561799,433414,398870,1646063,953409,442475,304195,351918,336313,346871,199863,217625,110457];
+  const RET=[236796,749633,939793,514280,509204,214070,337816,403179,284049,358300,402179,390610,432413,329078,1373695,611804,332426,208903,354546,247339,453880,290133,221541,154550];
+  const META=[null,null,null,null,null,null,null,null,null,null,null,null,346677,336483,885943,695190,388493,286167,187622,100588,180253,185888,178495,98521];
+  const CREP=[2238,3098,5551,1955,2360,1500,1588,1918,1169,1248,1742,1434,1002,1018,3999,1833,938,619,772,550,448,233,141,44];
+  const CORD=[11495,15477,31969,11024,14553,10340,8981,10408,6807,7590,11177,9002,6117,5715,27680,14728,6939,4760,6251,5183,5171,3118,2546,1368];
+  const CSP=[926410,1314171,2687338,922932,1148038,757818,677083,828495,688017,762074,1126479,869471,650011,600583,2372651,1309876,630866,425124,495458,441429,429200,244922,267706,130675];
+  const n=M.length;
+  const fmt=v=>v.toLocaleString("en-AU");
+  const money=v=>"A$"+fmt(Math.round(v));
+  const mil=v=>"A$"+(v/1e6).toFixed(2)+"M";
+  const pct=v=>(100*v).toFixed(1)+"%";
+  const short=m=>m.replace(" 20"," ");
+
+  function roundedTop(x,y,w,h,r,cls){
+    if(h<=r+1) return `<rect class="${cls}" x="${x}" y="${y}" width="${w}" height="${h}"/>`;
+    return `<path class="${cls}" d="M${x},${y+h} V${y+r} A${r},${r} 0 0 1 ${x+r},${y} H${x+w-r} A${r},${r} 0 0 1 ${x+w},${y+r} V${y+h} Z"/>`;
+  }
+  function attachTips(figId,tipId,html){
+    const fig=document.getElementById(figId), tip=document.getElementById(tipId);
+    const show=(el)=>{ const i=+el.getAttribute("data-i"); tip.innerHTML=html(i); tip.hidden=false;
+      const fr=fig.getBoundingClientRect(), br=el.getBoundingClientRect();
+      let left=br.left-fr.left+br.width/2-tip.offsetWidth/2; left=Math.max(8,Math.min(left,fr.width-tip.offsetWidth-8));
+      let top=br.top-fr.top-tip.offsetHeight-10; if(top<4) top=br.top-fr.top+24;
+      tip.style.left=left+"px"; tip.style.top=top+"px"; };
+    const hide=()=>{ tip.hidden=true; };
+    fig.querySelectorAll(".hit").forEach(el=>{ el.addEventListener("mouseenter",()=>show(el)); el.addEventListener("mouseleave",hide); el.addEventListener("focus",()=>show(el)); el.addEventListener("blur",hide); });
+  }
+
+  // Chart A: stacked columns, returning at the base
+  (function(){
+    const W=920,H=340,L=64,R=16,T=30,B=40,pw=W-L-R,ph=H-T-B,slot=pw/n,bw=Math.min(24,slot*.62);
+    const ymax=3.2e6, y=v=>T+ph-(v/ymax)*ph;
+    let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="ca-title">`;
+    [1e6,2e6,3e6].forEach(v=>{ s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/>`; });
+    [0,1e6,2e6,3e6].forEach(v=>{ s+=`<text class="tick" x="${L-10}" y="${y(v)+4}" text-anchor="end">${v?("A$"+v/1e6+"M"):"0"}</text>`; });
+    for(let i=0;i<n;i++){
+      const x=L+slot*i+(slot-bw)/2, r=RET[i], nw=NEW[i], yr=y(r), yt=y(r+nw);
+      s+=`<rect class="bar-ret" x="${x}" y="${yr}" width="${bw}" height="${T+ph-yr}"/>`;
+      const bottom=yr-2, h=bottom-yt; if(h>0.5) s+=roundedTop(x,yt,bw,h,4,"bar-new");
+      if(i%3===0) s+=`<text class="tick" x="${L+slot*i+slot/2}" y="${T+ph+22}" text-anchor="middle">${short(M[i])}</text>`;
+    }
+    s+=`<line class="base" x1="${L}" x2="${W-R}" y1="${T+ph}" y2="${T+ph}"/>`;
+    const px=L+slot*14+slot/2; s+=`<text class="lbl" x="${px}" y="${y(NET[14])-8}" text-anchor="middle">${mil(NET[14])} · Black Friday</text>`;
+    const lx=L+slot*23+slot/2; s+=`<text class="lbl" x="${lx}" y="${y(NET[23])-8}" text-anchor="middle">${mil(NET[23])}</text>`;
+    for(let i=0;i<n;i++) s+=`<rect class="hit" data-i="${i}" x="${L+slot*i}" y="${T}" width="${slot}" height="${ph}" tabindex="0" aria-label="${M[i]}: returning ${money(RET[i])}, new ${money(NEW[i])}"/>`;
+    s+="</svg>";
+    document.getElementById("chartA").innerHTML=s;
+    attachTips("figA","tipA",i=>`<b>${M[i]}</b><span>Returning ${money(RET[i])} (${Math.round(100*RET[i]/NET[i])}%)</span><span>New ${money(NEW[i])}</span><span>Total ${money(NET[i])}</span>${META[i]?`<span>Meta spend ${money(META[i])}</span>`:""}`);
+  })();
+
+  // Chart B: cohort second-purchase rate
+  (function(){
+    const W=920,H=320,L=56,R=16,T=26,B=40,pw=W-L-R,ph=H-T-B,slot=pw/n,bw=Math.min(24,slot*.62);
+    const ymax=.35, y=v=>T+ph-(v/ymax)*ph;
+    let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="cb-title">`;
+    [.1,.2,.3].forEach(v=>{ s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/>`; });
+    [0,.1,.2,.3].forEach(v=>{ s+=`<text class="tick" x="${L-10}" y="${y(v)+4}" text-anchor="end">${Math.round(v*100)}%</text>`; });
+    for(let i=0;i<n;i++){
+      const rate=CREP[i]/NEWC[i], age=24-i, x=L+slot*i+(slot-bw)/2, yt=y(rate), h=T+ph-yt;
+      s+=roundedTop(x,yt,bw,h,4,"bar-ret"+(age<12?" soft":""));
+      if(i%3===0) s+=`<text class="tick" x="${L+slot*i+slot/2}" y="${T+ph+22}" text-anchor="middle">${short(M[i])}</text>`;
+    }
+    s+=`<line class="base" x1="${L}" x2="${W-R}" y1="${T+ph}" y2="${T+ph}"/>`;
+    s+=`<line class="ref" x1="${L}" x2="${W-R}" y1="${y(.30)}" y2="${y(.30)}"/><text class="ref-lbl" x="${W-R}" y="${y(.30)-6}" text-anchor="end">Benchmark floor 30%</text>`;
+    s+=`<line class="ref" x1="${L}" x2="${W-R}" y1="${y(.248)}" y2="${y(.248)}"/><text class="ref-lbl" x="${W-R}" y="${y(.248)+15}" text-anchor="end">Settled cohorts 24.8%</text>`;
+    const p=1; s+=`<text class="lbl" x="${L+slot*p+slot/2}" y="${y(CREP[p]/NEWC[p])-8}" text-anchor="middle">${pct(CREP[p]/NEWC[p])}</text>`;
+    for(let i=0;i<n;i++) s+=`<rect class="hit" data-i="${i}" x="${L+slot*i}" y="${T}" width="${slot}" height="${ph}" tabindex="0" aria-label="${M[i]} cohort: ${pct(CREP[i]/NEWC[i])} bought again"/>`;
+    s+="</svg>";
+    document.getElementById("chartB").innerHTML=s;
+    attachTips("figB","tipB",i=>`<b>First order ${M[i]}</b><span>${fmt(NEWC[i])} customers</span><span>${fmt(CREP[i])} bought again (${pct(CREP[i]/NEWC[i])})</span><span>${(CORD[i]/NEWC[i]).toFixed(2)} orders each · ${money(CSP[i]/NEWC[i])} spend</span><span>${24-i} months old</span>`);
+  })();
+
+  // Chart C: conversion by who is visiting (horizontal bars, emphasis on known customers)
+  (function(){
+    const rows=[
+      ["Visits tied to a champion",2896,763,true],
+      ["Visits tied to an active customer",1032,251,true],
+      ["Customers with two or more orders",2627,566,true],
+      ["Clicks from our emails",1876,64,false],
+      ["Untagged (direct, organic, SMS, apps)",37537,561,false],
+      ["Paid social (Meta, Instagram, TikTok)",33551,357,false],
+      ["Whole store",75048,1023,false]];
+    const W=920,L=300,R=70,rowH=34,T=10,B=30,pw=W-L-R,H=T+rows.length*rowH+B,xmax=.30,x=v=>L+(v/xmax)*pw;
+    let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="cc-title">`;
+    [.1,.2,.3].forEach(v=>{ s+=`<line class="grid" x1="${x(v)}" x2="${x(v)}" y1="${T}" y2="${T+rows.length*rowH}"/><text class="tick" x="${x(v)}" y="${T+rows.length*rowH+18}" text-anchor="middle">${Math.round(v*100)}%</text>`; });
+    rows.forEach((r,i)=>{
+      const rate=r[2]/r[1], y=T+i*rowH+6, h=22, w=Math.max(2,x(rate)-L);
+      s+=`<text class="rowlbl" x="${L-14}" y="${y+15}" text-anchor="end">${r[0]}</text>`;
+      s+=`<path class="${r[3]?'bar-ret':'bar-dim'}" d="M${L},${y} H${L+w-4} A4,4 0 0 1 ${L+w},${y+4} V${y+h-4} A4,4 0 0 1 ${L+w-4},${y+h} H${L} Z"/>`;
+      s+=`<text class="lbl" x="${L+w+8}" y="${y+15}">${(100*rate).toFixed(rate<0.05?1:0)}%</text>`;
+      s+=`<rect class="hit" data-i="${i}" x="0" y="${T+i*rowH}" width="${W}" height="${rowH}" tabindex="0" aria-label="${r[0]}: ${fmt(r[1])} visits, ${fmt(r[2])} orders, ${(100*rate).toFixed(1)}%"/>`;
+    });
+    s+=`<line class="base" x1="${L}" x2="${L}" y1="${T}" y2="${T+rows.length*rowH}"/>`;
+    s+="</svg>";
+    document.getElementById("chartC").innerHTML=s;
+    attachTips("figC","tipC",i=>{const r=rows[i];return `<b>${r[0]}</b><span>${fmt(r[1])} visits</span><span>${fmt(r[2])} orders</span><span>${(100*r[2]/r[1]).toFixed(1)}% converted</span>`;});
+  })();
+
+  // Appendix tables
+  const tb=document.querySelector("#tblB tbody"), tc=document.querySelector("#tblC tbody");
+  let hb="",hc="";
+  for(let i=0;i<n;i++){
+    hb+=`<tr><td>${M[i]}${i===0?" (from 8 Sep)":""}</td><td class="n">${fmt(ORD[i])}</td><td class="n">${fmt(NET[i])}</td><td class="n">${fmt(NEWC[i])}</td><td class="n">${fmt(RETC[i])}</td><td class="n">${fmt(NEW[i])}</td><td class="n">${fmt(RET[i])}</td><td class="n">${META[i]?fmt(META[i]):"n/a"}</td><td class="n">${Math.round(100*RETC[i]/(RETC[i]+NEWC[i]))}%</td></tr>`;
+    hc+=`<tr><td>${M[i]}</td><td class="n">${fmt(NEWC[i])}</td><td class="n">${fmt(CREP[i])}</td><td class="n">${pct(CREP[i]/NEWC[i])}</td><td class="n">${(CORD[i]/NEWC[i]).toFixed(2)}</td><td class="n">${money(CSP[i]/NEWC[i])}</td><td class="n">${24-i}</td></tr>`;
+  }
+  tb.innerHTML=hb; tc.innerHTML=hc;
+})();
+</script>
