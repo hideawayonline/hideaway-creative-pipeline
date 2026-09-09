@@ -9,7 +9,9 @@
 
 ## Why this email, and why now
 
-On **30 Aug** we sent the ownership update / CEO letter to the full file — **118,347 recipients**.
+On **30 Aug** the ownership update went to the full file — **118,347 recipients**, subject
+line *"Hideaway is still trading and we are here to stay"*, signed **Chris Dobson, CEO**.
+
 It opened at **57.7%** (vs. our usual 34–38%). The list was paying close attention.
 
 Two other numbers from that send matter:
@@ -23,19 +25,49 @@ Two other numbers from that send matter:
 
 Roughly **860 people unsubscribed** off that one send — about 8x our normal rate.
 
-Read that together and the story is clear: a large part of the list opened because they were
-worried, read a letter, and got no proof. Some of them left.
+Read together: a large part of the list opened because they were worried, read a
+statement, and got no proof. Some of them left.
 
 **A letter is a claim. A warehouse tour is evidence.**
 
-This is the follow-up chapter to the CEO letter — the same message, but shown instead of said.
-It is a trust email, not a promo. Revenue is the second-order effect, not the ask.
+This is the follow-up chapter — the same message, shown instead of said. It is a trust
+email, not a promo. Revenue is the second-order effect, not the ask.
+
+## What the 30 Aug letter actually said
+
+This matters, because the copy references it directly and must not contradict it or
+overclaim beyond it. Verbatim from the sent template:
+
+> Following the recent media coverage regarding the liquidation of Platinum Investment
+> Group Pty Ltd (the company which previously operated Hideaway Online), the business is
+> transitioning into a phase of new ownership, during this time orders continue to flow
+> in and dispatch daily from our warehouses. All existing customer rewards and points
+> will transfer and continue to accumulate.
+>
+> [...] The brand, the website, social pages, our exciting product range, in store sales
+> and everything you love about Hideaway still remains!!
+>
+> Warmly, **Chris Dobson, CEO**
+
+Three constraints fall out of that:
+
+1. **The previous operating entity was liquidated.** Any claim of unbroken historical
+   continuity ("everything you've ever ordered came from this building") is unsafe and
+   probably untrue. The copy speaks in the **present tense** only.
+2. **The letter says "warehouses", plural.** Don't imply a single site is the whole
+   operation.
+3. **The letter was signed by Chris, not Steve.** A first-person callback ("I wrote to
+   you") only works over Chris's signature. The draft uses "we" so it works either way.
+
+The safe ground is exactly what the letter already claimed publicly and what the footage
+independently shows: **stock on shelves, orders dispatching daily, real staff at real
+desks, product made by hand.** Stay on that ground and the email is both true and strong.
 
 ## The strategic call
 
 Do **not** send this as "fun behind-the-scenes content". Send it as the receipt.
 
-> We told you we're here to stay. Here's the building.
+> We said we're here to stay. Here's the building.
 
 That framing does three jobs at once:
 1. Closes the loop the CEO letter opened, for the people who wanted more than words.
@@ -84,6 +116,12 @@ scroll, and gives the weekend to run. Avoid a morning send; this is watch-someth
 
 Preview text: `We filmed the whole warehouse. No stylist, no staging.`
 
+**Lead with A, not B — deliberately.** The callback belongs in the body, where only people
+who open it will reach it. Roughly 42% of the file never opened the 30 Aug letter; for
+them a subject line about still being here **creates** a doubt they didn't have. A is warm
+and safe for that group, and the people who did read the letter still get the full payoff
+in the first line of the email. B is worth testing on a holdout, not leading with.
+
 Both are deliberately plain. Our best-performing recent subjects ("Midnight",
 "I said there'd be no round three", "Dad's sorted. Now you.") work because they're
 short and confident. No emoji in the subject on this one — the message is sincerity.
@@ -95,7 +133,7 @@ Full body copy lives in `email.html`. Plain-text version below for reference.
 ```
 Hey {{ first_name }},
 
-A couple of weeks back we told you Hideaway is here to stay.
+A fortnight ago we wrote and told you Hideaway is here to stay.
 
 Fair enough if you wanted more than a letter.
 
@@ -110,14 +148,13 @@ No stylist. No staging. Just a normal day on the Gold Coast.
 What you'll see:
 
   - The bench where the fragrances get blended and bottled by hand
-  - Shelves stocked with the range you order from
+  - Shelves stocked, and orders going out the door daily
   - The desks where the team answers your emails, real people with real names
   - A very ordinary building doing a not-very-ordinary amount of work
 
-Everything you have ever ordered from us went out that door. Same building,
-same team, same hands. That is the whole story.
+Same building. Same team. Same hands making the same perfume.
 
-Now you've seen it.
+We asked you to take our word for it. Now you don't have to.
 
 [ SHOP THE RANGE ]
 
@@ -130,16 +167,21 @@ who reckons we'd disappeared, send it their way.
 
 ## Confirm before sending
 
-These are assumptions in the draft. Each one is a one-line fix if wrong:
-
-- [ ] **Sign-off.** Draft signs "Steve, Founder". The 30 Aug letter went out from the CEO —
-      match whichever name that was, so the two emails read as the same voice.
+- [ ] **Get this one past whoever handles the ownership comms.** The 30 Aug letter is a
+      formal statement about trading status made during a liquidation of the previous
+      operating entity and a change of ownership. This email references it. The copy has
+      been written to stay inside what that letter already claimed publicly, but it is a
+      marketing email touching a legally sensitive subject and it should have the same
+      eyes on it that the letter did. This is the only genuinely blocking item.
+- [ ] **Sign-off.** Draft signs "Steve, Founder" and uses "we wrote" so it works over
+      either signature. Recommendation: **Steve signs it.** The letter was the formal CEO
+      statement; this is the warm founder follow-up. Two named humans, different registers,
+      is a good one-two. If you'd rather Chris signs, swap "we wrote" to "I wrote".
+- [ ] **"Same team."** Safe if the team in the footage is still the team. Under a change of
+      ownership that's worth a five-second check before it goes out.
 - [ ] **Location.** Copy says "the Gold Coast", which covers both the Robina address on the
-      Klaviyo account and the "handmade in Burleigh Heads" line from the Delicate Rose launch.
-      Swap in the specific suburb if you'd rather be precise.
-- [ ] **"Everything you have ever ordered from us went out that door."** True only if there's
-      been no third-party fulfilment or site move. Soften to "Every order goes out that door"
-      if the history is messier.
+      Klaviyo account and the "handmade in Burleigh Heads" line from the Delicate Rose
+      launch. Swap in the specific suburb if you'd rather be precise.
 - [ ] **Video host.** Decide: on-site page (recommended) or straight to the Instagram reel.
 - [ ] **Hero still.** Pull a frame from the reel — the front-door shot with the
       "welcome to hideaway" sign is the strongest opener.
