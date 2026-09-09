@@ -18,7 +18,7 @@ send without someone deliberately scheduling it in the UI.
 | Message | `01M21WT04EB2Q8QTQ8GCE3JZKN` |
 | Template (library) | `W5dTqJ` — [edit](https://www.klaviyo.com/email-editor/W5dTqJ/edit) |
 | Template (campaign copy) | `Vzt7cP` — Klaviyo clones on assign; **the campaign renders this one**, so edit it from inside the campaign, not the library copy |
-| Audience | `SRapMe` — 📣 Reassurance WIDE (opened 180d OR clicked/ordered 365d) |
+| Audience | `SRapMe` — 📣 Reassurance WIDE (opened 180d OR clicked/ordered 365d) — **99,789 recipients** |
 | Excluded | `RUj7QZ` — Sunset Flow · Ready to Suppress (54,916 with no open/click/order in 180d) |
 | Send strategy | **Throttled at 33%/hour** from Thu 11 Sep 09:00 UTC = **7:00pm AEST**. Stored as intent only — not scheduled |
 | Smart sending | On |
@@ -347,11 +347,35 @@ window. Smart sending stays on.
 `WTLGJ3` (📣 Reassurance MAX — any open/click/order in 365d) is also built if we want to go
 wider still.
 
-**Recipient count:** Klaviyo's estimation API would not return a figure while these
-segments were new, and segment analytics are computed daily so both read zero until the
-next cycle. The live count is visible in the campaign wizard and on the segment page. If it
-comes back above ~110K we are close to full-file territory and should tighten; below ~30K
-the segment is not doing what was intended.
+### Recipient count: 99,789
+
+Klaviyo's estimation API returned 404 on five attempts over two hours before finally
+resolving. The figure is **99,789**.
+
+That is higher than the 60–90K expected, and it deserves stating plainly: it is **84% of
+the mailable file** (118,347 on 30 Aug) and a **4x step up** from our recent norm of
+~24,000 per send.
+
+**The recommendation is still to send it**, for four reasons:
+
+1. The 54,929 with no open, click or order in 180 days are excluded. Everyone receiving
+   this opened something within 180 days — this is the live portion of the file, not the
+   whole file.
+2. The 30 August send proved this file handles full volume cleanly: 99.50% delivery,
+   0.007% complaints, 57.7% opens.
+3. It is throttled at 33%/hour, so the volume ramps over ~3 hours rather than spiking.
+4. Strategically this email *should* go wide. The people who most need reassurance are
+   the ones whose confidence wobbled, and that includes lapsed buyers who would never
+   clear a 90-day click filter.
+
+**What to watch in the first hour.** Unsubscribe rate and spam complaints. Our normal is
+0.08–0.10% unsubscribes and 0.007–0.024% complaints; 30 Aug hit 0.73% unsubscribes because
+it was a liquidation letter. This email is far less alarming, so expect something closer to
+normal, perhaps mildly elevated. **Complaints above ~0.05% would be the genuine warning
+sign** — that is the number that damages sender reputation, not the unsubscribe rate.
+
+If 99,789 is more than you want to risk in one send, `WTLGJ3` is built and the segment
+definition can be tightened (e.g. opens within 90 days rather than 180) in one call.
 
 ## Claims audit — recorded
 
