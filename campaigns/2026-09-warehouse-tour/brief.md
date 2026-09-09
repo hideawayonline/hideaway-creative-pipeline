@@ -98,7 +98,7 @@ Three constraints fall out of that:
 
 The safe ground is exactly what the letter already claimed publicly and what the footage
 independently shows: **stock on shelves, orders dispatching daily, real staff at real
-desks, product made by hand.** Stay on that ground and the email is both true and strong.
+desks, product coming off the line.** Stay on that ground and the email is both true and strong.
 
 ## The strategic call
 
@@ -213,7 +213,7 @@ A fortnight ago we wrote and told you Hideaway is here to stay.
 Fair enough if you wanted more than a letter.
 
 So we grabbed a phone and filmed the place. The front door. The office.
-The benches where the perfumes get blended. The shelves your order gets
+The tanks where the perfumes get blended. The shelves your order gets
 picked off.
 
 No stylist. No staging. Just a normal day on the Gold Coast.
@@ -227,7 +227,7 @@ What you'll see:
   - The desks where the team answers your emails, real people with real names
   - The line that fills, caps and labels the bottles
 
-Same building. Same team. Same hands making the same perfume.
+Same building. Same team. Same perfume.
 
 We asked you to take our word for it. Now you don't have to.
 
@@ -244,7 +244,10 @@ who reckons we'd disappeared, send it their way.
 
 The strongest frame in the reel is not the front door — it's the **production floor**:
 stainless blending tanks, an automated filling and labelling line, staff working in
-hairnets, stock and trolleys either side. Reference saved as `hero-reference.jpg`.
+hairnets, stock and trolleys either side. Reference saved as `hero-reference.jpg` — that file is a phone screengrab carrying
+Instagram's UI, kept only to show the composition. The frame itself comes out of
+`Warehousetour` in Drive (126 MB QuickTime, full quality, no overlay):
+https://drive.google.com/file/d/1TyzafLR8rCj1EOkRzEo6Wu4y8cEG0agH/view
 
 That matters because of what each frame proves. A shopfront proves a building exists.
 A working production line proves **a business operates** — which is the actual question
@@ -265,11 +268,27 @@ This is a stronger claim, not a weaker one. A bench reads as a spare room; tanks
 filling line read as a manufacturer. During an ownership transition, visible capability
 is the reassuring thing.
 
-**One thing to confirm:** "hand poured on the Gold Coast" runs through the Instagram
-captions and product copy. Nothing here contradicts it — blending in tanks and hand
-pouring are compatible, and most small fragrance houses do exactly that. But if there is
-a hand-pour step elsewhere in the footage, say so and it goes back into the bullets, this
-time with an image that actually shows it.
+### The hand-poured claim is retired
+
+Confirmed 9 Sep: **"hand poured" and "handmade" are out** — not softened for this email,
+dropped as claims. The copy has been scrubbed:
+
+| Was | Now |
+|---|---|
+| "The benches where the perfumes get blended" | "The tanks where the perfumes get blended" |
+| "Same building. Same team. Same hands making the same perfume." | "Same building. Same team. Same perfume." |
+| "The bench where the fragrances get blended and bottled by hand" | "The stainless tanks where every fragrance gets blended" |
+
+Nothing in the email now makes any claim about the product being made by hand. The
+continuity message is untouched — it just rests on the building, the team and the product
+rather than on the method.
+
+**This is wider than one email.** "Hand poured on the Gold Coast" runs through the recent
+Instagram captions, and is very likely on Shopify product pages, the about page and
+packaging as well. This campaign is now consistent with the new position; the rest of the
+estate is not. Worth a separate sweep — and with the ownership conversation where it is,
+manufacturing claims are exactly the kind of thing to get consistent sooner rather than
+later.
 
 ## Confirm before sending
 
@@ -286,15 +305,19 @@ time with an image that actually shows it.
 - [x] **"Same team." — confirmed 9 Sep.** The team in the footage is still the team, so
       the line stands as written.
 - [ ] **Location.** Copy says "the Gold Coast", which covers both the Robina address on the
-      Klaviyo account and the "handmade in Burleigh Heads" line from the Delicate Rose
-      launch. Swap in the specific suburb if you'd rather be precise.
+      Klaviyo account and the Burleigh Heads reference in the Delicate Rose launch.
+      Swap in the specific suburb if you'd rather be precise.
 - [ ] **Video host.** Currently pointing at the Instagram reel so the email works as-is.
       Swap to the on-site page when it's built — see *Linking the reel* above.
-- [ ] **Hero still.** Use the **production-floor frame** — blending tanks, the
-      filling/labelling line, staff working (see `hero-reference.jpg`). Two requirements:
-      it must be a **clean export from the source video**, not a screengrab (the reference
-      is 1206x2165 with Instagram's UI over it), and it needs a **landscape crop to about
-      600x400** taking the middle band, so the reader reaches the headline fast.
+- [x] **Source video located.** `Warehousetour` — 126 MB QuickTime, in Drive:
+      https://drive.google.com/file/d/1TyzafLR8rCj1EOkRzEo6Wu4y8cEG0agH/view
+      Full quality, no Instagram UI. This is the file for both the hero frame and the
+      on-site page.
+- [ ] **Hero still.** Scrub `Warehousetour` to the **production-floor moment** — blending
+      tanks, the filling/labelling line, staff working (composition reference:
+      `hero-reference.jpg`, which is a phone screengrab and is NOT the file to use).
+      Export the frame, then **crop landscape to about 600x400** taking the middle band so
+      the reader reaches the headline fast.
 
 ## Success measures
 
