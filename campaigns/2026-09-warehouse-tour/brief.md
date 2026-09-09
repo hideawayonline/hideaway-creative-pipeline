@@ -17,7 +17,7 @@ send without someone deliberately scheduling it in the UI.
 | Campaign | `01M21WT046BX329SJDZ1371PM4` — [open in Klaviyo](https://www.klaviyo.com/campaign/01M21WT046BX329SJDZ1371PM4/wizard) |
 | Message | `01M21WT04EB2Q8QTQ8GCE3JZKN` |
 | Template (library) | `W5dTqJ` — [edit](https://www.klaviyo.com/email-editor/W5dTqJ/edit) |
-| Template (campaign copy) | `Yagy9J` — Klaviyo clones on assign; **the campaign renders this one**, so edit it from inside the campaign, not the library copy |
+| Template (campaign copy) | `W2nD9T` — Klaviyo clones on assign; **the campaign renders this one**, so edit it from inside the campaign, not the library copy |
 | Audience | `TtdqT4` — 🎯 Engaged REAL (~25,000) |
 | Send strategy | Static, Thu 11 Sep 2026 09:00 UTC = **7:00pm AEST**. Stored as intent only — not scheduled |
 | Smart sending | On |
@@ -222,10 +222,10 @@ No stylist. No staging. Just a normal day on the Gold Coast.
 
 What you'll see:
 
-  - The bench where the fragrances get blended and bottled by hand
+  - The stainless tanks where every fragrance gets blended
   - Shelves stocked, and orders going out the door daily
   - The desks where the team answers your emails, real people with real names
-  - A very ordinary building doing a not-very-ordinary amount of work
+  - The line that fills, caps and labels the bottles
 
 Same building. Same team. Same hands making the same perfume.
 
@@ -239,6 +239,37 @@ Founder, hideaway.
 P.S. It's up on Instagram too and it's had a bit of a run. If you know someone
 who reckons we'd disappeared, send it their way.
 ```
+
+## The hero image, and the line it changed
+
+The strongest frame in the reel is not the front door — it's the **production floor**:
+stainless blending tanks, an automated filling and labelling line, staff working in
+hairnets, stock and trolleys either side. Reference saved as `hero-reference.jpg`.
+
+That matters because of what each frame proves. A shopfront proves a building exists.
+A working production line proves **a business operates** — which is the actual question
+in customers' heads after the 30 August letter. It is the single most reassuring image
+in the whole clip.
+
+**It changed one line of copy.** The bullets previously said *"The bench where the
+fragrances get blended and bottled by hand."* There is no bench on screen — there are
+tanks and a machine line. Running that caption over that image is a small credibility
+gap in an email whose entire job is credibility. The bullets now read:
+
+> - The stainless tanks where every fragrance gets blended
+> - The line that fills, caps and labels the bottles
+> - Shelves stocked, and orders going out the door daily
+> - The desks where the team answers your emails — real people, real names
+
+This is a stronger claim, not a weaker one. A bench reads as a spare room; tanks and a
+filling line read as a manufacturer. During an ownership transition, visible capability
+is the reassuring thing.
+
+**One thing to confirm:** "hand poured on the Gold Coast" runs through the Instagram
+captions and product copy. Nothing here contradicts it — blending in tanks and hand
+pouring are compatible, and most small fragrance houses do exactly that. But if there is
+a hand-pour step elsewhere in the footage, say so and it goes back into the bullets, this
+time with an image that actually shows it.
 
 ## Confirm before sending
 
@@ -259,8 +290,11 @@ who reckons we'd disappeared, send it their way.
       launch. Swap in the specific suburb if you'd rather be precise.
 - [ ] **Video host.** Currently pointing at the Instagram reel so the email works as-is.
       Swap to the on-site page when it's built — see *Linking the reel* above.
-- [ ] **Hero still.** Pull a frame from the reel — the front-door shot with the
-      "welcome to hideaway" sign is the strongest opener.
+- [ ] **Hero still.** Use the **production-floor frame** — blending tanks, the
+      filling/labelling line, staff working (see `hero-reference.jpg`). Two requirements:
+      it must be a **clean export from the source video**, not a screengrab (the reference
+      is 1206x2165 with Instagram's UI over it), and it needs a **landscape crop to about
+      600x400** taking the middle band, so the reader reaches the headline fast.
 
 ## Success measures
 
