@@ -1,0 +1,319 @@
+<title>Cut Two Thirds, Not All</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --page:#F7F5F9; --surface:#FBFAFC; --ink:#211A2B; --ink-2:#5B5266; --muted:#877E92;
+  --hair:#E4DFEA; --hair-2:#D3CBDB; --accent:#B12A6B;
+  --series:#B12A6B; --series-dim:#D3CBDB;
+  --good:#0B7A55; --bad:#B12A6B;
+  --panel-bg:#2A1F35; --panel-ink:#F7F5F9; --panel-muted:#C9BFD6;
+  --fd:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --fb:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --fu:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --page:#15121A; --surface:#1C1822; --ink:#EEE8F2; --ink-2:#B7ADC2; --muted:#8C8494;
+    --hair:#2E2837; --hair-2:#3B3346; --accent:#E0609C;
+    --series:#E0609C; --series-dim:#3B3346;
+    --good:#2FA87C; --bad:#E0609C;
+    --panel-bg:#EEE8F2; --panel-ink:#211A2B; --panel-muted:#5B5266;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --page:#15121A; --surface:#1C1822; --ink:#EEE8F2; --ink-2:#B7ADC2; --muted:#8C8494;
+  --hair:#2E2837; --hair-2:#3B3346; --accent:#E0609C;
+  --series:#E0609C; --series-dim:#3B3346;
+  --good:#2FA87C; --bad:#E0609C;
+  --panel-bg:#EEE8F2; --panel-ink:#211A2B; --panel-muted:#5B5266;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--fb);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.doc{max-width:960px;margin:0 auto;padding:48px 24px 96px}
+.prose{max-width:68ch}
+h1,h2,h3{font-family:var(--fd);text-wrap:balance;margin:0;line-height:1.1;font-weight:600}
+h1{font-size:clamp(30px,4.4vw,44px);font-weight:700;letter-spacing:-.01em;margin:10px 0 28px}
+h2{font-size:24px;margin:0 0 14px}
+h3{font-size:17px;margin:24px 0 6px}
+p{margin:0 0 16px}
+section{margin:52px 0 0}
+.eyebrow{font-family:var(--fu);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0}
+.brand{color:var(--accent);font-weight:600}
+.memo{border-bottom:1px solid var(--hair-2);padding-bottom:28px}
+.memo-meta{display:grid;grid-template-columns:max-content 1fr;gap:6px 22px;margin:0;font-size:16px;max-width:72ch}
+.memo-meta dt{font-family:var(--fu);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.memo-meta dd{margin:0}
+.note{font-family:var(--fu);font-size:14px;color:var(--ink-2);max-width:72ch;margin:20px 0 0}
+.lede{font-size:19px;line-height:1.5}
+.scroll{overflow-x:auto;margin:18px 0 6px}
+table.tbl{border-collapse:collapse;width:100%;font-family:var(--fu);font-size:14px}
+.tbl th{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:500;text-align:left;padding:8px 10px 8px 0;border-bottom:1px solid var(--hair-2);vertical-align:bottom}
+.tbl td{padding:9px 10px 9px 0;border-bottom:1px solid var(--hair);vertical-align:top}
+.tbl .n,.tbl th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl tr.key td{font-weight:600}
+.tbl td:first-child{color:var(--ink)}
+.tbl caption{caption-side:bottom;text-align:left;font-family:var(--fu);font-size:12.5px;color:var(--muted);padding:10px 0 0}
+.tag{font-family:var(--fu);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:3px;white-space:nowrap}
+.tag.keep{background:rgba(11,122,85,.12);color:var(--good)}
+.tag.cut{background:rgba(177,42,107,.12);color:var(--bad)}
+.tag.watch{background:var(--hair);color:var(--ink-2)}
+.fig{position:relative;background:var(--surface);border:1px solid var(--hair);padding:20px 20px 14px;margin:26px 0 8px}
+.fig-title{font-family:var(--fd);font-size:16px;font-weight:600;margin:0}
+.fig-sub{font-family:var(--fu);font-size:13px;color:var(--muted);margin:2px 0 12px}
+.fig svg{display:block;width:100%;height:auto;overflow:visible}
+.fig .cap{font-family:var(--fu);font-size:12.5px;color:var(--muted);margin:10px 0 0;line-height:1.45}
+.tick{font:12px var(--fu);fill:var(--muted);font-variant-numeric:tabular-nums}
+.grid{stroke:var(--hair);stroke-width:1}
+.base{stroke:var(--hair-2);stroke-width:1}
+.bar{fill:var(--series)} .bar-dim{fill:var(--series-dim)}
+.hit{fill:transparent;outline:none}
+.hit:focus-visible{stroke:var(--ink);stroke-width:1.5}
+.lbl{font:600 12px var(--fu);fill:var(--ink-2)}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--page);font-family:var(--fu);font-size:12.5px;line-height:1.4;padding:8px 10px;border-radius:4px;max-width:230px;z-index:2;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.tip b{display:block;font-weight:600;margin-bottom:2px}
+.tip span{display:block;font-variant-numeric:tabular-nums}
+ul,ol{padding-left:22px;margin:0 0 16px}
+li{margin:0 0 9px}
+.ask{background:var(--panel-bg);color:var(--panel-ink);padding:34px 36px 30px;margin-top:52px}
+.ask h2{color:var(--panel-ink)}
+.ask ol{font-size:18px}
+.ask li{margin-bottom:11px}
+.ask p{color:var(--panel-ink)}
+.ask .eyebrow{color:var(--panel-muted)}
+.caveat{border-left:2px solid var(--hair-2);padding-left:18px;margin:26px 0 0}
+.appendix{margin-top:60px;padding-top:24px;border-top:1px solid var(--hair-2);font-size:15.5px}
+.appendix h2{font-size:21px}
+.appendix ul{font-size:15px}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:760px){
+  .memo-meta{grid-template-columns:1fr;gap:2px}
+  .memo-meta dd{margin-bottom:8px}
+  .ask{padding:26px 22px}
+  .doc{padding:32px 18px 72px}
+}
+@media print{ .tip{display:none} .fig,.tbl,.ask{break-inside:avoid} body{font-size:12pt} .doc{padding:0} }
+@media (prefers-reduced-motion:no-preference){ .tip{transition:opacity .12s} }
+</style>
+
+<main class="doc">
+<header class="memo">
+  <p class="eyebrow"><span class="brand">hideaway.</span> &nbsp;·&nbsp; reply &nbsp;·&nbsp; confidential</p>
+  <h1>Cut two thirds of the ad spend, not all of it</h1>
+  <dl class="memo-meta">
+    <dt>To</dt><dd>Chris, CEO</dd>
+    <dt>From</dt><dd>Steve</dd>
+    <dt>Date</dt><dd>9 September 2026 (AEST)</dd>
+    <dt>Re</dt><dd>Your note on the five profitability metrics, and the advice to pause all paid ads</dd>
+  </dl>
+  <p class="note">Figures are Australian dollars, from Shopify and the HW 2 Meta account, pulled 9 September 2026. Method and limits are at the end. The underlying customer analysis is in the <a href="https://claude.ai/code/artifact/0787930a-34da-4b4e-8f66-66314b739fa0">return rate report</a>.</p>
+</header>
+
+<section class="prose">
+  <p class="lede">You are right on every metric you flagged. I have been through the weekly numbers and the ad account line by line and I am not going to argue with the diagnosis. I am going to disagree with one part of the prescription, and I want to withdraw my request for two or three more days.</p>
+  <p>Short version. Pausing all paid ads would also switch off the only two campaigns making money. Two thirds of the spend is underwater and should go today. The last third is earning its keep and should stay. And the deeper problem is not the ad account at all.</p>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>1. The number I should have been showing you</h2>
+    <p>Revenue and marketing efficiency ratio each tell part of the story. This is the line that settles it: cash left each week after product cost, shipping and ad spend, before a dollar of overhead.</p>
+  </div>
+  <figure class="fig" id="figA">
+    <p class="fig-title" id="ca-title">Weekly cash left after product, shipping and ad spend</p>
+    <p class="fig-sub">Net sales less A$34.50 per order of cost of goods and shipping, less Meta spend. Before overheads.</p>
+    <div id="chartA"></div>
+    <div class="tip" id="tipA" hidden></div>
+    <figcaption class="cap">The pale column is the week of 17 August, when the ad account was effectively dark and we took only 157 orders. It is shown for completeness, not as a trend point.</figcaption>
+  </figure>
+  <div class="prose">
+    <p>Down from A$32,312 to A$4,129 in seven weeks, a fall of 87%. With our headcount, weekly overheads are far above A$4,129. You are right that we are losing money daily. This is the line I will report every Monday from now on, instead of revenue.</p>
+  </div>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>2. Your five metrics, checked</h2>
+    <h3>Marketing spend well over 40%</h3>
+    <p>Confirmed, and deteriorating. This is Meta alone. Add Google, TikTok, affiliates and creator fees and the real figure is higher.</p>
+  </div>
+  <div class="scroll" style="max-width:600px">
+  <table class="tbl">
+    <thead><tr><th>Week starting</th><th class="n">Net sales</th><th class="n">Meta spend</th><th class="n">Share of net sales</th></tr></thead>
+    <tbody>
+      <tr><td>13 July</td><td class="n">A$121,396</td><td class="n">A$45,303</td><td class="n">37.3%</td></tr>
+      <tr><td>10 August</td><td class="n">A$99,268</td><td class="n">A$32,976</td><td class="n">33.2%</td></tr>
+      <tr><td>24 August</td><td class="n">A$38,641</td><td class="n">A$16,429</td><td class="n">42.5%</td></tr>
+      <tr class="key"><td>31 August</td><td class="n">A$40,951</td><td class="n">A$19,262</td><td class="n">47.0%</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="prose">
+    <h3>Average unit value down from A$16 to A$18, to just over A$13</h3>
+    <p>Your figures are accurate. My baseline was wrong, and the correction matters. Net sales per unit ran between A$12.27 and A$13.75 through all of June and July. The A$16 to A$18 you remember existed only in the fortnight from 17 to 30 August, which were our two lowest volume weeks. Today's A$13.10 is a return to our normal, not a fall below it.</p>
+  </div>
+  <div class="scroll" style="max-width:640px">
+  <table class="tbl">
+    <thead><tr><th>Week starting</th><th class="n">Units</th><th class="n">Net sales per unit</th><th class="n">Discounts as share of gross</th></tr></thead>
+    <tbody>
+      <tr><td>13 July</td><td class="n">8,831</td><td class="n">A$13.75</td><td class="n">nil</td></tr>
+      <tr><td>10 August</td><td class="n">7,370</td><td class="n">A$13.47</td><td class="n">nil</td></tr>
+      <tr><td>24 August</td><td class="n">2,324</td><td class="n">A$16.63</td><td class="n">13.2%</td></tr>
+      <tr><td>31 August</td><td class="n">2,812</td><td class="n">A$14.56</td><td class="n">18.6%</td></tr>
+      <tr class="key"><td>7 September</td><td class="n">1,037</td><td class="n">A$13.10</td><td class="n">4.8%</td></tr>
+    </tbody>
+    <caption>Week of 7 September covers two days only.</caption>
+  </table>
+  </div>
+  <div class="prose">
+    <p>What is genuinely new is the discounting. We ran zero discounts every single week of June, July and the first half of August. It started on 24 August and reached 18.6% of gross the following week. That is a real margin leak and it is a fortnight old.</p>
+
+    <h3>Cost of business under where it should be</h3>
+    <p>I cannot verify this one from Shopify and Meta. It needs the Xero actuals, and the per order costs I am using here are house averages of A$20.50 for goods and A$14 for shipping, not audited figures. I will have the real numbers for you this week.</p>
+
+    <h3>Conversion at 1% to 2% against an industry 2.5% to 4%</h3>
+    <p>Confirmed. We convert 1.4% overall and 1.1% on paid social. The reason changes what we should do about it. Ninety-three per cent of our visits are from strangers, who convert near 1%. The 7% Shopify can tie to a known customer convert at 22% to 26%. Stores hitting 3% have far more returning traffic than we do. This is a traffic mix problem, not a website problem, so no amount of landing page work will close it.</p>
+  </div>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>3. Withdrawing my request for two or three more days</h2>
+    <p>The experiment has already run and I did not read it properly. Deep discounting started on 24 August. Two full weeks later, orders are flat at 459 then 509, against 1,245 in the last normal week. The discounting has not bought volume. It has only given away margin. Waiting another three days tells us nothing we do not already know, and costs us roughly another A$1,800 a day.</p>
+  </div>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>4. Where I disagree: pause two thirds, not all</h2>
+    <p>At our current order value, a campaign has to return A$1.75 for every dollar spent just to cover the product and shipping on what it sells. Below that it destroys cash. Here is the account against that line, for 24 August to 8 September.</p>
+  </div>
+  <div class="scroll">
+  <table class="tbl">
+    <thead><tr><th>Campaign</th><th class="n">Spend</th><th class="n">Return per dollar</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>SS-Clearance, cold</td><td class="n">A$9,011</td><td class="n">2.40</td><td><span class="tag keep">Keep</span></td></tr>
+      <tr><td>SS-AU Retargeting</td><td class="n">A$4,703</td><td class="n">2.27</td><td><span class="tag keep">Keep</span></td></tr>
+      <tr><td>SS-Gifting</td><td class="n">A$6,258</td><td class="n">1.74</td><td><span class="tag watch">Break-even</span></td></tr>
+      <tr><td>SS-AUD DPA Open</td><td class="n">A$5,797</td><td class="n">1.72</td><td><span class="tag watch">Break-even</span></td></tr>
+      <tr><td>SS-100+ Bundle</td><td class="n">A$2,913</td><td class="n">1.51</td><td><span class="tag cut">Cut</span></td></tr>
+      <tr><td>SS-AUD DPA live catalogue</td><td class="n">A$3,326</td><td class="n">1.26</td><td><span class="tag cut">Cut</span></td></tr>
+      <tr><td>SS-5 for 100 High Val Scale</td><td class="n">A$2,876</td><td class="n">1.21</td><td><span class="tag cut">Cut</span></td></tr>
+      <tr><td>SS TESTING</td><td class="n">A$6,788</td><td class="n">0.90</td><td><span class="tag cut">Cut</span></td></tr>
+      <tr><td>Dream Five giveaway</td><td class="n">A$286</td><td class="n">no purchases</td><td><span class="tag cut">Cut</span></td></tr>
+    </tbody>
+    <caption>Break-even is 1.75, being one divided by our 57% contribution margin at the current A$80.50 order value.</caption>
+  </table>
+  </div>
+  <div class="prose">
+    <p>About A$16,200 of the A$41,900 is clearly below the line. Cutting it releases roughly A$7,000 a week of cash immediately. Cutting the two break-even campaigns as well takes that to about A$12,000 a week, at the cost of very little profit, since break-even spend contributes nothing either way.</p>
+    <p>The two campaigns above the line are clearance and retargeting. Pausing everything switches those off too, and they are the only ad money currently paying for itself.</p>
+  </div>
+</section>
+
+<section>
+  <div class="prose">
+    <h2>5. The part neither of us has been solving</h2>
+    <p>Cutting spend cannot make paid acquisition profitable on its own. Here is the whole life of a customer we buy today.</p>
+  </div>
+  <div class="scroll" style="max-width:600px">
+  <table class="tbl">
+    <tbody>
+      <tr><td>What we pay Meta for one new customer</td><td class="n">A$70.81</td></tr>
+      <tr><td>Contribution on their first order</td><td class="n">A$46.00</td></tr>
+      <tr><td>Everything they are worth after that</td><td class="n">A$19.70</td></tr>
+      <tr class="key"><td>Lifetime contribution</td><td class="n">A$65.70</td></tr>
+      <tr class="key"><td>What we keep</td><td class="n">minus A$5.11</td></tr>
+    </tbody>
+    <caption>The A$19.70 is the 24.8% of customers who ever buy again, times the 1.73 further orders they average, times A$46. Meta only, before Google, TikTok, affiliates and creator fees.</caption>
+  </table>
+  </div>
+  <div class="prose">
+    <p>We lose money on a customer across their entire life with us, not just on the first order. Only one in four ever comes back, and that has not moved in two years. Fix the return rate to the industry floor of 30% and the same customer turns profitable without any change to what we pay for them. That is the same lever that fixes the conversion rate, because returning customers are the visitors who convert at 22% and above.</p>
+  </div>
+</section>
+
+<section class="ask">
+  <p class="eyebrow">What I need from you</p>
+  <h2>6. The decision</h2>
+  <ol>
+    <li>Cut the five campaigns below break-even today. About A$7,000 a week of cash back, immediately.</li>
+    <li>Stop the clearance discounting. Two weeks proves it is not buying volume.</li>
+    <li>Keep clearance and retargeting running. They are the only spend above water.</li>
+    <li>Agree the second purchase rate as a reported metric alongside the five. It is the one number that fixes both the marketing efficiency ratio and the conversion rate structurally.</li>
+  </ol>
+  <p>If you want the two break-even campaigns cut as well, say so and I will do it. That is another A$5,000 a week of cash and costs us almost no profit.</p>
+</section>
+
+<section class="prose">
+  <div class="caveat">
+    <h3>One thing to confirm before we treat this as the new normal</h3>
+    <p>Our Meta account was effectively dark from 17 to 23 August, spending A$173 across the whole week. Restarting after a blackout resets the learning phases and depresses efficiency for a while. Some of the drop since then may be that rather than a structural collapse. I am finding out what happened that week before drawing a longer conclusion from the last fortnight.</p>
+  </div>
+</section>
+
+<section class="appendix">
+  <h2>Method and limits</h2>
+  <ul>
+    <li><strong>Sales, orders, units and discounts:</strong> Shopify analytics for hideaway.online, weekly, queried 9 September 2026. Net sales is after discounts and refunds, before GST and shipping.</li>
+    <li><strong>Ad spend and returns:</strong> HW 2 Meta account, weekly totals and campaign results for 24 August to 8 September. Meta counts conversions on its own attribution window and generally claims more than Shopify records, so treat the ratios as directional and the spend as exact.</li>
+    <li><strong>Conversion:</strong> Shopify sessions from 27 August 2026, when session tracking began, to 8 September. Only thirteen days, and Shopify recognises a visitor only when they are logged in or arrive from an email, which flatters the known-customer figure. The size of the gap is not in doubt; the exact multiple is.</li>
+    <li><strong>Per order costs:</strong> house averages of A$20.50 goods and A$14 shipping, from the affiliate audit model, not Xero actuals. If the true contribution is A$40 rather than A$46, every figure here worsens and none of the conclusions change.</li>
+    <li><strong>Return rate and lifetime value:</strong> from the customer cohort analysis in the return rate report, covering customers first acquired between September 2024 and August 2025.</li>
+  </ul>
+</section>
+</main>
+
+<script>
+(function(){
+  const W=["13 Jul","20 Jul","27 Jul","3 Aug","10 Aug","17 Aug","24 Aug","31 Aug"];
+  const V=[32312,21280,16603,12589,23339,6945,6376,4129];
+  const ORD=[1269,1024,950,1014,1245,157,459,509];
+  const NET=[121396,95652,85660,82553,99268,12535,38641,40951];
+  const ADS=[45303,39044,36282,34981,32976,173,16429,19262];
+  const DIM=[false,false,false,false,false,true,false,false];
+  const n=W.length;
+  const fmt=v=>v.toLocaleString("en-AU");
+  const money=v=>"A$"+fmt(Math.round(v));
+
+  const CW=920,H=330,L=76,R=24,T=32,B=42,pw=CW-L-R,ph=H-T-B,slot=pw/n,bw=Math.min(34,slot*.5);
+  const ymax=35000, y=v=>T+ph-(v/ymax)*ph;
+  let s=`<svg viewBox="0 0 ${CW} ${H}" role="img" aria-labelledby="ca-title">`;
+  [10000,20000,30000].forEach(v=>{ s+=`<line class="grid" x1="${L}" x2="${CW-R}" y1="${y(v)}" y2="${y(v)}"/>`; });
+  [0,10000,20000,30000].forEach(v=>{ s+=`<text class="tick" x="${L-12}" y="${y(v)+4}" text-anchor="end">${v?("A$"+v/1000+"k"):"0"}</text>`; });
+  for(let i=0;i<n;i++){
+    const x=L+slot*i+(slot-bw)/2, yt=y(V[i]), h=T+ph-yt, r=4;
+    const d = h<=r+1 ? `M${x},${yt} h${bw} v${h} h${-bw} Z`
+      : `M${x},${yt+h} V${yt+r} A${r},${r} 0 0 1 ${x+r},${yt} H${x+bw-r} A${r},${r} 0 0 1 ${x+bw},${yt+r} V${yt+h} Z`;
+    s+=`<path class="${DIM[i]?'bar-dim':'bar'}" d="${d}"/>`;
+    s+=`<text class="tick" x="${L+slot*i+slot/2}" y="${T+ph+22}" text-anchor="middle">${W[i]}</text>`;
+  }
+  s+=`<line class="base" x1="${L}" x2="${CW-R}" y1="${T+ph}" y2="${T+ph}"/>`;
+  s+=`<text class="lbl" x="${L+slot*0+slot/2}" y="${y(V[0])-9}" text-anchor="middle">${money(V[0])}</text>`;
+  s+=`<text class="lbl" x="${L+slot*7+slot/2}" y="${y(V[7])-9}" text-anchor="middle">${money(V[7])}</text>`;
+  for(let i=0;i<n;i++) s+=`<rect class="hit" data-i="${i}" x="${L+slot*i}" y="${T}" width="${slot}" height="${ph}" tabindex="0" aria-label="Week of ${W[i]}: ${money(V[i])} left after ads"/>`;
+  s+="</svg>";
+  document.getElementById("chartA").innerHTML=s;
+
+  const fig=document.getElementById("figA"), tip=document.getElementById("tipA");
+  const show=el=>{ const i=+el.getAttribute("data-i");
+    tip.innerHTML=`<b>Week of ${W[i]}</b><span>${fmt(ORD[i])} orders</span><span>Net sales ${money(NET[i])}</span><span>Meta spend ${money(ADS[i])}</span><span>Left after ads ${money(V[i])}</span>`;
+    tip.hidden=false;
+    const fr=fig.getBoundingClientRect(), br=el.getBoundingClientRect();
+    let left=br.left-fr.left+br.width/2-tip.offsetWidth/2;
+    left=Math.max(8,Math.min(left,fr.width-tip.offsetWidth-8));
+    let top=br.top-fr.top-tip.offsetHeight-10; if(top<4) top=br.top-fr.top+28;
+    tip.style.left=left+"px"; tip.style.top=top+"px"; };
+  const hide=()=>{ tip.hidden=true; };
+  fig.querySelectorAll(".hit").forEach(el=>{
+    el.addEventListener("mouseenter",()=>show(el)); el.addEventListener("mouseleave",hide);
+    el.addEventListener("focus",()=>show(el)); el.addEventListener("blur",hide);
+  });
+})();
+</script>
