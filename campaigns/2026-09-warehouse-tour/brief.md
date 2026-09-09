@@ -177,8 +177,8 @@ who reckons we'd disappeared, send it their way.
       either signature. Recommendation: **Steve signs it.** The letter was the formal CEO
       statement; this is the warm founder follow-up. Two named humans, different registers,
       is a good one-two. If you'd rather Chris signs, swap "we wrote" to "I wrote".
-- [ ] **"Same team."** Safe if the team in the footage is still the team. Under a change of
-      ownership that's worth a five-second check before it goes out.
+- [x] **"Same team." — confirmed 9 Sep.** The team in the footage is still the team, so
+      the line stands as written.
 - [ ] **Location.** Copy says "the Gold Coast", which covers both the Robina address on the
       Klaviyo account and the "handmade in Burleigh Heads" line from the Delicate Rose
       launch. Swap in the specific suburb if you'd rather be precise.

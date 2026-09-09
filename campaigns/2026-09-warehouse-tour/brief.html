@@ -196,6 +196,17 @@
   .check .box{
     flex:0 0 15px;height:15px;margin-top:6px;border:1.5px solid var(--faint);border-radius:3px;
   }
+  .check li.done .box{border-color:var(--good);background:var(--good);position:relative;}
+  .check li.done .box::after{
+    content:"";position:absolute;left:4px;top:1px;width:3px;height:7px;
+    border:solid var(--surface);border-width:0 2px 2px 0;transform:rotate(45deg);
+  }
+  .check li.done b{color:var(--good);}
+  .check li.done > span:last-child{color:var(--faint);}
+  .stamp{
+    font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--good);margin-left:8px;
+  }
   .check b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:15px;margin-bottom:2px;letter-spacing:-.005em;}
   .check span{color:var(--muted);font-size:15.5px;}
 
@@ -369,11 +380,11 @@
   <section class="col">
     <p class="kicker">Confirm before sending</p>
     <h2>What needs a decision</h2>
-    <p>Each is a one-line fix if it's wrong.</p>
+    <p>One blocking item, three quick calls, and one already cleared.</p>
     <ul class="check">
       <li><span class="box"></span><span><b>Get it past whoever handles the ownership comms &mdash; blocking</b>The 30 August letter is a formal statement about trading status, made during a liquidation of the previous operating entity and a change of ownership. This email references it. The copy has been written to stay inside what that letter already claimed publicly, but it's a marketing email touching a legally sensitive subject and it wants the same eyes the letter had.</span></li>
       <li><span class="box"></span><span><b>Sign-off</b>Draft signs &ldquo;Steve, Founder&rdquo; and uses &ldquo;we wrote&rdquo;, so it works over either signature. Recommendation: Steve signs. The letter was the formal CEO statement; this is the warm founder follow-up. If Chris signs instead, change &ldquo;we wrote&rdquo; to &ldquo;I wrote&rdquo;.</span></li>
-      <li><span class="box"></span><span><b>&ldquo;Same team&rdquo;</b>Safe if the team in the footage is still the team. Under a change of ownership that's worth a five-second check.</span></li>
+      <li class="done"><span class="box"></span><span><b>&ldquo;Same team&rdquo;<span class="stamp">Confirmed 9 Sep</span></b>The team in the footage is still the team, so the line stands as written.</span></li>
       <li><span class="box"></span><span><b>Location</b>Copy says &ldquo;the Gold Coast&rdquo;, which covers both the Robina address on the Klaviyo account and the &ldquo;handmade in Burleigh Heads&rdquo; line from the Delicate Rose launch. Swap in the suburb if you'd rather be precise.</span></li>
       <li><span class="box"></span><span><b>Video host</b>On-site page or straight to the reel. On-site is the recommendation.</span></li>
       <li><span class="box"></span><span><b>Hero still</b>Pull a frame from the reel &mdash; the front-door shot with the &ldquo;welcome to hideaway&rdquo; sign is the strongest opener.</span></li>
