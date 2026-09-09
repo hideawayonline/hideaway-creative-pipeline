@@ -1,6 +1,6 @@
 # Campaign brief — Inside the warehouse
 
-**Status:** Draft copy, ready for review
+**Status:** Comms cleared 9 Sep. Built in Klaviyo as a Draft, unscheduled.
 **Channel:** Email (Klaviyo)
 **Proposed send:** Thu 11 Sep 2026, 7:00pm AEST
 **Source content:** Warehouse tour reel, @hideawayonline (38.2K views, 210 likes, 25 comments, 38 shares)
@@ -18,18 +18,19 @@ send without someone deliberately scheduling it in the UI.
 | Message | `01M21WT04EB2Q8QTQ8GCE3JZKN` |
 | Template (library) | `W5dTqJ` — [edit](https://www.klaviyo.com/email-editor/W5dTqJ/edit) |
 | Template (campaign copy) | `Vzt7cP` — Klaviyo clones on assign; **the campaign renders this one**, so edit it from inside the campaign, not the library copy |
-| Audience | `TtdqT4` — 🎯 Engaged REAL (~25,000) |
-| Send strategy | Static, Thu 11 Sep 2026 09:00 UTC = **7:00pm AEST**. Stored as intent only — not scheduled |
+| Audience | `SRapMe` — 📣 Reassurance WIDE (opened 180d OR clicked/ordered 365d) |
+| Excluded | `RUj7QZ` — Sunset Flow · Ready to Suppress (54,916 with no open/click/order in 180d) |
+| Send strategy | **Throttled at 33%/hour** from Thu 11 Sep 09:00 UTC = **7:00pm AEST**. Stored as intent only — not scheduled |
 | Smart sending | On |
 | From | Hideaway &lt;no-reply@hideaway.online&gt; |
 | Reply-to | hello@hideaway.online — set deliberately so replies land somewhere real, since replies are a success measure |
 | Subject | Come see where it's actually made |
 | Preview | We filmed the whole warehouse. No stylist, no staging. |
 
-**The creative opens with a dark red DRAFT — NOT READY TO SEND banner** listing the four
-outstanding items, plus a dashed placeholder where the hero image goes and a red note under
-the tour button. All of it is designed to make an accidental send obvious before it happens.
-Delete the banner once the four items are cleared.
+The creative carried a dark red **DRAFT — NOT READY TO SEND** banner throughout the build,
+as a tripwire against an accidental send. It did its job — it was spotted in preview — and
+was removed on 9 Sep once comms cleared the copy. **The email is now exactly what a
+recipient would see.**
 
 Live links already wired: **Shop the range** → `hideaway.online/collections/perfumes`
 (111 products), plus **Watch the tour** and the **P.S.** → the reel permalink. No dead
@@ -309,10 +310,52 @@ estate is not. Worth a separate sweep — and with the ownership conversation wh
 manufacturing claims are exactly the kind of thing to get consistent sooner rather than
 later.
 
-## Claims audit — for the comms reviewer
+## Audience — widened 9 Sep
 
-Every factual assertion the email makes, and what it rests on. Written so the person who
-owns the ownership comms can clear this in five minutes rather than reading it cold.
+Originally built against `TtdqT4` (Engaged REAL, 24,140). Widened after reviewing what the
+30 August send actually did to sender reputation:
+
+| 30 Aug send, 118,347 recipients | Result | Read |
+|---|---|---|
+| Delivery rate | 99.50% | Bounces ~0.5%. A stale file bounces 2–5% |
+| Spam complaints | 0.007% | Trouble starts at 0.10%. 14x under it |
+| Open rate | 57.7% | On the *full* file. A dead 118K list opens at 15–25% |
+
+That send did not damage deliverability — it probably helped. High opens and near-zero
+complaints are the signals mailbox providers reward, and the 860 unsubscribes were people
+leaving cleanly rather than marking spam, which left the file healthier than before.
+
+**The limiting factor was our own filter, not our reputation.** `TtdqT4` requires a *click*
+in 90 days, which is a high bar — 24,140 people. Openers are excluded because Apple's MPP
+inflates them, and there is even a segment in the account labelled *"⛔ Do not send · MPP
+inflated"*. That is the right call for **measuring** engagement. It is the wrong filter for
+**deliverability**: an MPP open does not prove a human read the email, but it does prove the
+address is live and the message reached a real inbox, which is what providers grade.
+
+- Clicked or ordered: **24,140**
+- Opened in 90 days: **97,800**
+
+**Now sending to** `SRapMe` — opened 180d OR clicked 365d OR ordered 365d, subscribed.
+**Explicitly excluding** `RUj7QZ` — the 54,916 with no open, click or order in 180 days.
+That cohort is where recycled addresses and spam traps live and is the one group that
+genuinely damages sender reputation.
+
+**Throttled at 33%/hour** rather than blasted. A sudden volume spike is what trips
+filtering; a ramp does not. Starts 7pm, finishes about 10pm AEST, still inside the evening
+window. Smart sending stays on.
+
+`WTLGJ3` (📣 Reassurance MAX — any open/click/order in 365d) is also built if we want to go
+wider still.
+
+**Recipient count:** Klaviyo's estimation API would not return a figure while these
+segments were new, and segment analytics are computed daily so both read zero until the
+next cycle. The live count is visible in the campaign wizard and on the segment page. If it
+comes back above ~110K we are close to full-file territory and should tighten; below ~30K
+the segment is not doing what was intended.
+
+## Claims audit — recorded
+
+Cleared 9 Sep. Kept as the record of what the email asserts and what each claim rests on.
 
 | # | Claim in the email | What it rests on | Risk |
 |---|---|---|---|
@@ -355,12 +398,9 @@ of ownership should be cleared by whoever cleared the letter.
 
 ## Confirm before sending
 
-- [ ] **Get this one past whoever handles the ownership comms.** The 30 Aug letter is a
-      formal statement about trading status made during a liquidation of the previous
-      operating entity and a change of ownership. This email references it. The copy has
-      been written to stay inside what that letter already claimed publicly, but it is a
-      marketing email touching a legally sensitive subject and it should have the same
-      eyes on it that the letter did. This is the only genuinely blocking item.
+- [x] **Comms review cleared, 9 Sep.** Copy stands as written — no changes required off
+      the back of it. The DRAFT banner has been removed from the creative and the campaign
+      renamed accordingly.
 - [ ] **Sign-off.** Draft signs "Steve, Founder" and uses "we wrote" so it works over
       either signature. Recommendation: **Steve signs it.** The letter was the formal CEO
       statement; this is the warm founder follow-up. Two named humans, different registers,

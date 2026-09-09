@@ -239,9 +239,9 @@
 
   <div class="col meta">
     <span>Send&nbsp; <b>Thu 11 Sep, 7:00pm AEST</b></span>
-    <span>Audience&nbsp; <b>~25,000</b></span>
+    <span>Audience&nbsp; <b>Reassurance WIDE</b></span>
     <span>Source&nbsp; <b>38.2K views &middot; 38 shares</b></span>
-    <span>Status&nbsp; <b style="color:var(--good);">Built in Klaviyo &mdash; Draft, unscheduled</b></span>
+    <span>Status&nbsp; <b style="color:var(--good);">Comms cleared &mdash; Draft, ready to schedule</b></span>
   </div>
 
   <section class="col">
@@ -252,15 +252,16 @@
       <table>
         <tbody>
           <tr><td>Campaign</td><td colspan="2" style="text-align:left;padding-left:0;"><a href="https://www.klaviyo.com/campaign/01M21WT046BX329SJDZ1371PM4/wizard">01M21WT046BX329SJDZ1371PM4</a></td></tr>
-          <tr><td>Audience</td><td colspan="2" style="text-align:left;">TtdqT4 &mdash; Engaged REAL, ~25,000</td></tr>
-          <tr><td>Send strategy</td><td colspan="2" style="text-align:left;">Thu 11 Sep, 7:00pm AEST &mdash; intent only, not scheduled</td></tr>
+          <tr><td>Audience</td><td colspan="2" style="text-align:left;">SRapMe &mdash; Reassurance WIDE (opened 180d, or clicked/ordered 365d)</td></tr>
+          <tr><td>Excluded</td><td colspan="2" style="text-align:left;">RUj7QZ &mdash; Ready to Suppress, 54,916 with no activity in 180d</td></tr>
+          <tr><td>Send strategy</td><td colspan="2" style="text-align:left;">Throttled 33%/hour from Thu 11 Sep 7:00pm AEST &mdash; intent only, not scheduled</td></tr>
           <tr><td>Subject</td><td colspan="2" style="text-align:left;">Come see where it's actually made</td></tr>
           <tr><td>Reply-to</td><td colspan="2" style="text-align:left;">hello@hideaway.online</td></tr>
           <tr><td>Template</td><td colspan="2" style="text-align:left;">W5dTqJ in the library; the campaign renders its own copy, Vzt7cP &mdash; edit from inside the campaign</td></tr>
         </tbody>
       </table>
     </div>
-    <p style="margin-top:26px;">The creative opens with a dark red <strong>DRAFT &mdash; NOT READY TO SEND</strong> banner listing the four outstanding items, a dashed placeholder where the hero image goes, and a red note under the tour button. All of it exists to make an accidental send obvious before it happens. Delete the banner once the items are cleared.</p>
+    <p style="margin-top:26px;">The creative carried a dark red <strong>DRAFT &mdash; NOT READY TO SEND</strong> banner throughout the build, as a tripwire against an accidental send. It did its job &mdash; it was caught in preview &mdash; and was removed on 9 September once comms cleared the copy. <strong>The email is now exactly what a recipient would see.</strong></p>
     <p><strong>Wired and live:</strong> Watch the tour points at the reel, Shop the range at the Perfume collection (111 products). The P.S. carries no second link. Only the hero image is still a placeholder.</p>
     <p><strong>Not built yet:</strong> subject line B as an A/B test, because the comms review may change the wording. Worth adding once it's signed off.</p>
   </section>
@@ -456,9 +457,45 @@
   </section>
 
   <section class="col">
+    <p class="kicker">Audience</p>
+    <h2>Widened, because the limit was our filter, not our reputation</h2>
+    <p>Originally built against Engaged REAL (24,140). Widened after checking what the 30 August send actually did to sender reputation.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>30 Aug, 118,347 recipients</th><th>Result</th><th>Read</th></tr></thead>
+        <tbody>
+          <tr><td>Delivery rate</td><td>99.50%</td><td style="font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">Bounces ~0.5%. A stale file bounces 2&ndash;5%</td></tr>
+          <tr><td>Spam complaints</td><td>0.007%</td><td style="font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">Trouble starts at 0.10%. 14&times; under</td></tr>
+          <tr><td>Open rate</td><td>57.7%</td><td style="font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">On the <em>full</em> file. A dead list opens at 15&ndash;25%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:26px;">That send did not damage deliverability &mdash; it probably helped. High opens and near-zero complaints are what mailbox providers reward, and the 860 unsubscribes were people leaving cleanly rather than marking spam, which left the file healthier than before.</p>
+    <div class="pull">
+      <p>Engaged REAL demands a click in 90 days: 24,140 people. Opened in 90 days: 97,800.</p>
+    </div>
+    <p>Opens are excluded because Apple's MPP inflates them &mdash; there's even a segment labelled <em>&ldquo;&#9940; Do not send &middot; MPP inflated&rdquo;</em>. That's right for <strong>measuring</strong> engagement and wrong for <strong>deliverability</strong>: an MPP open doesn't prove a human read it, but it does prove the address is live and the mail reached a real inbox, which is what providers grade.</p>
+    <div class="duo">
+      <div>
+        <h3>Now sending to</h3>
+        <p>Opened 180d, or clicked/ordered in 365d. Subscribed only.</p>
+      </div>
+      <div>
+        <h3>Explicitly excluded</h3>
+        <p>The 54,916 with no open, click or order in 180 days &mdash; where recycled addresses and spam traps live.</p>
+      </div>
+      <div>
+        <h3>Throttled, not blasted</h3>
+        <p>33% per hour. A volume spike trips filtering; a ramp doesn't. 7pm to about 10pm AEST.</p>
+      </div>
+    </div>
+    <p style="margin-top:30px;"><strong>Recipient count:</strong> Klaviyo's estimation API wouldn't return a figure while these segments were new, and segment analytics are computed daily so both read zero until the next cycle. The live count shows in the campaign wizard and on the segment page. Above ~110K we're close to full-file and should tighten; below ~30K the segment isn't doing what was intended.</p>
+  </section>
+
+  <section class="col">
     <p class="kicker">Claims audit</p>
     <h2>Everything the email asserts, and what it rests on</h2>
-    <p>Written so whoever owns the ownership comms can clear this in five minutes rather than reading it cold.</p>
+    <p><strong>Cleared 9 September.</strong> Kept as the record of what the email claims and what each claim rests on.</p>
     <div class="tablewrap">
       <table>
         <thead><tr><th>Claim</th><th style="text-align:left;">Rests on</th><th>Risk</th></tr></thead>
@@ -485,7 +522,7 @@
       <li><strong>&ldquo;Same building&rdquo;</strong> &mdash; the letter says warehouses plural; is the filmed site the one that ships?</li>
       <li><strong>Paragraph 3</strong> &mdash; do all four things named appear in the footage?</li>
     </ol>
-    <p style="margin-top:24px;color:var(--muted);font-size:15px;"><strong>This audit is not the sign-off.</strong> It's a first pass to make the sign-off fast. A marketing email touching trading status during a liquidation and change of ownership should still be cleared by whoever cleared the letter.</p>
+    <p style="margin-top:24px;color:var(--muted);font-size:15px;">These three were put to comms and cleared on 9 September with no copy changes required.</p>
   </section>
 
   <section class="col">
@@ -493,7 +530,7 @@
     <h2>What needs a decision</h2>
     <p>One blocking item, three quick calls, and one already cleared.</p>
     <ul class="check">
-      <li><span class="box"></span><span><b>Get it past whoever handles the ownership comms &mdash; blocking</b>The 30 August letter is a formal statement about trading status, made during a liquidation of the previous operating entity and a change of ownership. This email references it. The copy has been written to stay inside what that letter already claimed publicly, but it's a marketing email touching a legally sensitive subject and it wants the same eyes the letter had.</span></li>
+      <li class="done"><span class="box"></span><span><b>Comms review cleared<span class="stamp">9 Sep</span></b>Copy stands as written, no changes required. The DRAFT banner has been removed from the creative and the campaign renamed.</span></li>
       <li><span class="box"></span><span><b>Sign-off</b>Draft signs &ldquo;Steve, Founder&rdquo; and uses &ldquo;we wrote&rdquo;, so it works over either signature. Recommendation: Steve signs. The letter was the formal CEO statement; this is the warm founder follow-up. If Chris signs instead, change &ldquo;we wrote&rdquo; to &ldquo;I wrote&rdquo;.</span></li>
       <li class="done"><span class="box"></span><span><b>&ldquo;Same team&rdquo;<span class="stamp">Confirmed 9 Sep</span></b>The team in the footage is still the team, so the line stands as written.</span></li>
       <li><span class="box"></span><span><b>Location</b>Copy says &ldquo;the Gold Coast&rdquo;, which covers both the Robina address on the Klaviyo account and the Burleigh Heads reference in the Delicate Rose launch. Swap in the suburb if you'd rather be precise.</span></li>
