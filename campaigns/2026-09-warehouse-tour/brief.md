@@ -7,6 +7,39 @@
 
 ---
 
+## Built in Klaviyo — draft, unscheduled
+
+Created 9 Sep 2026. **Status: Draft. `send_time: null`, `scheduled_at: null`.** It cannot
+send without someone deliberately scheduling it in the UI.
+
+| | |
+|---|---|
+| Campaign | `01M21WT046BX329SJDZ1371PM4` — [open in Klaviyo](https://www.klaviyo.com/campaign/01M21WT046BX329SJDZ1371PM4/wizard) |
+| Message | `01M21WT04EB2Q8QTQ8GCE3JZKN` |
+| Template (library) | `W5dTqJ` — [edit](https://www.klaviyo.com/email-editor/W5dTqJ/edit) |
+| Template (campaign copy) | `XEng5U` — Klaviyo clones on assign; **the campaign renders this one**, so edit it from inside the campaign, not the library copy |
+| Audience | `TtdqT4` — 🎯 Engaged REAL (~25,000) |
+| Send strategy | Static, Thu 11 Sep 2026 09:00 UTC = **7:00pm AEST**. Stored as intent only — not scheduled |
+| Smart sending | On |
+| From | Hideaway &lt;no-reply@hideaway.online&gt; |
+| Reply-to | hello@hideaway.online — set deliberately so replies land somewhere real, since replies are a success measure |
+| Subject | Come see where it's actually made |
+| Preview | We filmed the whole warehouse. No stylist, no staging. |
+
+**The creative opens with a dark red DRAFT — NOT READY TO SEND banner** listing the four
+outstanding items, plus a dashed placeholder where the hero image goes and a red note under
+the tour button. All of it is designed to make an accidental send obvious before it happens.
+Delete the banner once the four items are cleared.
+
+Live links already wired: **Shop the range** → `hideaway.online/collections/perfumes`
+(the Perfume collection, 111 products). Still placeholders: the tour link and the P.S.
+Instagram link.
+
+Not yet built: **subject line B as an A/B test**, because the comms review may change the
+copy. Worth adding once the wording is signed off.
+
+---
+
 ## Why this email, and why now
 
 On **30 Aug** the ownership update went to the full file — **118,347 recipients**, subject
