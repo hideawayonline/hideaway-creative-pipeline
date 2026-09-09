@@ -290,6 +290,50 @@ estate is not. Worth a separate sweep — and with the ownership conversation wh
 manufacturing claims are exactly the kind of thing to get consistent sooner rather than
 later.
 
+## Claims audit — for the comms reviewer
+
+Every factual assertion the email makes, and what it rests on. Written so the person who
+owns the ownership comms can clear this in five minutes rather than reading it cold.
+
+| # | Claim in the email | What it rests on | Risk |
+|---|---|---|---|
+| 1 | "A fortnight ago we wrote and told you Hideaway is here to stay" | The 30 Aug campaign, subject line *"Hideaway is still trading and we are here to stay"*. 30 Aug → 11 Sep is 12 days. Says "we", not "I", so it holds over any signature | Low |
+| 2 | "We grabbed a phone and filmed the place" | The reel, posted 8 Sep | Low |
+| 3 | "The front door. The office. The tanks where the perfumes get blended. The shelves your order gets picked off." | The footage — **reviewer should confirm all four actually appear** | Low, verifiable |
+| 4 | "No stylist. No staging. Just a normal day on the Gold Coast." | Footage is visibly unstaged. Gold Coast covers both the Robina address and Burleigh Heads | Low |
+| 5 | "The stainless tanks where every fragrance gets blended" / "The line that fills, caps and labels the bottles" | Visible in the frame supplied 9 Sep | Low, verifiable |
+| 6 | "Shelves stocked, and orders going out the door daily" | The 30 Aug letter's own words: *"orders continue to flow in and dispatch daily from our warehouses"* | Low — already published |
+| 7 | "The desks where the team answers your emails — real people, real names" | Footage; the letter also promised queries "handled by a real person" | Low |
+| 8 | **"Same building."** | **Unverified.** The letter says "warehouses", plural. Is the filmed site the one orders actually ship from? | **Medium** |
+| 9 | **"Same team."** | Confirmed by Steve, 9 Sep | Low |
+| 10 | **"Same perfume."** | **Unverified.** Are the formulations unchanged through the transition? | **Medium** |
+| 11 | P.S. "it's had a bit of a run" | 38.2K views, 38 shares | Low |
+
+### What the email deliberately does not say
+
+Worth reading, because absences are the point in a message like this:
+
+- Nothing about the liquidation or the previous operating entity
+- Nothing about new ownership — the 30 Aug letter covered that, and this doesn't reopen it
+- No claim of historical continuity ("everything you've ever ordered came from here") — cut
+  deliberately, since the previous operating entity was liquidated
+- No "hand poured", "handmade" or "handcrafted" — retired as claims on 9 Sep
+- Nothing about rewards, points, pricing or offers
+
+### The three things actually worth a reviewer's attention
+
+1. **"Same perfume"** — formulations unchanged through the transition?
+2. **"Same building"** — the letter says warehouses plural; is the filmed site the one that
+   ships?
+3. **Paragraph 3** — do all four things named appear in the footage?
+
+Clear those three and the copy is signed off. Everything else in the table is either
+already published in the 30 Aug letter or verifiable by watching the video.
+
+**This audit is not a substitute for that sign-off.** It is a first pass to make the
+sign-off fast. A marketing email touching trading status during a liquidation and change
+of ownership should be cleared by whoever cleared the letter.
+
 ## Confirm before sending
 
 - [ ] **Get this one past whoever handles the ownership comms.** The 30 Aug letter is a
@@ -307,8 +351,14 @@ later.
 - [ ] **Location.** Copy says "the Gold Coast", which covers both the Robina address on the
       Klaviyo account and the Burleigh Heads reference in the Delicate Rose launch.
       Swap in the specific suburb if you'd rather be precise.
-- [ ] **Video host.** Currently pointing at the Instagram reel so the email works as-is.
-      Swap to the on-site page when it's built — see *Linking the reel* above.
+- [x] **Tour page built, 9 Sep.** `/pages/inside-the-warehouse` created on Shopify,
+      **unpublished** — copy and structure in place, with a marked block where the video
+      goes and the exact embed snippet to paste. Nothing is visible on the site.
+- [ ] **Add the video, publish, swap the link.** Export `Warehousetour` as **MP4 (H.264)**
+      (the original is .mov and won't play in every browser), upload under
+      Shopify → Content → Files, paste the snippet, publish the page, then change the
+      email's Watch the tour button to `hideaway.online/pages/inside-the-warehouse`.
+      One-line change in Klaviyo.
 - [x] **Source video located.** `Warehousetour` — 126 MB QuickTime, in Drive:
       https://drive.google.com/file/d/1TyzafLR8rCj1EOkRzEo6Wu4y8cEG0agH/view
       Full quality, no Instagram UI. This is the file for both the hero frame and the
