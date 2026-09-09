@@ -17,7 +17,7 @@ send without someone deliberately scheduling it in the UI.
 | Campaign | `01M21WT046BX329SJDZ1371PM4` — [open in Klaviyo](https://www.klaviyo.com/campaign/01M21WT046BX329SJDZ1371PM4/wizard) |
 | Message | `01M21WT04EB2Q8QTQ8GCE3JZKN` |
 | Template (library) | `W5dTqJ` — [edit](https://www.klaviyo.com/email-editor/W5dTqJ/edit) |
-| Template (campaign copy) | `XEng5U` — Klaviyo clones on assign; **the campaign renders this one**, so edit it from inside the campaign, not the library copy |
+| Template (campaign copy) | `Yagy9J` — Klaviyo clones on assign; **the campaign renders this one**, so edit it from inside the campaign, not the library copy |
 | Audience | `TtdqT4` — 🎯 Engaged REAL (~25,000) |
 | Send strategy | Static, Thu 11 Sep 2026 09:00 UTC = **7:00pm AEST**. Stored as intent only — not scheduled |
 | Smart sending | On |
@@ -32,8 +32,12 @@ the tour button. All of it is designed to make an accidental send obvious before
 Delete the banner once the four items are cleared.
 
 Live links already wired: **Shop the range** → `hideaway.online/collections/perfumes`
-(the Perfume collection, 111 products). Still placeholders: the tour link and the P.S.
-Instagram link.
+(111 products), plus **Watch the tour** and the **P.S.** → the reel permalink. No dead
+links remain; only the hero image is still a placeholder.
+
+Note: Klaviyo's sanitiser strips an `<a>` wrapped around a `<table>`, so the hero
+placeholder box itself isn't clickable. Once a real `<img>` replaces it, wrap that image
+in the anchor and it behaves normally.
 
 Not yet built: **subject line B as an A/B test**, because the comms review may change the
 copy. Worth adding once the wording is signed off.
@@ -126,6 +130,44 @@ but the click lands somewhere that can convert, and we own the traffic.
 If the page can't be built in time, ship the email anyway and point the CTA at the
 collection page with the reel as a linked GIF. Don't hold the send for it.
 
+## Linking the reel
+
+**Permalink:** https://www.instagram.com/reel/DdA5Ndzit-M/
+Posted 8 Sep. 211 likes, 25 comments. **Runs 1 min 43 sec.**
+
+Both links in the draft are now wired to it — the Watch the tour button and the P.S. —
+so nothing in the email is dead. But Instagram is the fallback, not the destination.
+
+### Why the on-site page still wins
+
+- **Desktop is the problem.** A logged-out visitor clicking through to a reel gets
+  Instagram's login overlay rather than the video. A meaningful slice of email opens are
+  desktop, and those people hit a wall instead of the proof we promised them.
+- **The session ends on Instagram.** They watch, they scroll, they're gone. No product
+  grid, no path back, nothing to buy.
+- **No visibility past the click.** Klaviyo records the click and that's the end of the trail.
+
+On mobile with the app installed it deep-links fine, so it isn't broken — it's just leaving
+most of the value on the table for a page that takes about an hour to build.
+
+### Getting the video file
+
+Instagram's CDN is locked down, so the file has to be pulled by someone with account access:
+
+- **Meta Business Suite → Content → Reels →** find the 8 Sep warehouse tour → Download.
+  Cleanest option, full quality.
+- **Or the Instagram app:** your own post → ⋯ → Download.
+
+Then upload to **Shopify → Content → Files** and embed with a native `<video>` tag. Don't
+use an Instagram embed — it pulls in their script and can show a login prompt.
+
+### A note on the length
+
+1:43 is long for an email click-through. For a promo that would be a problem. For this one
+it's probably fine — people who are worried about whether you're still trading will watch
+the whole thing, and the length is itself part of the proof. Worth cutting a 15-second
+version for the hero GIF if there's time, but don't hold the send for it.
+
 ## Audience
 
 **Primary:** `🎯 Engaged REAL — clicked 90d OR ordered 180d (subscribed, no MPP opens)` (~25,000)
@@ -215,7 +257,8 @@ who reckons we'd disappeared, send it their way.
 - [ ] **Location.** Copy says "the Gold Coast", which covers both the Robina address on the
       Klaviyo account and the "handmade in Burleigh Heads" line from the Delicate Rose
       launch. Swap in the specific suburb if you'd rather be precise.
-- [ ] **Video host.** Decide: on-site page (recommended) or straight to the Instagram reel.
+- [ ] **Video host.** Currently pointing at the Instagram reel so the email works as-is.
+      Swap to the on-site page when it's built — see *Linking the reel* above.
 - [ ] **Hero still.** Pull a frame from the reel — the front-door shot with the
       "welcome to hideaway" sign is the strongest opener.
 
