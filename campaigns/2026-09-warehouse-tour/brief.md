@@ -17,7 +17,7 @@ send without someone deliberately scheduling it in the UI.
 | Campaign | `01M21WT046BX329SJDZ1371PM4` — [open in Klaviyo](https://www.klaviyo.com/campaign/01M21WT046BX329SJDZ1371PM4/wizard) |
 | Message | `01M21WT04EB2Q8QTQ8GCE3JZKN` |
 | Template (library) | `W5dTqJ` — [edit](https://www.klaviyo.com/email-editor/W5dTqJ/edit) |
-| Template (campaign copy) | `W2nD9T` — Klaviyo clones on assign; **the campaign renders this one**, so edit it from inside the campaign, not the library copy |
+| Template (campaign copy) | `Vzt7cP` — Klaviyo clones on assign; **the campaign renders this one**, so edit it from inside the campaign, not the library copy |
 | Audience | `TtdqT4` — 🎯 Engaged REAL (~25,000) |
 | Send strategy | Static, Thu 11 Sep 2026 09:00 UTC = **7:00pm AEST**. Stored as intent only — not scheduled |
 | Smart sending | On |
@@ -111,44 +111,63 @@ That framing does three jobs at once:
 2. Re-warms the worried-but-still-subscribed cohort before they churn too.
 3. Gives an easy, low-commitment click ("watch the tour") into a page that also sells.
 
-## The one structural change worth making
+## The click-to-open problem, and why it doesn't change the destination
 
 Our click-to-open rate is sitting at **~1.1%** across recent campaigns. People open and
-don't click. Sending them off to Instagram would make that worse — the session ends on
-someone else's platform.
+don't click. That number is the reason this email needs one clear, low-commitment job —
+"watch the tour" — rather than a shop-now push.
 
-**Recommendation: host the tour on our own site.**
+It is *not* a reason to keep the click on our own site. See *Linking the reel* below:
+this is a trust send, its measures are click-to-open and unsubscribe rate, and the
+reel's own engagement is the proof. Sending people somewhere that converts would be
+optimising for a goal this email doesn't have.
 
-Create `hideaway.online/pages/inside-the-warehouse` with:
-- The reel embedded at the top (self-hosted or Shopify-native video, no IG embed)
-- Two or three lines of copy underneath
-- The full range as a product grid below it
-
-Then the email's primary CTA points there, not to Instagram. Same emotional payoff,
-but the click lands somewhere that can convert, and we own the traffic.
-
-If the page can't be built in time, ship the email anyway and point the CTA at the
-collection page with the reel as a linked GIF. Don't hold the send for it.
+Expect the CTOR to rise sharply against the 1.1% baseline precisely because the ask is
+so small. That lift is the result we're after.
 
 ## Linking the reel
 
 **Permalink:** https://www.instagram.com/reel/DdA5Ndzit-M/
 Posted 8 Sep. 211 likes, 25 comments. **Runs 1 min 43 sec.**
 
-Both links in the draft are now wired to it — the Watch the tour button and the P.S. —
-so nothing in the email is dead. But Instagram is the fallback, not the destination.
+The Watch the tour button points here. The P.S. no longer carries a second link to the
+same place — it now points at the comments instead, which is the strongest thing on that
+page.
 
-### Why the on-site page still wins
+### Why Instagram is the destination, not a fallback
 
-- **Desktop is the problem.** A logged-out visitor clicking through to a reel gets
-  Instagram's login overlay rather than the video. A meaningful slice of email opens are
-  desktop, and those people hit a wall instead of the proof we promised them.
-- **The session ends on Instagram.** They watch, they scroll, they're gone. No product
-  grid, no path back, nothing to buy.
-- **No visibility past the click.** Klaviyo records the click and that's the end of the trail.
+This reverses an earlier recommendation in this brief, and the reversal is the right call.
 
-On mobile with the app installed it deep-links fine, so it isn't broken — it's just leaving
-most of the value on the table for a page that takes about an hour to build.
+The earlier argument was to host the video on our own site so the click lands somewhere
+that can convert. That argument optimises for revenue. **This email's job is trust, and
+we set its success measures accordingly — click-to-open and unsubscribe rate, explicitly
+not revenue.** Recommending a conversion-optimised destination for a trust email was
+inconsistent.
+
+On the reel, people land on **38.2K views, 210 likes and 25 comments from real customers.**
+None of that can be staged. A lone video on a page we built and control is just us saying
+it again in a different format — the third-party voices in the comments are worth more
+than anything in our own copy.
+
+The one real cost is desktop: a logged-out desktop visitor gets Instagram's login overlay
+over the video. That was overstated earlier. Beauty and e-commerce email runs roughly
+60–75% mobile opens, so most recipients deep-link cleanly into the app and the desktop
+minority gets a degraded experience rather than a blocked one.
+
+It also ships today — no export, no upload, no page to publish and QA.
+
+### Instagram, not TikTok
+
+1. **The proof already exists on Instagram.** 38.2K views, 25 comments. A fresh TikTok post
+   starts at zero, and zero engagement is weaker evidence than none when the question is
+   "are they still trading?"
+2. **The email list and the Instagram audience are the same people.** TikTok skews to
+   discovery and new audiences; this send goes to 25,000 existing engaged customers.
+3. **TikTok would need the tour posted there first**, which is an extra step for a weaker
+   result.
+
+If TikTok is wanted, post the tour there and use it for a separate wave to a different
+audience. Don't split this send.
 
 ### Getting the video file
 
@@ -236,8 +255,8 @@ We asked you to take our word for it. Now you don't have to.
 Steve
 Founder, hideaway.
 
-P.S. It's up on Instagram too and it's had a bit of a run. If you know someone
-who reckons we'd disappeared, send it their way.
+P.S. Comments are open, and plenty of you have already had your say. If you
+know someone who reckons we'd disappeared, send them the tour.
 ```
 
 ## The hero image, and the line it changed
@@ -351,14 +370,8 @@ of ownership should be cleared by whoever cleared the letter.
 - [ ] **Location.** Copy says "the Gold Coast", which covers both the Robina address on the
       Klaviyo account and the Burleigh Heads reference in the Delicate Rose launch.
       Swap in the specific suburb if you'd rather be precise.
-- [x] **Tour page built, 9 Sep.** `/pages/inside-the-warehouse` created on Shopify,
-      **unpublished** — copy and structure in place, with a marked block where the video
-      goes and the exact embed snippet to paste. Nothing is visible on the site.
-- [ ] **Add the video, publish, swap the link.** Export `Warehousetour` as **MP4 (H.264)**
-      (the original is .mov and won't play in every browser), upload under
-      Shopify → Content → Files, paste the snippet, publish the page, then change the
-      email's Watch the tour button to `hideaway.online/pages/inside-the-warehouse`.
-      One-line change in Klaviyo.
+- [x] **Destination settled, 9 Sep: the Instagram reel.** No on-site page. The draft
+      Shopify page has been deleted. Reasoning below.
 - [x] **Source video located.** `Warehousetour` — 126 MB QuickTime, in Drive:
       https://drive.google.com/file/d/1TyzafLR8rCj1EOkRzEo6Wu4y8cEG0agH/view
       Full quality, no Instagram UI. This is the file for both the hero frame and the
