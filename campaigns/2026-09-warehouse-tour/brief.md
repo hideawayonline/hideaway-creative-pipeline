@@ -376,11 +376,13 @@ of ownership should be cleared by whoever cleared the letter.
       https://drive.google.com/file/d/1TyzafLR8rCj1EOkRzEo6Wu4y8cEG0agH/view
       Full quality, no Instagram UI. This is the file for both the hero frame and the
       on-site page.
-- [ ] **Hero still.** Scrub `Warehousetour` to the **production-floor moment** — blending
-      tanks, the filling/labelling line, staff working (composition reference:
-      `hero-reference.jpg`, which is a phone screengrab and is NOT the file to use).
-      Export the frame, then **crop landscape to about 600x400** taking the middle band so
-      the reader reaches the headline fast.
+- [x] **Hero image done, 9 Sep.** Cut from the frame Steve supplied rather than the
+      source video — the Instagram chrome sits in a column on the right and along the
+      bottom, so cropping to **1045x697 (exactly 3:2, displays 600x400)** removes all of
+      it while keeping the product in hand, the blending tank, the filling and labelling
+      line and a staff member at work. Hosted on our own Shopify CDN and wired into the
+      draft, linked to the reel. Saved here as `hero-warehouse.jpg`.
+      `https://cdn.shopify.com/s/files/1/0835/1386/8508/files/hideaway-warehouse-hero.jpg?v=1788920681`
 
 ## Success measures
 
