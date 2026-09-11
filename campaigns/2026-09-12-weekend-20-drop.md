@@ -89,12 +89,15 @@ The shop converts. The list opens. The gap is that nobody's been given a reason 
 
 **Stop blasting 100k+.** Those sends earn $0.009–$0.038 per recipient and cost 0.24–0.74% in unsubscribes. The CEO letter alone cost ~880 subscribers to make $4,418.
 
-| Email | Send time (AEST) | Audience | Est. size |
-|---|---|---|---:|
-| **E1** | Sat 12 Sep, 5:00pm | Engaged 90d (opened or clicked) **+** all customers 365d | ~40–45k |
-| **E2** | Sun 13 Sep, 7:00pm | Non-clickers of E1 **+** widen to 180d openers | ~55–60k |
+> **Correction after building this.** The first pass defined "engaged" as *opened in 90 days* — that segment came back at **99,364**, not the ~45k estimated. Opens are inflated by Apple Mail Privacy Protection, which is exactly why open rate reads 34–58% while click rate reads 0.33%. Opens are not a signal on this list. The audience below is built on **clicks and orders only.**
 
-**Exclusions on both:** placed an order in the last 7 days · unsubscribed · suppressed.
+| Email | Send time (AEST) | Audience | Actual size |
+|---|---|---|---:|
+| **E1** | Sat 12 Sep, 5:00pm | Clicked in 180d **OR** ordered in 365d | **52,271** |
+| **E2** | Sun 13 Sep, 7:00pm | Same segment — the 7-day exclusion auto-drops Saturday's buyers | **52,271 minus weekend buyers** |
+
+**Exclusions on both:** ordered in the last 7 days · unsubscribed · suppressed. Because segments refresh live, anyone who buys on Saturday falls out of E2 automatically — no manual suppression list needed.
+
 **Do not send a third email.** Two is the whole campaign.
 
 Saturday 5pm is deliberate — your 1 Aug Build Your Box went at Sat 17:00 and did $0.271/recipient, and every top close in the account lands Sunday night.
@@ -207,3 +210,53 @@ Two questions, no judgement call, no escalation. Every top-10 campaign in the la
 | Campaign revenue | $12,328 (14 days) | **$10,000+ (48 hours)** |
 
 If click rate clears 1.2%, the mechanic is proven — put it on a monthly rotation.
+
+---
+
+## 10. Built and ready — nothing has been sent
+
+Everything below is live in the accounts. **Both campaigns sit in Draft. Neither is scheduled. Nothing sends until a human clicks send.**
+
+### Shopify discount — ACTIVE
+| | |
+|---|---|
+| Code | `DROP20` |
+| Offer | $20 off orders over $50 (fixed amount, not a percentage) |
+| Limit | One use per customer |
+| Live | Now → Sun 13 Sep, 11:59pm AEST (hard expiry set on the code itself) |
+| Stacking | Combines with free shipping; **not** with other order or product discounts |
+| ID | `gid://shopify/DiscountCodeNode/1481360933084` |
+
+The auto-apply link in both emails is `https://www.hideaway.online/discount/DROP20?redirect=/collections/all` — the code applies itself at checkout, so nobody has to remember or type it.
+
+### Klaviyo segments
+| ID | Segment | Size |
+|---|---|---:|
+| `SfMeXb` | **DROP20 · E1 TIGHT** — clicked 180d OR ordered 365d, excl. bought 7d | **52,271** |
+| `TfNPaM` | DROP20 · E1 — opened/clicked 90d OR ordered 365d, excl. bought 7d | 99,364 |
+| `S92etN` | DROP20 · E2 — opened 180d / clicked 365d / ordered 365d, excl. bought 7d | widest fallback |
+
+`SfMeXb` is the one both campaigns point at. The other two exist only as a wider fallback if reach is ever needed — they carry the MPP-inflated opener pool and should not be the default.
+
+### Klaviyo campaigns — both DRAFT
+| | E1 | E2 |
+|---|---|---|
+| Campaign ID | `01M29EFAYM88CDKJJYJA3D8VQH` | `01M29EFN2H4C1MFWK8PB9T3QXH` |
+| Open in Klaviyo | [wizard](https://www.klaviyo.com/campaign/01M29EFAYM88CDKJJYJA3D8VQH/wizard) | [wizard](https://www.klaviyo.com/campaign/01M29EFN2H4C1MFWK8PB9T3QXH/wizard) |
+| Subject | Your $20 is just sitting there 👀 | 5 hours. Then your $20 vanishes ⏳ |
+| Preview text | No code hunting. No spend-$200-to-save-$30 riddle. $20 off anything over $50. | Midnight. That's it. That's the whole email. |
+| From | Hideaway &lt;no-reply@hideaway.online&gt; | Hideaway &lt;no-reply@hideaway.online&gt; |
+| Send time set | Sat 12 Sep 17:00 AEST | Sun 13 Sep 19:00 AEST |
+| Template | `XbTBB9` | `SySweA` |
+| Smart sending | On | **Off** — the 26-hour gap would otherwise suppress the final-hours email |
+| UTMs | `utm_source=klaviyo`, `utm_medium=email`, `utm_campaign`, `utm_content` | same |
+
+The UTMs are a deliberate addition: Shopify currently reports 1,416 of the last 30 days' orders under a blank referrer source, so email revenue is invisible in Shopify analytics. These tags fix that from this campaign onward.
+
+### Before sending
+1. Send yourself a test of each — check the `{{ first_name }}` fallback renders as "gorgeous" / "Hey" when the name is missing.
+2. Click the CTA in the test and confirm $20 comes off at checkout on a $50+ cart.
+3. Confirm the recipient count reads ~52,000, not ~99,000. If it reads 99k the wrong segment is attached.
+
+### One thing worth changing later, not now
+The sender is `no-reply@hideaway.online`. A no-reply address suppresses replies, and reply activity is a positive deliverability signal to Gmail. Worth moving to a monitored address — but **not this weekend**: changing the sending identity right before a large send risks inbox placement. Left exactly as the account has it.
