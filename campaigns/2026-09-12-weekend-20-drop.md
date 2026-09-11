@@ -1,0 +1,209 @@
+# The $20 Drop — weekend EDM, 12–13 Sep 2026
+
+**Status:** ready to build · **Window:** Sat 12 Sep 5:00pm → Sun 13 Sep 11:59pm AEST
+**Account:** Klaviyo M7xxfa (Hideaway) · **Store:** hideaway-infinity.myshopify.com
+
+---
+
+## 1. Why the last few EDMs didn't sell
+
+Not deliverability. Not the list. **No deadline and no personalised value.**
+
+Last 8 broadcasts (27 Aug – 9 Sep): **411,857 recipient-sends → $12,328.** That's $0.030 per recipient.
+
+| Sent | Campaign | Recipients | Click | Orders | Revenue | $/recip |
+|---|---|---:|---:|---:|---:|---:|
+| 9 Sep | Warehouse tour | 99,590 | 0.33% | 10 | $899 | $0.009 |
+| 6 Sep | MM5 Refill | 7,582 | 0.34% | 7 | $705 | $0.093 |
+| 4 Sep | EVG-12 Cost per wear | 24,438 | 0.39% | 8 | $888 | $0.036 |
+| 2 Sep | Oh So Beautiful launch | 24,856 | 0.44% | 15 | $1,862 | $0.075 |
+| 30 Aug | Ownership update / CEO letter | 118,347 | 0.10% | 44 | $4,418 | $0.038 |
+| 30 Aug | Sweet & Seductive Trio launch | 25,358 | 0.45% | 7 | $755 | $0.030 |
+| 28 Aug | Addictive Angel launch | 49,148 | 0.32% | 4 | $522 | $0.011 |
+| 27 Aug | Delicate Rose launch | 110,996 | 0.23% | 26 | $2,279 | $0.021 |
+
+Now the top performers of the last 90 days. **Every one has a hard deadline, a personalised dollar figure, or both:**
+
+| Sent | Campaign | Recipients | Click | Orders | Revenue | $/recip |
+|---|---|---:|---:|---:|---:|---:|
+| 15 Jul | FD26 VIP main send | 3,529 | 1.68% | 20 | $4,924 | **$1.400** |
+| 19 Jul | FD26 FINAL CALL — "sold out, 50 more" | 8,135 | 0.78% | 20 | $5,688 | **$0.701** |
+| 20 Jul | FD26 — closes tonight | 25,332 | 0.74% | 45 | $10,872 | **$0.430** |
+| 22 Jul | VIP Upgrade — VIP72 free ship | 39,741 | 1.69% | 62 | $11,212 | **$0.283** |
+| 1 Aug | Build your box · 6 for $80 | 29,251 | 0.71% | 34 | $7,893 | **$0.271** |
+| 16 Aug | AUG26 CLOSE — midnight, final hours | 35,855 | 0.52% | 31 | $6,384 | **$0.179** |
+| 8 Aug | Starter Pack 5 for $50 | 28,642 | 0.68% | 26 | $4,854 | **$0.170** |
+| 3 Jul | **Store Credit Reminder – $15.30** | 148,478 | **3.75%** | 109 | **$19,993** | $0.135 |
+
+### The one number that matters
+Open rate is fine — 34–58% across the board. **Click rate is the broken metric: 0.33% now vs 3.75% on your best-ever send.** People are opening and finding nothing to act on.
+
+### The list is not the problem
+Flows, same list, last 30 days:
+
+| Flow | $/recipient |
+|---|---:|
+| hideAWAY Welcome — Email | **$3.93** |
+| hideAWAY Welcome — SMS | **$2.79** |
+| Abandon Checkout | **$1.72** |
+| Abandon Checkout v2 (MINIONME) | **$1.44** |
+| Spin the Bottle — Prize Claim | $0.59 |
+
+When there's a concrete reason to buy, this list buys hard.
+
+---
+
+## 2. Business context this campaign sits in
+
+- Trading at **~$6,000/day net, ~72 orders/day, AOV ~$85**
+- July peak $121k/week → now ~$42k/week
+- Site conversion is **improving**: 1.22% → 1.47% → 1.82% (last 3 weeks)
+- Traffic is the constraint: 35.8k → 31.5k → ~27k sessions/week
+- Discounting is currently **~4% of net sales** — almost nothing. Plenty of headroom.
+
+The shop converts. The list opens. The gap is that nobody's been given a reason to show up.
+
+---
+
+## 3. The play
+
+**"The $20 Drop" — a 31-hour weekend window with a hard midnight close.**
+
+### Why store credit, not % off
+
+1. Your single best email in 90 days was a store-credit reminder — **3.75% click rate, 11x current**.
+2. It costs nothing on non-redeemers. A % off costs you on every single order.
+3. At $85 AOV, $20 is a ~23% effective discount — but only paid when it converts.
+4. Same revenue via a 40% flash would give away ~$3,400 instead of ~$2,000.
+
+**Cash impact:** at the Build Your Box rate ($0.271/recipient × ~45,000) ≈ **$12,200 revenue for ~$2,900 in credit redeemed.** Cash-positive inside 48 hours. If it only half-lands, it's still ~$6,000 on a weekend that would otherwise do nothing.
+
+### Terms
+- **$20 off orders over $50**, one use per customer
+- Expires **Sunday 13 Sep, 11:59pm AEST** — hard stop, no extensions, no exceptions
+- If Shopify store credit didn't survive the replatform, run it as a single-use code (`DROP20`) — the mechanic is the personalised framing, not the plumbing
+
+---
+
+## 4. Audience — the change that matters most
+
+**Stop blasting 100k+.** Those sends earn $0.009–$0.038 per recipient and cost 0.24–0.74% in unsubscribes. The CEO letter alone cost ~880 subscribers to make $4,418.
+
+| Email | Send time (AEST) | Audience | Est. size |
+|---|---|---|---:|
+| **E1** | Sat 12 Sep, 5:00pm | Engaged 90d (opened or clicked) **+** all customers 365d | ~40–45k |
+| **E2** | Sun 13 Sep, 7:00pm | Non-clickers of E1 **+** widen to 180d openers | ~55–60k |
+
+**Exclusions on both:** placed an order in the last 7 days · unsubscribed · suppressed.
+**Do not send a third email.** Two is the whole campaign.
+
+Saturday 5pm is deliberate — your 1 Aug Build Your Box went at Sat 17:00 and did $0.271/recipient, and every top close in the account lands Sunday night.
+
+---
+
+## 5. The scarcity is real — name the numbers
+
+Last 30 days, actual stock:
+
+| Product | Units left | 30d sell-through |
+|---|---:|---:|
+| Centurion Man Perfume | **26** | 90% |
+| Boss Man Body Wash (OG) | **49** | 78% |
+| Aurora Rouge Perfume | **91** | 77% |
+
+Not manufactured urgency. "FD26 FINAL CALL — sold out, 50 more" did $0.70/recipient off exactly this. Use the real figures.
+
+---
+
+## 6. Copy
+
+### E1 — Saturday 12 Sep, 5:00pm AEST
+
+**Subject A:** Your $20 is just sitting there 👀
+**Subject B:** We've put $20 in your account (til midnight tomorrow)
+**Preview:** No code hunting. No spend-$200-to-save-$30 riddle. $20 off anything over $50.
+
+> Hey {{ first_name|default:"gorgeous" }},
+>
+> We've dropped **$20** into your account. 🖤
+>
+> Not a percentage. Not a "spend $200 to save $30" riddle. Twenty actual dollars off anything over $50.
+>
+> There's one catch and it's the only one: **it disappears Sunday at 11:59pm.**
+>
+> **[ SPEND MY $20 → ]**
+>
+> What it's going on this weekend:
+>
+> 🖤 **Black Essence** — inspired by YSL Black Opium. Our #1 this month.
+> 🌹 **Aurora Rouge** — inspired by MFK Baccarat Rouge 540. **91 left.**
+> 🍦 **Vanilla Delight** — inspired by Kayali Vanilla | 28.
+> 🤵 **Centurion Man** — **26 left.** Genuinely almost gone.
+>
+> Most orders around here land 4–5 bottles. Yours could land tonight.
+>
+> **[ SPEND MY $20 → ]**
+>
+> Midnight Sunday. Then it's gone and we both pretend this never happened. 😌
+>
+> — The hideaway. team
+>
+> *$20 off orders over $50. One use per customer. Expires Sun 13 Sep, 11:59pm AEST.*
+
+### E2 — Sunday 13 Sep, 7:00pm AEST
+
+**Subject A:** 5 hours. Then your $20 vanishes ⏳
+**Subject B:** Last call — your $20 expires tonight
+**Preview:** Midnight. That's it. That's the whole email.
+
+> {{ first_name|default:"Hey" }} — five hours.
+>
+> That $20 in your account expires at **11:59pm tonight** and we can't roll it over, no matter how nicely you ask. (People have asked. We have tried.)
+>
+> **[ USE IT BEFORE MIDNIGHT → ]**
+>
+> Going, going:
+>
+> 🤵 **Centurion Man** — down to the last handful
+> 🌹 **Aurora Rouge** — nearly gone
+> 🧴 **Boss Man Body Wash** — under 50 left
+>
+> Two minutes of your Sunday. $20 better off.
+>
+> **[ USE IT BEFORE MIDNIGHT → ]**
+>
+> — The hideaway. team
+
+---
+
+## 7. What to stop doing
+
+**Product launches to the broadcast list.** Four in sixteen days produced **$5,418 from 210,458 sends**. New scents belong in flows and on paid — not in the campaign calendar. Meta is where a launch finds new buyers; your email list wants a reason, not an announcement.
+
+**Reassurance content.** The ownership letter and warehouse tour were the right instinct at the time. But three in two weeks now reads as a brand with a problem. The best reassurance from here is shipping fast and running good offers.
+
+---
+
+## 8. The standing rule (so this stops coming to you)
+
+Pin this above the campaign calendar. Anyone on the team can apply it without asking:
+
+> **Every broadcast must carry a deadline, a personalised dollar value, or both.**
+> **If it has neither, it is not a campaign — it's a flow, a blog post, or a paid ad.**
+>
+> And: **nothing goes to more than 50,000 people unless the value in it is personalised.**
+
+Two questions, no judgement call, no escalation. Every top-10 campaign in the last 90 days passes it. Every one of the last eight fails it.
+
+---
+
+## 9. Measure it against this
+
+| Metric | Last 8 sends | Target this weekend |
+|---|---:|---:|
+| Click rate | 0.33% | **≥ 1.2%** |
+| Revenue per recipient | $0.030 | **≥ $0.20** |
+| Unsubscribe rate | up to 0.74% | **< 0.25%** |
+| Campaign revenue | $12,328 (14 days) | **$10,000+ (48 hours)** |
+
+If click rate clears 1.2%, the mechanic is proven — put it on a monthly rotation.
