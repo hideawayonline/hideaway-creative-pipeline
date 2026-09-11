@@ -1,3 +1,67 @@
+# RESULTS — sent 9 Sep 2026, 1:00pm AEST
+
+The campaign went out **Wed 9 Sep at 03:00 UTC (1:00pm AEST)**, not the proposed evening
+slot, and at a **20% throttle** rather than 33%. Audience and creative went as built.
+
+| Metric | Result | Their norm | Read |
+|---|---|---|---|
+| Recipients | 99,590 | ~24,000 | 4x the usual send |
+| Delivered | 99,169 (**99.58%**) | ~99.6% | Healthy |
+| Bounce rate | 0.42% | — | Healthy |
+| **Open rate** | **44.2%** (43,864) | 34–38% | **Well above norm, on 4x the volume** |
+| **Click-to-open** | **0.74%** (323 clicks) | ~1.1% | **Below baseline. Target was 5%+** |
+| Unsubscribes | 0.236% (234) | 0.08–0.10% | 2.4x norm, but a third of 30 Aug's 0.73% |
+| **Spam complaints** | **0.002%** (2 people) | 0.007–0.024% | **Lower than their own norm** |
+| Orders | 10, $899.10, AOV $89.91 | — | Not the objective |
+
+## Scoring this against what was predicted
+
+**Right — the deliverability call.** Quadrupling the send to 99,590 produced 99.58%
+delivery, a 0.42% bounce rate and **two** spam complaints in total. The argument that the
+30 Aug data proved the file could carry full volume held up exactly. Widening the audience
+did no harm.
+
+**Right — the subject line and audience.** 44.2% open on 99,590 is well above the 34–38%
+norm achieved on 24,000. Leading with the warm subject rather than the trading-status
+callback was the correct call: **43,864 people opened and read it**, roughly five times the
+reach a narrow send would have produced.
+
+**Wrong — the click-to-open prediction.** The brief targeted 5%+ on the reasoning that
+"watch the tour" is a small ask. It came in at **0.74%, below the 1.1% baseline.** That
+prediction was not close, and the reasoning behind it was wrong.
+
+**Missed — the unsubscribe target.** Target was under 0.10%; actual 0.236%, about 234
+people. Far better than 30 Aug, but still 2.4x normal.
+
+## Why the clicks did not come
+
+Three candidates, in order of how much weight they deserve:
+
+1. **The email did its job in the inbox.** 43,864 people opened, read "Same building. Same
+   team. Same perfume", and were satisfied. A reassurance message that lands does not
+   necessarily need a click — the proof was in the copy and the hero image, both visible
+   without leaving the inbox. This is the most likely explanation and it is not a failure
+   of the campaign, only of the metric chosen to judge it.
+2. **Leaving the inbox for a social app is a bigger ask than assumed.** Predicting 5%
+   treated an Instagram jump as low-friction. It isn't.
+3. **1pm on a Wednesday is a poor slot for a 1:43 video.** The evening placement was
+   proposed precisely because this is watch-something content.
+
+## What to take from it
+
+- **The audience widening is validated.** Reach 5x, complaints lower than normal, zero
+  deliverability damage. Use `SRapMe` again for anything that genuinely warrants broad reach.
+- **Do not use click-to-open as the success measure for a reassurance email again.** Opens
+  and unsubscribe rate told the real story; CTOR measured an action the email did not
+  really need.
+- **234 unsubscribes is the honest price** of mailing 99,590 including people who have not
+  clicked in a year. Cheap, against 43,864 people reassured.
+- **If clicks are wanted next time, the ask has to stay on-site.** That was the original
+  recommendation, reversed on good reasoning for a trust send — but the reversal is
+  specific to trust sends and should not carry over to campaigns that need a click.
+
+---
+
 # Campaign brief — Inside the warehouse
 
 **Status:** Comms cleared 9 Sep. Built in Klaviyo as a Draft, unscheduled.
