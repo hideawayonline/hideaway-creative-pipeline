@@ -1,0 +1,576 @@
+<title>Inside the Warehouse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,500;12..96,75..100,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root{
+    --paper:#faf7f7;
+    --surface:#ffffff;
+    --ink:#1b1517;
+    --muted:#6f6469;
+    --faint:#948890;
+    --rule:#e8dfe2;
+    --rule-soft:#f1eaec;
+    --accent:#c4406f;
+    --accent-soft:#fbeef3;
+    --warn:#a9502c;
+    --warn-soft:#fbf0e9;
+    --good:#2c6f56;
+    --shadow:0 1px 2px rgba(27,21,23,.05), 0 12px 32px -12px rgba(27,21,23,.14);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#141013;
+      --surface:#1d181b;
+      --ink:#f3ecef;
+      --muted:#a89aa1;
+      --faint:#7d7077;
+      --rule:#332a2f;
+      --rule-soft:#272025;
+      --accent:#f28cb2;
+      --accent-soft:#2b1a22;
+      --warn:#e5a074;
+      --warn-soft:#2b2019;
+      --good:#7cc4a4;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#141013;
+    --surface:#1d181b;
+    --ink:#f3ecef;
+    --muted:#a89aa1;
+    --faint:#7d7077;
+    --rule:#332a2f;
+    --rule-soft:#272025;
+    --accent:#f28cb2;
+    --accent-soft:#2b1a22;
+    --warn:#e5a074;
+    --warn-soft:#2b2019;
+    --good:#7cc4a4;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 12px 32px -12px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1060px;margin:0 auto;padding:56px 28px 96px;}
+  .col{max-width:660px;}
+
+  /* ---- type roles ---- */
+  h1,h2,h3,.mono,.eyebrow{font-family:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;}
+  .mono,.eyebrow,th,.num,.tag{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;}
+
+  .eyebrow{
+    font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent);margin:0 0 14px;
+  }
+  h1{
+    font-size:clamp(38px,6vw,60px);line-height:1.02;letter-spacing:-.025em;
+    font-weight:700;margin:0 0 18px;text-wrap:balance;font-stretch:92%;
+  }
+  h2{
+    font-size:26px;line-height:1.18;letter-spacing:-.015em;font-weight:700;
+    margin:0 0 4px;text-wrap:balance;
+  }
+  h3{
+    font-size:16px;line-height:1.3;letter-spacing:-.005em;font-weight:700;
+    margin:0 0 8px;
+  }
+  p{margin:0 0 18px;}
+  a{color:var(--accent);}
+  a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px;}
+  strong{font-weight:600;}
+
+  .lede{font-size:20px;line-height:1.55;color:var(--muted);margin-bottom:34px;}
+  .meta{
+    display:flex;flex-wrap:wrap;gap:10px 26px;padding:18px 0;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted);
+  }
+  .meta b{color:var(--ink);font-weight:500;}
+
+  section{margin-top:64px;}
+  .kicker{
+    font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--faint);margin:0 0 22px;
+    padding-bottom:10px;border-bottom:1px solid var(--rule);
+  }
+
+  /* ---- metrics ---- */
+  .tablewrap{overflow-x:auto;margin:26px 0 8px;}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-variant-numeric:tabular-nums;}
+  th{
+    text-align:right;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+    font-weight:500;color:var(--faint);padding:0 0 12px;border-bottom:1px solid var(--rule);
+  }
+  th:first-child{text-align:left;}
+  td{
+    padding:15px 0;border-bottom:1px solid var(--rule-soft);text-align:right;
+    font-family:"IBM Plex Mono",monospace;font-size:15px;
+  }
+  td:first-child{
+    text-align:left;font-family:"Source Serif 4",serif;font-size:16.5px;color:var(--muted);
+  }
+  td:nth-child(2){font-weight:500;color:var(--ink);padding-right:30px;}
+  td:nth-child(3){color:var(--faint);}
+  tr.flag td:nth-child(2){color:var(--warn);}
+  .flagnote{
+    display:inline-block;margin-left:8px;font-size:10.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--warn);background:var(--warn-soft);
+    padding:2px 7px;border-radius:3px;vertical-align:1px;
+  }
+
+  /* ---- pull ---- */
+  .pull{
+    margin:34px 0;padding:2px 0 2px 26px;border-left:3px solid var(--accent);
+  }
+  .pull p{
+    font-family:"Bricolage Grotesque",sans-serif;font-size:23px;line-height:1.3;
+    letter-spacing:-.015em;font-weight:500;margin:0;text-wrap:balance;
+  }
+  .pull cite{display:block;margin-top:10px;font-style:normal;font-size:13px;color:var(--faint);font-family:"IBM Plex Mono",monospace;}
+
+  /* ---- two-up ---- */
+  .duo{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:2px 44px;margin-top:26px;}
+  .duo > div{padding:22px 0 4px;border-top:2px solid var(--ink);}
+  .duo p{font-size:16px;color:var(--muted);margin-bottom:12px;}
+  .tag{
+    display:inline-block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:3px;
+  }
+  .seg{
+    font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:1.5;
+    color:var(--ink);background:var(--rule-soft);padding:10px 12px;border-radius:5px;
+    display:block;margin-bottom:12px;word-break:break-word;
+  }
+
+  /* ---- subject lines ---- */
+  .subjects{display:flex;flex-direction:column;gap:0;margin-top:24px;}
+  .subj{display:flex;gap:20px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--rule-soft);}
+  .subj .lbl{
+    font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
+    color:var(--faint);flex:0 0 68px;text-transform:uppercase;
+  }
+  .subj .txt{font-family:"Bricolage Grotesque",sans-serif;font-size:20px;font-weight:500;letter-spacing:-.012em;}
+
+  /* ---- email preview ---- */
+  .previewzone{background:var(--rule-soft);border-radius:10px;padding:34px 20px;margin-top:26px;}
+  .mail{
+    max-width:520px;margin:0 auto;background:var(--surface);border-radius:10px;
+    box-shadow:var(--shadow);overflow:hidden;
+  }
+  .mail-hdr{padding:18px 26px;border-bottom:1px solid var(--rule-soft);font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--faint);line-height:1.8;}
+  .mail-hdr b{color:var(--ink);font-weight:400;}
+  .mail-body{padding:28px 26px 32px;font-size:15.5px;line-height:1.62;}
+  .mail-body h4{
+    font-family:"Bricolage Grotesque",sans-serif;font-size:25px;line-height:1.12;
+    letter-spacing:-.02em;font-weight:700;margin:0 0 20px;text-wrap:balance;
+  }
+  .mail-body p{margin:0 0 14px;}
+  .mail-body ul{margin:0 0 16px;padding-left:20px;}
+  .mail-body li{margin-bottom:7px;}
+  .btn{
+    display:inline-block;background:var(--ink);color:var(--paper);
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;
+    padding:13px 30px;border-radius:999px;margin:8px 0 18px;
+  }
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);}
+  .sig{color:var(--muted);font-size:14px;}
+  .ps{margin-top:22px;padding-top:16px;border-top:1px solid var(--rule-soft);font-size:13.5px;color:var(--muted);}
+  .wordmark{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:16px;letter-spacing:.01em;text-align:center;padding:22px 0 4px;}
+
+  /* ---- checklist ---- */
+  .check{list-style:none;padding:0;margin:24px 0 0;}
+  .check li{
+    display:flex;gap:15px;padding:17px 0;border-bottom:1px solid var(--rule-soft);
+    font-size:16px;line-height:1.55;
+  }
+  .check .box{
+    flex:0 0 15px;height:15px;margin-top:6px;border:1.5px solid var(--faint);border-radius:3px;
+  }
+  .check li.done .box{border-color:var(--good);background:var(--good);position:relative;}
+  .check li.done .box::after{
+    content:"";position:absolute;left:4px;top:1px;width:3px;height:7px;
+    border:solid var(--surface);border-width:0 2px 2px 0;transform:rotate(45deg);
+  }
+  .check li.done b{color:var(--good);}
+  .check li.done > span:last-child{color:var(--faint);}
+  .stamp{
+    font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--good);margin-left:8px;
+  }
+  .check b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:15px;margin-bottom:2px;letter-spacing:-.005em;}
+  .check span{color:var(--muted);font-size:15.5px;}
+
+  /* ---- measures ---- */
+  .measures{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:28px;margin-top:26px;}
+  .measures > div{border-top:2px solid var(--ink);padding-top:18px;}
+  .measures .num{font-size:30px;font-weight:500;letter-spacing:-.02em;line-height:1;margin-bottom:8px;font-variant-numeric:tabular-nums;}
+  .measures .num.up{color:var(--good);}
+  .measures .num.dn{color:var(--accent);}
+  .measures h3{font-size:14px;margin-bottom:6px;}
+  .measures p{font-size:14.5px;color:var(--muted);margin:0;line-height:1.5;}
+
+  footer{margin-top:80px;padding-top:26px;border-top:1px solid var(--rule);font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--faint);line-height:1.8;}
+
+  @media (max-width:620px){
+    .wrap{padding:40px 20px 72px;}
+    .previewzone{padding:22px 12px;}
+    .mail-body,.mail-hdr{padding-left:20px;padding-right:20px;}
+    .subj{flex-direction:column;gap:6px;}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+</style>
+
+<div class="wrap">
+  <div class="col">
+    <p class="eyebrow">Klaviyo campaign brief &middot; Draft for review</p>
+    <h1>Inside the warehouse</h1>
+    <p class="lede">The warehouse tour reel is not behind-the-scenes content. It's the receipt for the letter Chris sent on 30 August &mdash; and it should be sent as one.</p>
+  </div>
+
+  <div class="col meta">
+    <span>Send&nbsp; <b>Thu 11 Sep, 7:00pm AEST</b></span>
+    <span>Audience&nbsp; <b>99,789</b></span>
+    <span>Source&nbsp; <b>38.2K views &middot; 38 shares</b></span>
+    <span>Status&nbsp; <b style="color:var(--good);">Comms cleared &mdash; Draft, ready to schedule</b></span>
+  </div>
+
+  <section class="col">
+    <p class="kicker">Built in Klaviyo</p>
+    <h2>Draft, unscheduled, and it can't send by accident</h2>
+    <p>Created 9 September. Status is <strong>Draft</strong> with <span class="seg" style="display:inline;padding:2px 7px;">send_time: null</span> and <span class="seg" style="display:inline;padding:2px 7px;">scheduled_at: null</span> &mdash; it cannot go anywhere until someone deliberately schedules it.</p>
+    <div class="tablewrap">
+      <table>
+        <tbody>
+          <tr><td>Campaign</td><td colspan="2" style="text-align:left;padding-left:0;"><a href="https://www.klaviyo.com/campaign/01M21WT046BX329SJDZ1371PM4/wizard">01M21WT046BX329SJDZ1371PM4</a></td></tr>
+          <tr><td>Audience</td><td colspan="2" style="text-align:left;">SRapMe &mdash; Reassurance WIDE, <strong>99,789 recipients</strong></td></tr>
+          <tr><td>Excluded</td><td colspan="2" style="text-align:left;">RUj7QZ &mdash; Ready to Suppress, 54,916 with no activity in 180d</td></tr>
+          <tr><td>Send strategy</td><td colspan="2" style="text-align:left;">Throttled 33%/hour from Thu 11 Sep 7:00pm AEST &mdash; intent only, not scheduled</td></tr>
+          <tr><td>Subject</td><td colspan="2" style="text-align:left;">Come see where it's actually made</td></tr>
+          <tr><td>Reply-to</td><td colspan="2" style="text-align:left;">hello@hideaway.online</td></tr>
+          <tr><td>Template</td><td colspan="2" style="text-align:left;">W5dTqJ in the library; the campaign renders its own copy, Vzt7cP &mdash; edit from inside the campaign</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:26px;">The creative carried a dark red <strong>DRAFT &mdash; NOT READY TO SEND</strong> banner throughout the build, as a tripwire against an accidental send. It did its job &mdash; it was caught in preview &mdash; and was removed on 9 September once comms cleared the copy. <strong>The email is now exactly what a recipient would see.</strong></p>
+    <p><strong>Wired and live:</strong> Watch the tour points at the reel, Shop the range at the Perfume collection (111 products). The P.S. carries no second link. Only the hero image is still a placeholder.</p>
+    <p><strong>Not built yet:</strong> subject line B as an A/B test, because the comms review may change the wording. Worth adding once it's signed off.</p>
+  </section>
+
+  <section class="col">
+    <p class="kicker">The read</p>
+    <h2>The list already told us they were worried</h2>
+    <p>On 30 August the ownership update went to the full file &mdash; 118,347 recipients, subject line <em>&ldquo;Hideaway is still trading and we are here to stay&rdquo;</em>, signed <strong>Chris Dobson, CEO</strong>. It opened at <strong>57.7%</strong> against our usual 34&ndash;38%. People were paying close attention.</p>
+    <p>Two other numbers from that send tell the rest of the story.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>CEO letter, 30 Aug</th><th>Typical campaign</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Recipients</td><td>118,347</td><td>~25,000</td></tr>
+          <tr><td>Open rate</td><td>57.7%</td><td>34&ndash;38%</td></tr>
+          <tr class="flag"><td>Click-to-open</td><td>0.17%</td><td>~1.1%</td></tr>
+          <tr class="flag"><td>Unsubscribe rate</td><td>0.73%<span class="flagnote">8&times;</span></td><td>0.08&ndash;0.10%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:14.5px;color:var(--faint);margin-top:14px;">Roughly 860 people unsubscribed off that one send.</p>
+
+    <p>Read together: a large part of the list opened because they were worried, read a statement, and got no proof. Some of them left.</p>
+
+    <div class="pull">
+      <p>A letter is a claim. A warehouse tour is evidence.</p>
+    </div>
+
+    <p>This is the follow-up chapter &mdash; the same message, shown instead of said. It's a trust email, not a promo. Revenue is the second-order effect, not the ask.</p>
+  </section>
+
+  <section class="col">
+    <p class="kicker">What the letter actually said</p>
+    <h2>The ground the copy has to stay on</h2>
+    <p>The copy references the letter directly, so it can't contradict it or overclaim past it. Verbatim from the sent template:</p>
+    <div class="pull">
+      <p style="font-size:17px;font-weight:400;font-family:'Source Serif 4',serif;line-height:1.55;">Following the recent media coverage regarding the liquidation of Platinum Investment Group Pty Ltd (the company which previously operated Hideaway Online), the business is transitioning into a phase of new ownership, during this time orders continue to flow in and dispatch daily from our warehouses.</p>
+      <cite>Chris Dobson, CEO &middot; 30 August 2026</cite>
+    </div>
+    <p>Three constraints fall out of that, and two of them changed the draft:</p>
+    <div class="duo">
+      <div>
+        <h3>Present tense only</h3>
+        <p>The previous operating entity was liquidated, so any claim of unbroken historical continuity is unsafe. &ldquo;Everything you've ever ordered came from this building&rdquo; is cut.</p>
+      </div>
+      <div>
+        <h3>Warehouses, plural</h3>
+        <p>The letter says warehouses. Don't imply one site is the whole operation.</p>
+      </div>
+      <div>
+        <h3>Chris signed it, not Steve</h3>
+        <p>A first-person callback only works over Chris's signature. The draft says &ldquo;we wrote&rdquo;, so it holds either way.</p>
+      </div>
+    </div>
+    <p style="margin-top:30px;">The safe ground is exactly what the letter already claimed publicly and what the footage independently shows: <strong>stock on shelves, orders dispatching daily, real staff at real desks, product coming off the line.</strong> Stay there and the email is both true and strong.</p>
+  </section>
+
+  <section class="col">
+    <p class="kicker">The framing</p>
+    <h2>We told you we're here to stay. Here's the building.</h2>
+    <p>That single line does three jobs at once: it closes the loop the letter opened for the people who wanted more than words, it re-warms the worried-but-still-subscribed before they churn too, and it earns an easy, low-commitment click.</p>
+  </section>
+
+  <section class="col">
+    <p class="kicker">The click-to-open problem</p>
+    <h2>One small ask, not a shop-now push</h2>
+    <p>Click-to-open is sitting at roughly <strong>1.1%</strong> across recent campaigns. People open and don't click. That number is why this email needs one clear, low-commitment job &mdash; &ldquo;watch the tour&rdquo; &mdash; and nothing competing with it.</p>
+    <p>It is <em>not</em> a reason to keep the click on our own site. This is a trust send, its measures are click-to-open and unsubscribe rate, and the reel's own engagement is the proof &mdash; see <strong>Linking the reel</strong> below. Sending people somewhere that converts would optimise for a goal this email doesn't have.</p>
+    <p>Expect CTOR to rise sharply against the 1.1% baseline precisely because the ask is so small. That lift is the result we're after.</p>
+  </section>
+
+  <section class="col">
+    <p class="kicker">Linking the reel</p>
+    <h2>Instagram is the destination, not a fallback</h2>
+    <p>The permalink is <a href="https://www.instagram.com/reel/DdA5Ndzit-M/">instagram.com/reel/DdA5Ndzit-M</a> &mdash; posted 8 September, 211 likes, 25 comments, running <strong>1 min 43 sec</strong>. The Watch the tour button points here. No on-site page; the draft Shopify page has been deleted.</p>
+    <p><strong>This reverses an earlier recommendation in this brief, and the reversal is the right call.</strong> The earlier argument was to host the video on our own site so the click lands somewhere that can convert. That optimises for revenue &mdash; but this email's job is trust, and its success measures are click-to-open and unsubscribe rate, explicitly not revenue. Recommending a conversion-optimised destination for a trust email was inconsistent.</p>
+    <div class="pull">
+      <p>38.2K views. 25 comments from real customers. None of that can be staged &mdash; and it's worth more than anything in our own copy.</p>
+    </div>
+    <p>A lone video on a page we built and control is just us saying it again in a different format. The third-party voices in the comments are the proof.</p>
+    <p>The one real cost is desktop: a logged-out visitor gets Instagram's login overlay over the video. That was overstated earlier &mdash; beauty and e-commerce email runs roughly 60&ndash;75% mobile opens, so most recipients deep-link cleanly into the app and the desktop minority gets a degraded experience rather than a blocked one. It also ships today: no export, no upload, no page to publish and QA.</p>
+    <h3 style="margin-top:34px;">Instagram, not TikTok</h3>
+    <div class="duo">
+      <div>
+        <h3>The proof already exists here</h3>
+        <p>38.2K views, 25 comments. A fresh TikTok post starts at zero, and zero engagement is weaker evidence than none when the question is whether we're still trading.</p>
+      </div>
+      <div>
+        <h3>Same people as the list</h3>
+        <p>TikTok skews to discovery and new audiences. This send goes to 25,000 existing engaged customers.</p>
+      </div>
+      <div>
+        <h3>TikTok needs the post first</h3>
+        <p>An extra step for a weaker result. If TikTok is wanted, post it there and run a separate wave &mdash; don't split this send.</p>
+      </div>
+    </div>
+    <h3 style="margin-top:34px;">Getting the file</h3>
+    <p>Instagram's CDN is locked down, so someone with account access has to pull it: <strong>Meta Business Suite &rarr; Content &rarr; Reels</strong>, find the 8 September tour, Download. Or from the app: your own post &rarr; &hellip; &rarr; Download. Then upload to <strong>Shopify &rarr; Content &rarr; Files</strong> and embed with a native <span class="seg" style="display:inline;padding:2px 7px;">&lt;video&gt;</span> tag &mdash; not an Instagram embed, which drags in their script and can show a login prompt.</p>
+    <p><strong>On the length:</strong> 1:43 is long for an email click-through, and for a promo that would be a problem. Here it's probably fine &mdash; someone worried about whether you're still trading will watch the lot, and the length is part of the proof. Cut a 15-second version for the hero if there's time, but don't hold the send for it.</p>
+  </section>
+
+  <section class="col">
+    <p class="kicker">Who and when</p>
+    <div class="duo">
+      <div>
+        <h3>Primary audience</h3>
+        <span class="seg">&#127919; Engaged REAL &mdash; clicked 90d OR ordered 180d (subscribed, no MPP opens)</span>
+        <p>About 25,000 profiles. Our normal campaign audience.</p>
+      </div>
+      <div>
+        <h3>Second wave, +48h <span class="tag">optional</span></h3>
+        <p>Opened the CEO letter but hasn't ordered since 30 Aug. That's precisely the reassurance-needed cohort, and the highest-value audience for this exact message.</p>
+      </div>
+    </div>
+    <p style="margin-top:34px;"><strong>Don't re-blast the full 118K.</strong> We spent that card on 30 August and it cost us 860 subscribers. Deliverability needs the recovery time.</p>
+    <p>Thursday 11 Sep at 7:00pm AEST matches the hideaway fest send pattern and lands in the evening scroll, with the weekend to run. Avoid a morning send &mdash; this is watch-something content.</p>
+  </section>
+
+  <section class="col">
+    <p class="kicker">Subject lines</p>
+    <div class="subjects">
+      <div class="subj"><span class="lbl">A &middot; lead</span><span class="txt">Come see where it's actually made</span></div>
+      <div class="subj"><span class="lbl">B &middot; test</span><span class="txt">We said we're here to stay. Here's the building.</span></div>
+      <div class="subj"><span class="lbl">Preview</span><span class="txt" style="font-size:17px;font-weight:400;color:var(--muted);">We filmed the whole warehouse. No stylist, no staging.</span></div>
+    </div>
+    <p style="margin-top:26px;font-size:16px;"><strong>Lead with A, not B &mdash; deliberately.</strong> The callback belongs in the body, where only people who open will reach it. Roughly 42% of the file never opened the 30 August letter; for them a subject line about still being here <em>creates</em> a doubt they didn't have. A is warm and safe for that group, and the people who did read the letter still get the full payoff in the first line. Test B on a holdout rather than leading with it.</p>
+    <p style="margin-top:18px;font-size:15.5px;color:var(--muted);">Both deliberately plain. Our best recent subjects &mdash; &ldquo;Midnight&rdquo;, &ldquo;I said there'd be no round three&rdquo;, &ldquo;Dad's sorted. Now you.&rdquo; &mdash; work because they're short and confident. No emoji on this one; the message is sincerity.</p>
+  </section>
+
+  <section>
+    <div class="col"><p class="kicker">The email</p></div>
+    <div class="previewzone">
+      <div class="mail">
+        <div class="mail-hdr">
+          <b>From</b> &nbsp;hideaway.<br>
+          <b>Subject</b> &nbsp;Come see where it's actually made
+        </div>
+        <div class="wordmark">hideaway.</div>
+        <div class="mail-body">
+          <h4>Come see where it's actually made</h4>
+          <p>Hey {{ first_name }},</p>
+          <p>A fortnight ago we wrote and told you Hideaway is here to stay.</p>
+          <p>Fair enough if you wanted more than a letter.</p>
+          <p>So we grabbed a phone and filmed the place. The front door. The office. The tanks where the perfumes get blended. The shelves your order gets picked off.</p>
+          <p><strong>No stylist. No staging. Just a normal day on the Gold Coast.</strong></p>
+          <div style="text-align:center;"><span class="btn">WATCH THE TOUR</span></div>
+          <p style="font-weight:600;">What you'll see:</p>
+          <ul>
+            <li>The stainless tanks where every fragrance gets blended</li>
+            <li>Shelves stocked, and orders going out the door daily</li>
+            <li>The desks where the team answers your emails &mdash; real people, real names</li>
+            <li>The line that fills, caps and labels the bottles</li>
+          </ul>
+          <p>Same building. Same team. Same perfume.</p>
+          <p>We asked you to take our word for it. Now you don't have to.</p>
+          <div style="text-align:center;"><span class="btn ghost">SHOP THE RANGE</span></div>
+          <p class="sig">Steve<br>Founder, hideaway.</p>
+          <p class="ps"><strong>P.S.</strong> Comments are open, and plenty of you have already had your say. If you know someone who reckons we'd disappeared, send them the tour.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col"><p style="margin-top:20px;font-size:14.5px;color:var(--faint);">Full HTML template is in the repo at <span style="font-family:'IBM Plex Mono',monospace;font-size:13px;">campaigns/2026-09-warehouse-tour/email.html</span> &mdash; 600px, table-based, ready to paste into Klaviyo.</p></div>
+  </section>
+
+  <section class="col">
+    <p class="kicker">The hero image</p>
+    <h2>The production floor, not the front door</h2>
+    <p>The strongest frame in the reel isn't the shopfront &mdash; it's the production floor: stainless blending tanks, an automated filling and labelling line, staff working in hairnets, stock and trolleys either side.</p>
+    <p>The difference matters. <strong>A shopfront proves a building exists. A working production line proves a business operates</strong> &mdash; which is the actual question in customers' heads after the 30 August letter. It's the most reassuring image in the whole clip.</p>
+    <div class="pull">
+      <p>A bench reads as a spare room. Tanks and a filling line read as a manufacturer.</p>
+    </div>
+    <h3 style="margin-top:30px;">It changed one line of copy</h3>
+    <p>The bullets used to say <em>&ldquo;The bench where the fragrances get blended and bottled by hand.&rdquo;</em> There is no bench on screen. Running that caption over that image is a small credibility gap in an email whose whole job is credibility, so the bullets now name what's actually there &mdash; the tanks, and the line that fills, caps and labels.</p>
+    <h3 style="margin-top:34px;">The hand-poured claim is retired</h3>
+    <p>Confirmed 9 September: <strong>&ldquo;hand poured&rdquo; and &ldquo;handmade&rdquo; are out</strong> &mdash; not softened for this email, dropped as claims. The copy has been scrubbed.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Was</th><th style="text-align:left;">Now</th></tr></thead>
+        <tbody>
+          <tr><td>&ldquo;The benches where the perfumes get blended&rdquo;</td><td colspan="2" style="text-align:left;">&ldquo;The tanks where the perfumes get blended&rdquo;</td></tr>
+          <tr><td>&ldquo;Same hands making the same perfume&rdquo;</td><td colspan="2" style="text-align:left;">&ldquo;Same building. Same team. Same perfume.&rdquo;</td></tr>
+          <tr><td>&ldquo;The bench where the fragrances get blended and bottled by hand&rdquo;</td><td colspan="2" style="text-align:left;">&ldquo;The stainless tanks where every fragrance gets blended&rdquo;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:24px;">Nothing in the email now claims the product is made by hand. The continuity message is untouched &mdash; it just rests on the building, the team and the product rather than on the method.</p>
+    <p><strong>This is wider than one email.</strong> &ldquo;Hand poured on the Gold Coast&rdquo; runs through the recent Instagram captions, and is very likely on Shopify product pages, the about page and packaging too. This campaign is now consistent with the new position; the rest of the estate isn't. Worth a separate sweep &mdash; and with the ownership conversation where it is, manufacturing claims are the kind of thing to get consistent sooner rather than later.</p>
+    <p style="color:var(--muted);font-size:15px;">The frame comes out of <a href="https://drive.google.com/file/d/1TyzafLR8rCj1EOkRzEo6Wu4y8cEG0agH/view">Warehousetour</a> in Drive &mdash; 126 MB QuickTime, full quality, no overlay. The reference image is a phone screengrab carrying Instagram's UI and is only there to show the composition. Export the frame from the video, then <strong>crop landscape to roughly 600&times;400</strong> taking the middle band, so the reader reaches the headline fast.</p>
+  </section>
+
+  <section class="col">
+    <p class="kicker">Audience</p>
+    <h2>Widened, because the limit was our filter, not our reputation</h2>
+    <p>Originally built against Engaged REAL (24,140). Widened after checking what the 30 August send actually did to sender reputation.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>30 Aug, 118,347 recipients</th><th>Result</th><th>Read</th></tr></thead>
+        <tbody>
+          <tr><td>Delivery rate</td><td>99.50%</td><td style="font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">Bounces ~0.5%. A stale file bounces 2&ndash;5%</td></tr>
+          <tr><td>Spam complaints</td><td>0.007%</td><td style="font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">Trouble starts at 0.10%. 14&times; under</td></tr>
+          <tr><td>Open rate</td><td>57.7%</td><td style="font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">On the <em>full</em> file. A dead list opens at 15&ndash;25%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:26px;">That send did not damage deliverability &mdash; it probably helped. High opens and near-zero complaints are what mailbox providers reward, and the 860 unsubscribes were people leaving cleanly rather than marking spam, which left the file healthier than before.</p>
+    <div class="pull">
+      <p>Engaged REAL demands a click in 90 days: 24,140 people. Opened in 90 days: 97,800.</p>
+    </div>
+    <p>Opens are excluded because Apple's MPP inflates them &mdash; there's even a segment labelled <em>&ldquo;&#9940; Do not send &middot; MPP inflated&rdquo;</em>. That's right for <strong>measuring</strong> engagement and wrong for <strong>deliverability</strong>: an MPP open doesn't prove a human read it, but it does prove the address is live and the mail reached a real inbox, which is what providers grade.</p>
+    <div class="duo">
+      <div>
+        <h3>Now sending to</h3>
+        <p>Opened 180d, or clicked/ordered in 365d. Subscribed only.</p>
+      </div>
+      <div>
+        <h3>Explicitly excluded</h3>
+        <p>The 54,916 with no open, click or order in 180 days &mdash; where recycled addresses and spam traps live.</p>
+      </div>
+      <div>
+        <h3>Throttled, not blasted</h3>
+        <p>33% per hour. A volume spike trips filtering; a ramp doesn't. 7pm to about 10pm AEST.</p>
+      </div>
+    </div>
+    <h3 style="margin-top:34px;">Recipient count: 99,789</h3>
+    <p>Higher than the 60&ndash;90K expected, and worth stating plainly: that's <strong>84% of the mailable file</strong> (118,347 on 30 Aug) and a <strong>4&times; step up</strong> from our recent norm of ~24,000 per send.</p>
+    <p><strong>The recommendation is still to send it.</strong> The 54,929 with no activity in 180 days are excluded, so everyone receiving this opened something within 180 days &mdash; the live portion of the file, not the whole file. The 30 August send proved this file handles full volume cleanly. It's throttled so volume ramps over three hours rather than spiking. And strategically this email <em>should</em> go wide: the people who most need reassurance are the ones whose confidence wobbled, including lapsed buyers who'd never clear a 90-day click filter.</p>
+    <div class="pull">
+      <p>Watch complaints, not unsubscribes. Above ~0.05% is the genuine warning sign.</p>
+    </div>
+    <p>Our normal is 0.08&ndash;0.10% unsubscribes and 0.007&ndash;0.024% complaints. 30 August hit 0.73% unsubscribes because it was a liquidation letter; this one is far less alarming, so expect closer to normal. Complaint rate is what damages sender reputation &mdash; unsubscribes are the healthy release valve.</p>
+    <p style="color:var(--muted);font-size:15px;">If 99,789 is more than you want to risk in one send, the MAX segment is built and WIDE can be tightened (opens within 90 days rather than 180) in one call.</p>
+  </section>
+
+  <section class="col">
+    <p class="kicker">Claims audit</p>
+    <h2>Everything the email asserts, and what it rests on</h2>
+    <p><strong>Cleared 9 September.</strong> Kept as the record of what the email claims and what each claim rests on.</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Claim</th><th style="text-align:left;">Rests on</th><th>Risk</th></tr></thead>
+        <tbody>
+          <tr><td>&ldquo;A fortnight ago we wrote and told you Hideaway is here to stay&rdquo;</td><td style="text-align:left;font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">The 30 Aug campaign, subject &ldquo;Hideaway is still trading and we are here to stay&rdquo;. Says &ldquo;we&rdquo;, so it holds over any signature</td><td>Low</td></tr>
+          <tr><td>The four things named in paragraph 3</td><td style="text-align:left;font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">The footage &mdash; reviewer should confirm all four appear</td><td>Low</td></tr>
+          <tr><td>The tanks, and the fill/cap/label line</td><td style="text-align:left;font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">Visible in the frame supplied 9 Sep</td><td>Low</td></tr>
+          <tr><td>&ldquo;Orders going out the door daily&rdquo;</td><td style="text-align:left;font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">The 30 Aug letter's own words: &ldquo;orders continue to flow in and dispatch daily&rdquo;</td><td>Low</td></tr>
+          <tr class="flag"><td>&ldquo;Same building&rdquo;</td><td style="text-align:left;font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">Unverified. The letter says &ldquo;warehouses&rdquo;, plural &mdash; is the filmed site the one that ships?</td><td>Medium</td></tr>
+          <tr><td>&ldquo;Same team&rdquo;</td><td style="text-align:left;font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">Confirmed by Steve, 9 Sep</td><td>Low</td></tr>
+          <tr class="flag"><td>&ldquo;Same perfume&rdquo;</td><td style="text-align:left;font-family:'Source Serif 4',serif;font-size:15px;color:var(--muted);">Unverified. Formulations unchanged through the transition?</td><td>Medium</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-top:34px;">What it deliberately does not say</h3>
+    <p>The absences are the point in a message like this. Nothing about the liquidation or the previous operating entity. Nothing about new ownership &mdash; the letter covered that, and this doesn't reopen it. No claim of historical continuity, cut deliberately. No &ldquo;hand poured&rdquo;, &ldquo;handmade&rdquo; or &ldquo;handcrafted&rdquo;. Nothing about rewards, points, pricing or offers.</p>
+
+    <div class="pull">
+      <p>Three things actually need a reviewer's attention. Everything else is either already published in the 30 August letter, or verifiable by watching the video.</p>
+    </div>
+    <ol style="font-size:16.5px;line-height:1.7;padding-left:22px;">
+      <li><strong>&ldquo;Same perfume&rdquo;</strong> &mdash; formulations unchanged through the transition?</li>
+      <li><strong>&ldquo;Same building&rdquo;</strong> &mdash; the letter says warehouses plural; is the filmed site the one that ships?</li>
+      <li><strong>Paragraph 3</strong> &mdash; do all four things named appear in the footage?</li>
+    </ol>
+    <p style="margin-top:24px;color:var(--muted);font-size:15px;">These three were put to comms and cleared on 9 September with no copy changes required.</p>
+  </section>
+
+  <section class="col">
+    <p class="kicker">Confirm before sending</p>
+    <h2>What needs a decision</h2>
+    <p>One blocking item, three quick calls, and one already cleared.</p>
+    <ul class="check">
+      <li class="done"><span class="box"></span><span><b>Comms review cleared<span class="stamp">9 Sep</span></b>Copy stands as written, no changes required. The DRAFT banner has been removed from the creative and the campaign renamed.</span></li>
+      <li><span class="box"></span><span><b>Sign-off</b>Draft signs &ldquo;Steve, Founder&rdquo; and uses &ldquo;we wrote&rdquo;, so it works over either signature. Recommendation: Steve signs. The letter was the formal CEO statement; this is the warm founder follow-up. If Chris signs instead, change &ldquo;we wrote&rdquo; to &ldquo;I wrote&rdquo;.</span></li>
+      <li class="done"><span class="box"></span><span><b>&ldquo;Same team&rdquo;<span class="stamp">Confirmed 9 Sep</span></b>The team in the footage is still the team, so the line stands as written.</span></li>
+      <li><span class="box"></span><span><b>Location</b>Copy says &ldquo;the Gold Coast&rdquo;, which covers both the Robina address on the Klaviyo account and the Burleigh Heads reference in the Delicate Rose launch. Swap in the suburb if you'd rather be precise.</span></li>
+      <li class="done"><span class="box"></span><span><b>Destination settled &mdash; the Instagram reel<span class="stamp">9 Sep</span></b>No on-site page. The draft Shopify page has been deleted. The reel's own engagement is the proof a trust email needs.</span></li>
+      <li class="done"><span class="box"></span><span><b>Source video located<span class="stamp">Confirmed 9 Sep</span></b><a href="https://drive.google.com/file/d/1TyzafLR8rCj1EOkRzEo6Wu4y8cEG0agH/view">Warehousetour</a> &mdash; 126 MB QuickTime in Drive. Full quality, no Instagram UI. The file for both the hero frame and the on-site page.</span></li>
+      <li class="done"><span class="box"></span><span><b>Hero image done<span class="stamp">9 Sep</span></b>Cut from the supplied frame rather than the source video &mdash; Instagram's chrome sits in a right-hand column and along the bottom, so cropping to 1045&times;697 (exactly 3:2, displays 600&times;400) removes all of it while keeping the product in hand, the blending tank, the filling and labelling line and a staff member at work. Hosted on our own Shopify CDN, wired into the draft, linked to the reel.</span></li>
+    </ul>
+  </section>
+
+  <section class="col">
+    <p class="kicker">How we'll judge it</p>
+    <h2>Not on revenue</h2>
+    <div class="measures">
+      <div>
+        <div class="num up">5%+</div>
+        <h3>Click-to-open</h3>
+        <p>Anything above the 1.1% baseline means the content finally earned the click.</p>
+      </div>
+      <div>
+        <div class="num dn">&lt;0.10%</div>
+        <h3>Unsubscribe rate</h3>
+        <p>Back to normal. If this one's elevated too, the 30 Aug damage is still working through and we slow down.</p>
+      </div>
+      <div>
+        <div class="num">&mdash;</div>
+        <h3>Replies</h3>
+        <p>A trust email that gets replies is working. Watch the inbox.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="col">
+    hideaway. &middot; campaign brief &middot; drafted 9 Sep 2026<br>
+    Nothing scheduled. Nothing created in Klaviyo. Copy and template are in the repo on <span style="color:var(--muted);">claude/warehouse-tour-email-zc8k9v</span>.
+  </footer>
+</div>
