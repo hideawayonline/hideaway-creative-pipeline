@@ -1,5 +1,11 @@
 # The $20 Drop — weekend EDM, 12–13 Sep 2026
 
+> ## ⚠️ SUPERSEDED — the offer changed on margin grounds
+>
+> **This document's original offer ($20 off orders over $50) was replaced before sending.** It gave away too much margin, and the $50 minimum sat 40% below the $83.40 AOV — it actively invited customers who normally spend $83 to spend $50 instead and still take the full $20.
+>
+> **The live offer is now: free standard shipping on orders over $90 (`FREESHIP90`), expiring Sun 13 Sep 11:59pm AEST.** The Saturday send window lapsed, so this is now a one-day Sunday close. See **§11 Revision 2** at the end for the margin working, the new copy and the live IDs. Sections 1, 2, 4, 7 and 8 still stand; §3, §5 and §10 are superseded.
+
 **Status:** ready to build · **Window:** Sat 12 Sep 5:00pm → Sun 13 Sep 11:59pm AEST
 **Account:** Klaviyo M7xxfa (Hideaway) · **Store:** hideaway-infinity.myshopify.com
 
@@ -260,3 +266,76 @@ The UTMs are a deliberate addition: Shopify currently reports 1,416 of the last 
 
 ### One thing worth changing later, not now
 The sender is `no-reply@hideaway.online`. A no-reply address suppresses replies, and reply activity is a positive deliverability signal to Gmail. Worth moving to a monitored address — but **not this weekend**: changing the sending identity right before a large send risks inbox placement. Left exactly as the account has it.
+
+---
+
+## 11. Revision 2 — free shipping replaces the cash discount
+
+### Why the $20 had to go
+
+Per-order economics, using the house figures (COGS $20.50/order, freight $14.00/order) and the last 30 days of real Shopify data (2,141 orders, $83.40 AOV, $21,762 shipping collected = $10.17/order average, standard rates $12.95–$17.95):
+
+| Scenario | Customer pays | Contribution |
+|---|---:|---:|
+| **No offer**, cart $83.40 + $12.95 shipping | $96.35 | **$61.85** |
+| $20 off $50, cart holds at $83.40 | $76.35 | $41.85 |
+| **$20 off $50, cart falls to the $50 minimum** | $42.95 | **$8.45** |
+| **Free shipping over $90**, cart rises to $90 | $90.00 | **$55.50** |
+
+Two things to see here.
+
+**The $50 minimum was the real leak.** It sat 40% below AOV. A customer who normally spends $83 could buy at $50, take the full $20, and leave $8.45 of contribution — before payment processing. The discount cost margin twice: once on the $20 given, once on the $33 of basket that never happened.
+
+**Free shipping costs less and pulls the basket up.** It costs at most $17.95 (capped — see below) against a flat $20, and the $90 threshold sits *above* the $83.40 AOV, so it nudges baskets up rather than down. At $90 it returns $55.50 against a $61.85 no-offer baseline — near margin-neutral, where the $20 version cut contribution by a third at best and 86% at worst.
+
+It is also the better-converting mechanic in this account's own history: **VIP Upgrade — VIP72 free shipping** returned a **1.69% click rate**, the highest of any send in 90 days other than the store-credit reminder.
+
+### Margin guards built into the code
+
+- **$90 minimum subtotal** — above AOV, so it lifts baskets instead of shrinking them.
+- **`maximumShippingPrice` capped at $17.95** — this is the important one. Express shipping is $25. Without the cap, a customer could select Express and have Hideaway absorb $25. The cap means only standard rates ($12.95 / $15.95 / $17.95) are ever made free.
+- **One use per customer.**
+- **Combines with nothing** — not product discounts, not order discounts, not other shipping discounts.
+- **Hard expiry on the code itself**, 2026-09-13T13:59:59Z (Sun 11:59pm AEST).
+
+Note the store already had free shipping at $150+. At an $83 AOV essentially nobody ever reached it, so this is a genuinely new offer to the list rather than a restatement of something they already had.
+
+### Timing — now a one-day close
+
+The Saturday 5pm window passed without the send going out. Rather than compress two emails into a few hours, the campaign is now a **single-day Sunday close**:
+
+| Email | Send (AEST) | Subject | Audience |
+|---|---|---|---|
+| **E1** | Sun 13 Sep, 11:00am | We're paying your postage today 📦 | `SfMeXb` · 52,271 |
+| **E2** | Sun 13 Sep, 7:00pm | Free postage ends in 5 hours ⏳ | `SfMeXb` minus the day's buyers |
+
+Eight hours apart is acceptable *here* because E1 establishes the midnight deadline and E2 closes it — the pairing is coherent rather than repetitive. The 7-day purchase exclusion drops the morning's buyers out of the evening send automatically.
+
+### Live IDs after revision 2
+
+| | |
+|---|---|
+| Live code | **`FREESHIP90`** — free standard shipping over $90 |
+| Discount node | `gid://shopify/DiscountCodeNode/1481551413468` |
+| Auto-apply link | `https://www.hideaway.online/discount/FREESHIP90?redirect=/collections/all` |
+| **Retired** | `DROP20` — status `EXPIRED`, `gid://shopify/DiscountCodeNode/1481360933084` |
+| E1 campaign | `01M29EFAYM88CDKJJYJA3D8VQH` → template `XbTBB9` |
+| E2 campaign | `01M29EFN2H4C1MFWK8PB9T3QXH` → template `SySweA` |
+
+Both campaigns remain **Draft and unscheduled**.
+
+`DROP20` was expired rather than deleted — it was live and publicly reachable for roughly nine hours while nothing promoted it, and expiring leaves the audit trail intact. Nobody can redeem it now.
+
+### Pre-send checks, revised
+
+1. Test-send each. Confirm the name fallback reads **"Hey gorgeous"** with no first name on the profile.
+2. Build a cart of **exactly $90** and confirm standard shipping drops to $0.
+3. Build a cart of **$89** and confirm shipping is still charged — this proves the threshold is doing its job.
+4. Select **Express** on a $90+ cart and confirm it still charges. If Express goes free, the `maximumShippingPrice` cap is not applying and the send should wait.
+5. Confirm the recipient count reads **~52,000, not ~99,000**.
+
+### The margin rule worth keeping
+
+Add it to the standing rule in §8:
+
+> **Never set a discount threshold below AOV.** A minimum beneath the average basket doesn't win incremental orders — it discounts the orders you were already getting, and shrinks them. Thresholds go *above* AOV, so the offer pays for itself by lifting the basket.
