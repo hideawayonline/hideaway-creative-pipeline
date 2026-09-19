@@ -101,8 +101,9 @@ Lifting 26.3% → 40% (still below the 45–65% typical range) is worth
 | email | 85 | 11 | 2 | 18.2% | 2.35% |
 | unknown | 256 | 12 | 4 | 33.3% | 1.56% |
 
-- **Search converts 3.1x better than social** (4.82% vs 1.72%) and holds checkout far
-  better. Paid social traffic is reaching checkout and bailing.
+- **Search converts 2.8x better than social** (4.82% vs 1.72%) and 3.1x better than
+  direct, and it holds checkout far better (34.9% vs 22.8%). Paid social traffic is
+  reaching checkout and bailing.
 - **Email attribution is broken.** Klaviyo sent campaigns on 9 Sep and 14 Sep, yet
   Shopify recorded 85 email sessions across the whole 10 days. Those sessions are
   almost certainly landing in `direct` (the largest and worst-converting bucket).
